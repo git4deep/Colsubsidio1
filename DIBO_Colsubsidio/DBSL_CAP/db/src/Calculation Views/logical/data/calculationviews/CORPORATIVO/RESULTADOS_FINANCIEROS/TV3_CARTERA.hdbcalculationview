@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.RESULTADOS_FINANCIEROS::TV3_CARTERA" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_CARTERA"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_CARTERA">
+      <resourceUri>logical.data::T_COR_CARTERA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_VISTA">
+      <resourceUri>logical.data::T_COR_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_ORDEN_VISTA">
+      <resourceUri>logical.data::T_COR_ORDEN_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="CARTERA">
+      <viewAttributes>
+        <viewAttribute id="CARTERA"/>
+        <viewAttribute id="CARTERA_VENCIDA"/>
+        <viewAttribute id="ID_CARTERA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="PROVISION"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="FILTRO_1" length="60" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;TERCERO&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_CARTERA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CARTERA" source="CARTERA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CARTERA_VENCIDA" source="CARTERA_VENCIDA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CARTERA" source="ID_CARTERA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PROVISION" source="PROVISION"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="VISTA" filterExpressionLanguage="COLUMN_ENGINE">
+      <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="DESCRIPCION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+      </input>
+      <filter>(&quot;ID_VISTA&quot;=8)</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="ORDEN">
+      <viewAttributes>
+        <viewAttribute id="ID_ORDEN_VISTAS"/>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="FILTRO_2"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="ORDEN_3"/>
+        <viewAttribute id="ORDEN_4"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_ORDEN_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ORDEN_VISTAS" source="ID_ORDEN_VISTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_2" source="FILTRO_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_3" source="ORDEN_3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_4" source="ORDEN_4"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="ORDEN_VISTA" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="ID_ORDEN_VISTAS"/>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="FILTRO_2"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="ORDEN_3"/>
+        <viewAttribute id="ORDEN_4"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ORDEN_VISTAS" source="ID_ORDEN_VISTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_2" source="FILTRO_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_3" source="ORDEN_3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_4" source="ORDEN_4"/>
+      </input>
+      <input node="#VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+      </input>
+      <joinAttribute name="ID_VISTA"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="CAR_ORD" joinType="leftOuter">
+      <viewAttributes>
+        <viewAttribute id="CARTERA"/>
+        <viewAttribute id="CARTERA_VENCIDA"/>
+        <viewAttribute id="ID_CARTERA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="PROVISION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CARTERA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CARTERA" source="CARTERA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CARTERA_VENCIDA" source="CARTERA_VENCIDA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CARTERA" source="ID_CARTERA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PROVISION" source="PROVISION"/>
+      </input>
+      <input node="#ORDEN_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+      </input>
+      <joinAttribute name="FILTRO_1"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="SERVICIO">
+      <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="CAR" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="CARTERA"/>
+        <viewAttribute id="CARTERA_VENCIDA"/>
+        <viewAttribute id="ID_CARTERA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="PROVISION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CAR_ORD">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CARTERA" source="CARTERA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CARTERA_VENCIDA" source="CARTERA_VENCIDA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CARTERA" source="ID_CARTERA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PROVISION" source="PROVISION"/>
+      </input>
+      <input node="#SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <joinAttribute name="ID_SERVICIO"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="CAR">
+    <attributes>
+      <attribute id="ID_SERVICIO" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="CAR" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="PERIODO" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="CAR" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="TERCERO" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TERCERO"/>
+        <keyMapping columnObjectName="CAR" columnName="TERCERO"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="CAR" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="FILTRO_1" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FILTRO_1"/>
+        <keyMapping columnObjectName="CAR" columnName="FILTRO_1"/>
+      </attribute>
+      <attribute id="ORDEN_1" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_1"/>
+        <keyMapping columnObjectName="CAR" columnName="ORDEN_1"/>
+      </attribute>
+      <attribute id="ORDEN_2" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_2"/>
+        <keyMapping columnObjectName="CAR" columnName="ORDEN_2"/>
+      </attribute>
+      <attribute id="SERVICIO" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="CAR" columnName="SERVICIO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="CARTERA" order="2" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="CARTERA"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CAR" columnName="CARTERA"/>
+      </measure>
+      <measure id="CARTERA_VENCIDA" order="3" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="CARTERA_VENCIDA"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CAR" columnName="CARTERA_VENCIDA"/>
+      </measure>
+      <measure id="ID_CARTERA" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_CARTERA"/>
+        <measureMapping columnObjectName="CAR" columnName="ID_CARTERA"/>
+      </measure>
+      <measure id="VENTA" order="9" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="VENTA"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CAR" columnName="VENTA"/>
+      </measure>
+      <measure id="PROVISION" order="14" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="PROVISION"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CAR" columnName="PROVISION"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="CARTERA_VENCIDA_PORC" hidden="false" order="1" aggregationType="sum" measureType="simple" datatype="DOUBLE">
+        <descriptions defaultDescription="CARTERA_VENCIDA_PORC"/>
+        <formula>if(&quot;CARTERA&quot;=0,0,(&quot;CARTERA_VENCIDA&quot;/&quot;CARTERA&quot;))</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CARTERA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="31" y="517"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="-20" y="405"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="200" y="407"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ORDEN_VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="98" y="312"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CAR_ORD" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="140" y="211"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="-176" y="156"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CAR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="-59" y="78"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

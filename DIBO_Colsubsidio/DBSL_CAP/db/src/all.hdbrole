@@ -1,0 +1,18 @@
+{
+    "role": {
+        "name": "logical.role::all",
+        "schema_privileges": [
+            {
+                "privileges": [
+                    "ALTER",
+                    "DELETE",
+                    "EXECUTE",
+                    "INSERT",
+                    "SELECT",
+                    "UPDATE",
+                    "CREATE ANY"
+                ]
+            }
+        ]
+    }
+}

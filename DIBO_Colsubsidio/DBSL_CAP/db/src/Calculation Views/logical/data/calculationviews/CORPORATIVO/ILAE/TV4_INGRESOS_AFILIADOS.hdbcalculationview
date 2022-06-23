@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV4_INGRESOS_AFILIADOS" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="AFILIADOS"/>
+  <metadata changedAt="2021-10-08 14:49:16.568"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_AFILIADOS">
+      <resourceUri>logical.data::T_COR_AFILIADOS</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="AFILIADOS">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CANTIDAD"/>
+        <viewAttribute id="ID_AFILIADOS"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="NIVEL_3"/>
+        <viewAttribute id="BASE_PARTICIPACION"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="PARTICIPACION" length="17" scale="12" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;BASE_PARTICIPACION&quot;=0,0,round(&quot;CANTIDAD&quot;/&quot;BASE_PARTICIPACION&quot;, 1))</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="PENETRAC" length="17" scale="12" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;BASE_PARTICIPACION&quot;=0,0,&quot;CANTIDAD&quot;/&quot;BASE_PARTICIPACION&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_AFILIADOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_AFILIADOS" source="ID_AFILIADOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_3" source="NIVEL_3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BASE_PARTICIPACION" source="BASE_PARTICIPACION"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="AFILIADOS">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="AFILIADOS" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="SEGMENTO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEGMENTO"/>
+        <keyMapping columnObjectName="AFILIADOS" columnName="SEGMENTO"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="AFILIADOS" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="NIVEL_3" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_3"/>
+        <keyMapping columnObjectName="AFILIADOS" columnName="NIVEL_3"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="CANTIDAD" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD"/>
+        <measureMapping columnObjectName="AFILIADOS" columnName="CANTIDAD"/>
+      </measure>
+      <measure id="ID_AFILIADOS" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_AFILIADOS"/>
+        <measureMapping columnObjectName="AFILIADOS" columnName="ID_AFILIADOS"/>
+      </measure>
+      <measure id="VALOR" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALOR"/>
+        <measureMapping columnObjectName="AFILIADOS" columnName="VALOR"/>
+      </measure>
+      <measure id="PARTICIPACION" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PARTICIPACION"/>
+        <measureMapping columnObjectName="AFILIADOS" columnName="PARTICIPACION"/>
+      </measure>
+      <measure id="PENETRAC" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PENETRAC"/>
+        <measureMapping columnObjectName="AFILIADOS" columnName="PENETRAC"/>
+      </measure>
+      <measure id="BASE_PARTICIPACION" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="BASE_PARTICIPACION"/>
+        <measureMapping columnObjectName="AFILIADOS" columnName="BASE_PARTICIPACION"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize/>
+      </shape>
+      <shape expanded="true" modelObjectName="AFILIADOS" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="354"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV2_PART_EMPRESARIAL" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV2_PART_EMPRESARIAL"/>
+  <metadata changedAt="2021-05-04 13:00:37.027"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="39"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+    <DataSource id="T_COR_PART_EMPRESARIAL">
+      <resourceUri>logical.data.calculationviews.CORPORATIVO.ILAE::T_COR_PART_EMPRESARIAL</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_VISTA">
+      <resourceUri>logical.data::T_COR_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_ORDEN_VISTA">
+      <resourceUri>logical.data::T_COR_ORDEN_VISTA</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="SERVICIO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_SERVICIO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute aggregationType="sum" id="VALOR"/>
+        <viewAttribute aggregationType="sum" id="PARTICIPACION"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="INTEGER" id="ID_PART" expressionLanguage="COLUMN_ENGINE">
+          <formula>1</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="FILTRO_1" length="40" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;ID_SERVICIO&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="T_COR_PART_EMPRESARIAL"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="ID_PART"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Aggregation_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PART" source="ID_PART"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+      </input>
+      <input node="SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+    <joinAttribute name="ID_SERVICIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="DESCRIPCION"/>
+        <viewAttribute id="ID_VISTA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_VISTA"/>
+    <filter>(&quot;ID_VISTA&quot; ='4')</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_3">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_ORDEN_VISTAS"/>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="FILTRO_2"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="ORDEN_3"/>
+        <viewAttribute id="ORDEN_4"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_ORDEN_VISTA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="FILTRO_1"/>
+      <viewAttribute hidden="true" id="JOIN$ID_VISTA$ID_VISTA"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Aggregation_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_VISTA$ID_VISTA" source="ID_VISTA"/>
+      </input>
+      <input node="Aggregation_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_VISTA$ID_VISTA" source="ID_VISTA"/>
+      </input>
+    <joinAttribute name="JOIN$ID_VISTA$ID_VISTA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="leftOuter">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="ID_PART"/>
+      <viewAttribute hidden="true" id="JOIN$FILTRO_1$FILTRO_1"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Aggregation_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PART" source="ID_PART"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTRO_1$FILTRO_1" source="FILTRO_1"/>
+      </input>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTRO_1$FILTRO_1" source="FILTRO_1"/>
+      </input>
+    <joinAttribute name="JOIN$FILTRO_1$FILTRO_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_4" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="ID_PART"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PART" source="ID_PART"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+      </input>
+      <input node="SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+    <joinAttribute name="ID_SERVICIO"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_4">
+    <descriptions/>
+    <attributes>
+      <attribute id="TIPO_ANALISIS" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="Join_4" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="PERIODO" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="ID_SERVICIO" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Join_4" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="NIVEL_1" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_1"/>
+        <keyMapping columnObjectName="Join_4" columnName="NIVEL_1"/>
+      </attribute>
+      <attribute id="SEGMENTO" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEGMENTO"/>
+        <keyMapping columnObjectName="Join_4" columnName="SEGMENTO"/>
+      </attribute>
+      <attribute id="SERVICIO" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="Join_4" columnName="SERVICIO"/>
+      </attribute>
+      <attribute id="ORDEN_1" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_1"/>
+        <keyMapping columnObjectName="Join_4" columnName="ORDEN_1"/>
+      </attribute>
+      <attribute id="ORDEN_2" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_2"/>
+        <keyMapping columnObjectName="Join_4" columnName="ORDEN_2"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="VALOR" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALOR"/>
+        <measureMapping columnObjectName="Join_4" columnName="VALOR"/>
+      </measure>
+      <measure id="PARTICIPACION" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PARTICIPACION"/>
+        <measureMapping columnObjectName="Join_4" columnName="PARTICIPACION"/>
+      </measure>
+      <measure id="ID_PART" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_PART"/>
+        <measureMapping columnObjectName="Join_4" columnName="ID_PART"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="468.54865384147774" y="112"/>
+        <rectangleSize height="0" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="609.9053171904161" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="399.905317190416" y="536.9999976158142"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="500.93226848204756" y="376.9999988079071"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    <shape modelObjectName="Aggregation_2" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SERVICIO" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="301.9999999999999" y="696.9999964237213"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="91.99999999999989" y="696.9999964237213"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118.6666666666666" y="536.9999976158142"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Aggregation_3" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="145.33333333333323" y="376.9999988079071"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    <shape modelObjectName="Aggregation_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="468.54865384147774" y="217"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="Join_3" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SERVICIO" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

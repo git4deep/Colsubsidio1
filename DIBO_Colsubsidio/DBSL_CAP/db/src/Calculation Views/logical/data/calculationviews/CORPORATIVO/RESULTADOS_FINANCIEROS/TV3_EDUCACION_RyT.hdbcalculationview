@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.RESULTADOS_FINANCIEROS::TV3_EDUCACION_RyT" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_EDUCACION_RyT"/>
+  <metadata changedAt="2021-07-14 12:20:43.282"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="39"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_MANTENIMIENTO">
+      <resourceUri>logical.data::T_COR_MANTENIMIENTO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="MANTENIMIENTO">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CUMPLIMIENTO_COP"/>
+        <viewAttribute id="CUMPLIMIENTO_PORC"/>
+        <viewAttribute id="EJECUCION_MTTO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="PPTO_MTTO"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>component(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_MANTENIMIENTO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CUMPLIMIENTO_COP" source="CUMPLIMIENTO_COP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CUMPLIMIENTO_PORC" source="CUMPLIMIENTO_PORC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EJECUCION_MTTO" source="EJECUCION_MTTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MTTO" source="PPTO_MTTO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="SERVICIO">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="MTTO_SERVICIO" joinOrder="OUTSIDE_IN" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CUMPLIMIENTO_COP"/>
+        <viewAttribute id="CUMPLIMIENTO_PORC"/>
+        <viewAttribute id="EJECUCION_MTTO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="PPTO_MTTO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>component(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#MANTENIMIENTO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CUMPLIMIENTO_COP" source="CUMPLIMIENTO_COP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CUMPLIMIENTO_PORC" source="CUMPLIMIENTO_PORC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EJECUCION_MTTO" source="EJECUCION_MTTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MTTO" source="PPTO_MTTO"/>
+      </input>
+      <input node="#SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <joinAttribute name="ID_SERVICIO"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="PPTO_ANIO">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ANIO"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute aggregationType="sum" id="PPTO_MTTO_ANIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#MANTENIMIENTO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MTTO_ANIO" source="PPTO_MTTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinOrder="OUTSIDE_IN" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="PPTO_MTTO"/>
+        <viewAttribute id="PPTO_MTTO_ANIO"/>
+        <viewAttribute id="EJECUCION_MTTO"/>
+        <viewAttribute id="CUMPLIMIENTO_COP"/>
+        <viewAttribute id="CUMPLIMIENTO_PORC"/>
+        <viewAttribute hidden="true" id="JOIN$NIVEL_2$NIVEL_2"/>
+        <viewAttribute hidden="true" id="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+        <viewAttribute hidden="true" id="JOIN$ANIO$ANIO"/>
+        <viewAttribute hidden="true" id="JOIN$NIVEL_1$NIVEL_1"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#PPTO_ANIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MTTO_ANIO" source="PPTO_MTTO_ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_2$NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_1$NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <input node="#MTTO_SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MTTO" source="PPTO_MTTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CUMPLIMIENTO_COP" source="CUMPLIMIENTO_COP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EJECUCION_MTTO" source="EJECUCION_MTTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CUMPLIMIENTO_PORC" source="CUMPLIMIENTO_PORC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_2$NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_1$NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <joinAttribute name="JOIN$ANIO$ANIO"/>
+      <joinAttribute name="JOIN$NIVEL_2$NIVEL_2"/>
+      <joinAttribute name="JOIN$NIVEL_1$NIVEL_1"/>
+      <joinAttribute name="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_2">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_2" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="ID_SERVICIO" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Join_2" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="SERVICIO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="Join_2" columnName="SERVICIO"/>
+      </attribute>
+      <attribute id="NIVEL_1" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_1"/>
+        <keyMapping columnObjectName="Join_2" columnName="NIVEL_1"/>
+      </attribute>
+      <attribute id="NIVEL_2" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_2"/>
+        <keyMapping columnObjectName="Join_2" columnName="NIVEL_2"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="PPTO_MTTO" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_MTTO"/>
+        <measureMapping columnObjectName="Join_2" columnName="PPTO_MTTO"/>
+      </measure>
+      <measure id="PPTO_MTTO_ANIO" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_MTTO_ANIO"/>
+        <measureMapping columnObjectName="Join_2" columnName="PPTO_MTTO_ANIO"/>
+      </measure>
+      <measure id="EJECUCION_MTTO" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="EJECUCION_MTTO"/>
+        <measureMapping columnObjectName="Join_2" columnName="EJECUCION_MTTO"/>
+      </measure>
+      <measure id="CUMPLIMIENTO_COP" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CUMPLIMIENTO_COP"/>
+        <measureMapping columnObjectName="Join_2" columnName="CUMPLIMIENTO_COP"/>
+      </measure>
+      <measure id="CUMPLIMIENTO_PORC" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CUMPLIMIENTO_PORC"/>
+        <measureMapping columnObjectName="Join_2" columnName="CUMPLIMIENTO_PORC"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="ID_MANTENIMIENTO" hidden="false" order="1" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="ID_MANTENIMIENTO"/>
+        <formula>0</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="Nivel">
+        <attributeRef xsi:type="DataFoundation:Attribute">#NIVEL_1</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#NIVEL_2</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="Nivel" aggregateAllNodes="true" multipleParents="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions defaultDescription="Nivel"/>
+            <levels>
+              <level levelAttribute="#NIVEL_1" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#NIVEL_1"/>
+              <level levelAttribute="#NIVEL_2" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#NIVEL_2"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="99" y="87"/>
+        <rectangleSize/>
+      </shape>
+      <shape expanded="true" modelObjectName="MANTENIMIENTO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="357"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="176" y="357"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="MTTO_SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="176" y="261"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PPTO_ANIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="261"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="99" y="165"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV3_RETAIL_COBERTURA2" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_RETAIL_COBERTURA2"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_CANAL">
+      <resourceUri>logical.data::T_COR_CANAL</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SUBCANAL">
+      <resourceUri>logical.data::T_COR_SUBCANAL</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_COBERTURA">
+      <resourceUri>logical.data::T_COR_COBERTURA</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="CANAL">
+      <viewAttributes>
+        <viewAttribute id="ID_CANAL"/>
+        <viewAttribute id="CANAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_CANAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL" source="ID_CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="SUBCANAL">
+      <viewAttributes>
+        <viewAttribute id="ID_SUBCANAL"/>
+        <viewAttribute id="ID_CANAL"/>
+        <viewAttribute id="SUBCANAL"/>
+        <viewAttribute id="LATITUD"/>
+        <viewAttribute id="LONGITUD"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_SUBCANAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL" source="ID_CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBCANAL" source="SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LATITUD" source="LATITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUD" source="LONGITUD"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ID_SUBCANAL"/>
+        <viewAttribute id="ID_CANAL"/>
+        <viewAttribute id="SUBCANAL"/>
+        <viewAttribute id="LATITUD"/>
+        <viewAttribute id="LONGITUD"/>
+        <viewAttribute hidden="true" id="JOIN$ID_CANAL$ID_CANAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CANAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CANAL$ID_CANAL" source="ID_CANAL"/>
+      </input>
+      <input node="#SUBCANAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL" source="ID_CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBCANAL" source="SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LATITUD" source="LATITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUD" source="LONGITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CANAL$ID_CANAL" source="ID_CANAL"/>
+      </input>
+      <joinAttribute name="JOIN$ID_CANAL$ID_CANAL"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="COBERTURA">
+      <viewAttributes>
+        <viewAttribute id="ID_COBERTURA"/>
+        <viewAttribute id="ID_SUBCANAL"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="VENTAS"/>
+        <viewAttribute id="TRANSACCIONES"/>
+        <viewAttribute id="TKT_PROMEDIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_COBERTURA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_COBERTURA" source="ID_COBERTURA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTAS" source="VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRANSACCIONES" source="TRANSACCIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TKT_PROMEDIO" source="TKT_PROMEDIO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="ID_COBERTURA"/>
+        <viewAttribute id="ID_SUBCANAL"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="VENTAS"/>
+        <viewAttribute id="TRANSACCIONES"/>
+        <viewAttribute id="TKT_PROMEDIO"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="SUBCANAL"/>
+        <viewAttribute id="LATITUD"/>
+        <viewAttribute id="LONGITUD"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#COBERTURA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_COBERTURA" source="ID_COBERTURA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTAS" source="VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRANSACCIONES" source="TRANSACCIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TKT_PROMEDIO" source="TKT_PROMEDIO"/>
+      </input>
+      <input node="#Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBCANAL" source="SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LATITUD" source="LATITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUD" source="LONGITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+      </input>
+      <joinAttribute name="ID_SUBCANAL"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_2">
+    <attributes>
+      <attribute id="PERIODO" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_2" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="CANAL" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL"/>
+        <keyMapping columnObjectName="Join_2" columnName="CANAL"/>
+      </attribute>
+      <attribute id="SUBCANAL" key="true" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SUBCANAL"/>
+        <keyMapping columnObjectName="Join_2" columnName="SUBCANAL"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="ID_COBERTURA" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_COBERTURA"/>
+        <measureMapping columnObjectName="Join_2" columnName="ID_COBERTURA"/>
+      </measure>
+      <measure id="ID_SUBCANAL" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_SUBCANAL"/>
+        <measureMapping columnObjectName="Join_2" columnName="ID_SUBCANAL"/>
+      </measure>
+      <measure id="VENTAS" order="4" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="VENTAS"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_2" columnName="VENTAS"/>
+      </measure>
+      <measure id="TRANSACCIONES" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TRANSACCIONES"/>
+        <measureMapping columnObjectName="Join_2" columnName="TRANSACCIONES"/>
+      </measure>
+      <measure id="TKT_PROMEDIO" order="6" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="TKT_PROMEDIO"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_2" columnName="TKT_PROMEDIO"/>
+      </measure>
+      <measure id="LATITUD" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="LATITUD">
+          <comment text=""/>
+        </descriptions>
+        <measureMapping columnObjectName="Join_2" columnName="LATITUD"/>
+      </measure>
+      <measure id="LONGITUD" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="LONGITUD"/>
+        <measureMapping columnObjectName="Join_2" columnName="LONGITUD"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CANAL" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="-62" y="595"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUBCANAL" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="161" y="599"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="-48" y="481"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COBERTURA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="175" y="425"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="161" y="295"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

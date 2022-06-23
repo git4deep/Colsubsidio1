@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="3.0" id="logical.data.calculationviews.COMERCIAL::GESTION_COM_APORTES_RETENCION_RIESGO" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="GESTION_COM_APORTES_RETENCION_RIESGO"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COM_RETENCION_RIESGO">
+      <resourceUri>logical.data::T_COM_RETENCION_RIESGO</resourceUri>
+    </DataSource>
+    <DataSource id="RETENCION_RIESGO_MES_ANTERIOR$$$$logical.data::T_COM_RETENCION_RIESGO$$">
+      <resourceUri>logical.data::T_COM_RETENCION_RIESGO</resourceUri>
+    </DataSource>
+    <DataSource id="RETENCION_RIESGO_ANO_ANTERIOR$$$$logical.data::T_COM_RETENCION_RIESGO$$">
+      <resourceUri>logical.data::T_COM_RETENCION_RIESGO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_RET_RIESGO">
+      <resourceUri>logical.data::T_COM_RET_RIESGO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_PIRAMIDE_2">
+      <resourceUri>logical.data::T_COM_PIRAMIDE_2</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_PIRAMIDE_1">
+      <resourceUri>logical.data::T_COM_PIRAMIDE_1</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_RIESGO">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_RIESGO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_RETENCION_RIESGO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_RIESGO_MES_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_RIESGO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_MES_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_MONTHS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="RETENCION_RIESGO_MES_ANTERIOR$$$$logical.data::T_COM_RETENCION_RIESGO$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_RIESGO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="RETENCION_RIESGO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_RIESGO" source="ID_RIESGO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+      <input node="RETENCION_RIESGO_MES_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_RIESGO" source="ID_RIESGO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+    <joinAttribute name="ID_RIESGO"/>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_PIRAMIDE_2"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_RIESGO_ANO_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_RIESGO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_ANO_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_YEARS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="RETENCION_RIESGO_ANO_ANTERIOR$$$$logical.data::T_COM_RETENCION_RIESGO$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_RIESGO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_RIESGO" source="ID_RIESGO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+      <input node="RETENCION_RIESGO_ANO_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_RIESGO" source="ID_RIESGO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_RIESGO"/>
+    <joinAttribute name="ID_PIRAMIDE_2"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="RIESGO">
+    <viewAttributes>
+        <viewAttribute id="ID_RIESGO"/>
+        <viewAttribute id="RIESGO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_RET_RIESGO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="RIESGO"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+      <viewAttribute hidden="true" id="JOIN$ID_RIESGO$ID_RIESGO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_RIESGO$ID_RIESGO" source="ID_RIESGO"/>
+      </input>
+      <input node="RIESGO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="RIESGO" source="RIESGO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_RIESGO$ID_RIESGO" source="ID_RIESGO"/>
+      </input>
+    <joinAttribute name="JOIN$ID_RIESGO$ID_RIESGO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PIRAMIDE_2">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="ID_PIRAMIDE_1"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_PIRAMIDE_2"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PIRAMIDE_1">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_1"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_PIRAMIDE_1"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_4" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      <viewAttribute hidden="true" id="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="PIRAMIDE_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1" source="ID_PIRAMIDE_1"/>
+      </input>
+      <input node="PIRAMIDE_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1" source="ID_PIRAMIDE_1"/>
+      </input>
+    <joinAttribute name="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_5" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="RIESGO"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      <viewAttribute hidden="true" id="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="RIESGO" source="RIESGO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+      <input node="Join_4">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+    <joinAttribute name="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_5">
+    <attributes>
+      <attribute id="FECHA" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FECHA"/>
+        <keyMapping columnObjectName="Join_5" columnName="FECHA"/>
+      </attribute>
+      <attribute id="RIESGO" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="RIESGO"/>
+        <keyMapping columnObjectName="Join_5" columnName="RIESGO"/>
+      </attribute>
+      <attribute id="PIRAMIDE_2" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PIRAMIDE_2"/>
+        <keyMapping columnObjectName="Join_5" columnName="PIRAMIDE_2"/>
+      </attribute>
+      <attribute id="PIRAMIDE_1" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PIRAMIDE_1"/>
+        <keyMapping columnObjectName="Join_5" columnName="PIRAMIDE_1"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="APORTES" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS"/>
+      </measure>
+      <measure id="APORTES_MES_ANTERIOR" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_MES_ANTERIOR" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ANO_ANTERIOR" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_ANO_ANTERIOR" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_ACUM_EMPRESAS" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD ACUM EMPRESAS ACTUAL"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS"/>
+      </measure>
+      <measure id="CANTIDAD_ACUM_EMPRESAS_ANO_ANTERIOR" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD ACUM EMPRESAS ANO ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="PIRAMIDE1_2">
+        <attributeRef xsi:type="DataFoundation:Attribute">PIRAMIDE_1</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">PIRAMIDE_2</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="PIRAMIDE1_2" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions defaultDescription="PIRAMIDE1_2"/>
+            <levels>
+              <level levelAttribute="PIRAMIDE_1" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="PIRAMIDE_1" sortDirection="ASC"/>
+              <level levelAttribute="PIRAMIDE_2" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="PIRAMIDE_2" sortDirection="ASC"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="652" y="112"/>
+      
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="RETENCION_RIESGO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="92" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="RETENCION_RIESGO_MES_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="301" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="RETENCION_RIESGO" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="RETENCION_RIESGO_MES_ANTERIOR" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="RETENCION_RIESGO_ANO_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="386" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="145" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="RETENCION_RIESGO_ANO_ANTERIOR" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="RIESGO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="497" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="471" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="RIESGO" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="PIRAMIDE_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="917" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PIRAMIDE_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="707" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="734" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="PIRAMIDE_2" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="PIRAMIDE_1" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="652" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="Join_3" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_4" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

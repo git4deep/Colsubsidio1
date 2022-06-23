@@ -1,0 +1,92 @@
+<mvc:View controllerName="ui5.col.controller.home" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" displayBlock="true" height="100%" class="sapUiSizeCompact">
+	<m:Shell id="shell">
+		<m:App id="app">
+			<m:pages>
+				<m:Page id="page" title="{i18n>title}">
+					<m:content>
+						<m:Wizard id="Wizard"  finishButtonText="{i18n>saveProcess}" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" >
+							<m:WizardStep id="wsView" title="{i18n>selectViews}" icon="sap-icon://step" validated ="false">
+								<m:Panel height="600px" id="pViews">
+									<m:content>
+										<mvc:XMLView id="wizardViews" viewName="ui5.col.view.wizard.views" displayBlock="false"/>
+									</m:content>
+								</m:Panel>
+								<m:Panel height="120px" id="pMessageViews" visible="false" headerText="{i18n>selectedView}">
+									<m:content>
+										<m:List>
+											<items>
+												<StandardListItem  type="Detail" detailPress="onReturnStep"/>
+											</items>
+										</m:List>
+									</m:content>
+								</m:Panel>
+							</m:WizardStep>
+							<m:WizardStep id="wsTables" activate="onValidateViews" title="{i18n>selectTables}" icon="sap-icon://step">
+								<m:Panel height="600px" id="pTables">
+									<m:content>
+										<mvc:XMLView id="wizardTables" viewName="ui5.col.view.wizard.tables" displayBlock="false"/>
+									</m:content>
+								</m:Panel>
+								<m:Panel height="120px" id="pMessageTables" visible="false" headerText="{i18n>selectedTable}">
+									<m:content>
+										<m:List>
+											<items>
+												<StandardListItem title="{/oSelectedTable/TABLE_NAME}"  type="Detail" detailPress="onReturnStep"/>
+											</items>
+										</m:List>
+									</m:content>
+								</m:Panel>
+							</m:WizardStep>
+							<m:WizardStep id="wsColumns" activate="onValidateTables" title="{i18n>selectColumns}" icon="sap-icon://step">
+								<m:Panel height="600px" id="pColumns">
+									<m:content>
+										<mvc:XMLView id="wizardColumns" viewName="ui5.col.view.wizard.columns" displayBlock="false"/>
+									</m:content>
+								</m:Panel>
+								<m:Panel height="120px" id="pMessageColumns" visible="false" headerText="{i18n>selectedColumn}">
+									<m:content>
+										<m:List>
+											<items>
+												<StandardListItem title="{/oSelectedColumnByTable/TABLE_COLUMNS}"  type="Detail" detailPress="onReturnStep"/>
+											</items>
+										</m:List>
+									</m:content>
+								</m:Panel>
+							</m:WizardStep>
+							<m:WizardStep id="wsOrders" activate="onValidateColumns" title="{i18n>assingOrder}" icon="sap-icon://step">
+								<m:Panel height="700px" id="pOrder">
+									<m:content>
+										<mvc:XMLView id="wizardOrder" viewName="ui5.col.view.wizard.order" displayBlock="false"/>
+									</m:content>
+								</m:Panel>
+								<m:Panel height="400px" id="pMessageOrder" visible="false" headerText="{i18n>selectedOrden}">
+									<m:content>
+										<m:List items="{/aOrderOfRecords}">
+											<items>
+												<StandardListItem title="{RECORD}" type="Detail" detailPress="onReturnStep"/>
+											</items>
+										</m:List>
+									</m:content>
+								</m:Panel>
+							</m:WizardStep>
+							<m:WizardStep id="wsEnd" activate="onValidateAfterOrder" title="{i18n>confirmProcess}" complete="onConfirmProcess">
+								<m:Panel height="500px">
+									<m:content>
+										<mvc:XMLView id="wizardConfirm" viewName="ui5.col.view.wizard.confirm" displayBlock="false"/>
+									</m:content>
+								</m:Panel>
+							</m:WizardStep>
+						</m:Wizard>
+					</m:content>
+					<m:footer>
+						<m:Bar>
+							<m:contentLeft></m:contentLeft>
+							<m:contentRight></m:contentRight>
+						</m:Bar>
+					</m:footer>
+				</m:Page>
+			</m:pages>
+		</m:App>
+	</m:Shell>
+</mvc:View>

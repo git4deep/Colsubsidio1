@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::T_COR_PART_EMPRESARIAL" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="T_COR_PART_EMPRESARIAL"/>
+  <metadata changedAt="2021-05-04 15:07:25.045"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_INGRESO">
+      <resourceUri>logical.data::T_COR_INGRESO</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="INGRESOS">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="ID_SERVICIO_PRE"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ID_SERVICIO" length="1" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;ID_SERVICIO_PRE&quot; = 'COCS', '3',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COEC', '4',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COIP', '5',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'CORT', '8',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COAB', '1', 'ERROR'
+
+)))))</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="NIVEL_1" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;ID_SERVICIO_PRE&quot; = 'COAB', 'ALIMENTOS Y BEBIDAS',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COIP', 'IPS',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COCS', 'CRÉDITO Y SEGUROS',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COEC', 'EDUCACIÓN Y CULTURA',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'CORT', 'RECREACIÓN Y TURISMO',
+'ERROR'
+))) ))</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="VALOR" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;INGRESO_REAL&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO_PRE" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+      </input>
+      <filter>&quot;TIPO_ANALISIS&quot; = 'INGRESOS POR LÍNEA DE ACCIÓN ESTRATÉGICA' AND
+IN(&quot;ID_SERVICIO_PRE&quot;, 'COAB', 'COCS', 'CORT', 'COIP', 'COEC') AND
+IN(&quot;TIPO_TERCERO&quot;, 'EMPRESARIAL AFILIADO', 'EMPRESARIAL NO AFILIADO')</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="PARTICIPACION">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute aggregationType="sum" id="VALOR"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="PARTICIPACION_DENOM" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;VALOR&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#INGRESOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinOrder="OUTSIDE_IN" joinType="rightOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="PARTICIPACION_DENOM"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute hidden="true" id="JOIN$PERIODO$PERIODO"/>
+        <viewAttribute hidden="true" id="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#PARTICIPACION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION_DENOM" source="PARTICIPACION_DENOM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PERIODO$PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <input node="#INGRESOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO_PRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PERIODO$PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <joinAttribute name="JOIN$PERIODO$PERIODO"/>
+      <joinAttribute name="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="NIVEL_1" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_1"/>
+        <keyMapping columnObjectName="Join_1" columnName="NIVEL_1"/>
+      </attribute>
+      <attribute id="SEGMENTO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEGMENTO"/>
+        <keyMapping columnObjectName="Join_1" columnName="SEGMENTO"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="ID_SERVICIO" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_SERVICIO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="VALOR" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="VALOR"/>
+      </measure>
+      <measure id="PARTICIPACION_DENOM" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PARTICIPACION_DENOM"/>
+        <measureMapping columnObjectName="Join_1" columnName="PARTICIPACION_DENOM"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="PARTICIPACION" hidden="false" order="1" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="17" scale="2">
+        <descriptions defaultDescription="PARTICIPACION"/>
+        <formula>IF(&quot;PARTICIPACION_DENOM&quot; = 0,0,&quot;VALOR&quot;/&quot;PARTICIPACION_DENOM&quot;)</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="109" y="87"/>
+        <rectangleSize/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESOS" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="109" y="339"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PARTICIPACION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="261"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="109" y="165"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

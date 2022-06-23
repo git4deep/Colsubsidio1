@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV3_SIST_SALUD_DOBLE_COND" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_SIST_SALUD_DOBLE"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_DOBLE_CONDICION">
+      <resourceUri>logical.data::T_COR_DOBLE_CONDICION</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="DOBLE_CONDICION">
+      <viewAttributes>
+        <viewAttribute id="AFILIADOS"/>
+        <viewAttribute id="CONDICION"/>
+        <viewAttribute id="ID_DOBLE_CONDICION"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="REGIMEN"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_DOBLE_CONDICION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="AFILIADOS" source="AFILIADOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONDICION" source="CONDICION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DOBLE_CONDICION" source="ID_DOBLE_CONDICION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGIMEN" source="REGIMEN"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="DOBLE_CONDICION">
+    <attributes>
+      <attribute id="CONDICION" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CONDICION"/>
+        <keyMapping columnObjectName="DOBLE_CONDICION" columnName="CONDICION"/>
+      </attribute>
+      <attribute id="PERIODO" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="DOBLE_CONDICION" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="REGIMEN" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="REGIMEN"/>
+        <keyMapping columnObjectName="DOBLE_CONDICION" columnName="REGIMEN"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="AFILIADOS" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="AFILIADOS"/>
+        <measureMapping columnObjectName="DOBLE_CONDICION" columnName="AFILIADOS"/>
+      </measure>
+      <measure id="ID_DOBLE_CONDICION" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_DOBLE_CONDICION"/>
+        <measureMapping columnObjectName="DOBLE_CONDICION" columnName="ID_DOBLE_CONDICION"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="DOBLE_CONDICION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="37" y="505"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV4_INVERSIONES" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV4_INVERSIONES"/>
+  <metadata changedAt="2019-10-19 16:36:26.27"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="53"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_INVERSIONES">
+      <resourceUri>logical.data::T_COR_INVERSIONES</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_PROY_INVERSION">
+      <resourceUri>logical.data::T_COR_PROY_INVERSION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_GRUPO_LINEA_ACCION">
+      <resourceUri>logical.data::T_COR_GRUPO_LINEA_ACCION</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="SERVICIO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_SERVICIO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="INVESIONES">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="MODALIDAD"/>
+        <viewAttribute id="LIMITE_MAX"/>
+        <viewAttribute id="EJECUCCION"/>
+        <viewAttribute id="SALDO_EJECUTAR"/>
+        <viewAttribute id="ID_INVERSIONES"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_PROY_INVERSION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_INVERSIONES"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO_1"/>
+        <viewAttribute id="MODALIDAD"/>
+        <viewAttribute id="LIMITE_MAX"/>
+        <viewAttribute id="EJECUCCION"/>
+        <viewAttribute id="SALDO_EJECUTAR"/>
+        <viewAttribute id="ID_INVERSIONES"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_PROY_INVERSION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+      </input>
+      <input node="INVESIONES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO_1" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODALIDAD" source="MODALIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LIMITE_MAX" source="LIMITE_MAX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EJECUCCION" source="EJECUCCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SALDO_EJECUTAR" source="SALDO_EJECUTAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_INVERSIONES" source="ID_INVERSIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PROY_INVERSION" source="ID_PROY_INVERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+    <joinAttribute name="ID_SERVICIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PROYECTO_INV">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ESTADO_PROYECTO"/>
+        <viewAttribute id="ID_PROYECTO"/>
+        <viewAttribute id="PROYECTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_PROY_INVERSION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ESTADO_PROYECTO"/>
+        <viewAttribute id="ID_PROYECTO"/>
+        <viewAttribute id="PROYECTO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO_1"/>
+        <viewAttribute id="MODALIDAD"/>
+        <viewAttribute id="LIMITE_MAX"/>
+        <viewAttribute id="EJECUCCION"/>
+        <viewAttribute id="SALDO_EJECUTAR"/>
+        <viewAttribute id="ID_INVERSIONES"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_PROY_INVERSION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="PROYECTO_INV">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ESTADO_PROYECTO" source="ESTADO_PROYECTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PROYECTO" source="ID_PROYECTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PROYECTO" source="PROYECTO"/>
+      </input>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO_1" source="ID_SERVICIO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODALIDAD" source="MODALIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LIMITE_MAX" source="LIMITE_MAX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EJECUCCION" source="EJECUCCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SALDO_EJECUTAR" source="SALDO_EJECUTAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_INVERSIONES" source="ID_INVERSIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PROY_INVERSION" source="ID_PROY_INVERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PROYECTO" source="ID_PROY_INVERSION"/>
+      </input>
+    <joinAttribute name="ID_PROYECTO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_GRUPO_LINEA_ACCION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="ESTADO_PROYECTO"/>
+        <viewAttribute id="ID_PROYECTO"/>
+        <viewAttribute id="PROYECTO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO_1"/>
+        <viewAttribute id="MODALIDAD"/>
+        <viewAttribute id="LIMITE_MAX"/>
+        <viewAttribute id="EJECUCCION"/>
+        <viewAttribute id="SALDO_EJECUTAR"/>
+        <viewAttribute id="ID_INVERSIONES"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_PROY_INVERSION"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ESTADO_PROYECTO" source="ESTADO_PROYECTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PROYECTO" source="ID_PROYECTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PROYECTO" source="PROYECTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO_1" source="ID_SERVICIO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODALIDAD" source="MODALIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LIMITE_MAX" source="LIMITE_MAX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EJECUCCION" source="EJECUCCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SALDO_EJECUTAR" source="SALDO_EJECUTAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_INVERSIONES" source="ID_INVERSIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PROY_INVERSION" source="ID_PROY_INVERSION"/>
+      </input>
+      <input node="Aggregation_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+      </input>
+    <joinAttribute name="ID_GRUPO_LINEA_ACCION"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_3">
+    <descriptions/>
+    <attributes>
+      <attribute id="ESTADO_PROYECTO" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ESTADO_PROYECTO"/>
+        <keyMapping columnObjectName="Join_3" columnName="ESTADO_PROYECTO"/>
+      </attribute>
+      <attribute id="ID_PROYECTO" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_PROYECTO"/>
+        <keyMapping columnObjectName="Join_3" columnName="ID_PROYECTO"/>
+      </attribute>
+      <attribute id="PROYECTO" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PROYECTO"/>
+        <keyMapping columnObjectName="Join_3" columnName="PROYECTO"/>
+      </attribute>
+      <attribute id="ID_SERVICIO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Join_3" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="SERVICIO" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="Join_3" columnName="SERVICIO"/>
+      </attribute>
+      <attribute id="PERIODO" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_3" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="ID_SERVICIO_1" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO_1"/>
+        <keyMapping columnObjectName="Join_3" columnName="ID_SERVICIO_1"/>
+      </attribute>
+      <attribute id="MODALIDAD" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MODALIDAD"/>
+        <keyMapping columnObjectName="Join_3" columnName="MODALIDAD"/>
+      </attribute>
+      <attribute id="ID_GRUPO_LINEA_ACCION" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_GRUPO_LINEA_ACCION"/>
+        <keyMapping columnObjectName="Join_3" columnName="ID_GRUPO_LINEA_ACCION"/>
+      </attribute>
+      <attribute id="ID_PROY_INVERSION" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_PROY_INVERSION"/>
+        <keyMapping columnObjectName="Join_3" columnName="ID_PROY_INVERSION"/>
+      </attribute>
+      <attribute id="GRUPO_LINEA_ACCION" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GRUPO_LINEA_ACCION"/>
+        <keyMapping columnObjectName="Join_3" columnName="GRUPO_LINEA_ACCION"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="LIMITE_MAX" order="9" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="LIMITE_MAX"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_3" columnName="LIMITE_MAX"/>
+      </measure>
+      <measure id="EJECUCCION" order="10" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="EJECUCCION"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_3" columnName="EJECUCCION"/>
+      </measure>
+      <measure id="SALDO_EJECUTAR" order="11" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="SALDO_EJECUTAR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_3" columnName="SALDO_EJECUTAR"/>
+      </measure>
+      <measure id="ID_INVERSIONES" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_INVERSIONES"/>
+        <measureMapping columnObjectName="Join_3" columnName="ID_INVERSIONES"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="RETO_SERVICIO_PROY">
+        <attributeRef xsi:type="DataFoundation:Attribute">GRUPO_LINEA_ACCION</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">SERVICIO</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">PROYECTO</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="RETO_SERVICIO_PROY" aggregateAllNodes="true" multipleParents="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions defaultDescription="RETO_SERVICIO_PROY"/>
+            <levels>
+              <level levelAttribute="GRUPO_LINEA_ACCION" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="GRUPO_LINEA_ACCION" sortDirection="ASC"/>
+              <level levelAttribute="SERVICIO" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="SERVICIO" sortDirection="ASC"/>
+              <level levelAttribute="PROYECTO" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="PROYECTO" sortDirection="ASC"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="422.15218199852" y="112"/>
+      
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="92" y="696.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INVESIONES" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302.00000000000006" y="696.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118.66666666666669" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="SERVICIO" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="INVESIONES" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="PROYECTO_INV" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="384.11215526044043" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="145.33333333333337" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="PROYECTO_INV" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="489.48394766311617" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="422.15218199852" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="Join_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

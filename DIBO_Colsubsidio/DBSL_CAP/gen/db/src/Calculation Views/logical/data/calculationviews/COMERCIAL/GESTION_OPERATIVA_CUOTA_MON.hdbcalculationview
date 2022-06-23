@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="3.0" id="logical.data.calculationviews.COMERCIAL::GESTION_OPERATIVA_CUOTA_MON" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="GESTION_OPERATIVA_CUOTA_MONET"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COM_SUBSIDIOS">
+      <resourceUri>logical.data::T_COM_SUBSIDIOS</resourceUri>
+    </DataSource>
+    <DataSource id="SUBSIDIOS_MES_ANTERIOR$$$$logical.data::T_COM_SUBSIDIOS$$">
+      <resourceUri>logical.data::T_COM_SUBSIDIOS</resourceUri>
+    </DataSource>
+    <DataSource id="SUBSIDIOS_ANO_ANTERIOR$$$$logical.data::T_COM_SUBSIDIOS$$">
+      <resourceUri>logical.data::T_COM_SUBSIDIOS</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_PIRAMIDE_1">
+      <resourceUri>logical.data::T_COM_PIRAMIDE_1</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_PIRAMIDE_2">
+      <resourceUri>logical.data::T_COM_PIRAMIDE_2</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_TIPO_SUBSIDIO">
+      <resourceUri>logical.data::T_COM_TIPO_SUBSIDIO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_ESTADO_SUBSIDIO">
+      <resourceUri>logical.data::T_COM_ESTADO_SUBSIDIO</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUBSIDIOS">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="ID_TIPO_SUBSIDIO"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_SUBSIDIOS"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUBSIDIOS_MES_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="ID_TIPO_SUBSIDIO"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_MES_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_MONTHS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="SUBSIDIOS_MES_ANTERIOR$$$$logical.data::T_COM_SUBSIDIOS$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="ID_TIPO_SUBSIDIO"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="SUBSIDIOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_TIPO_SUBSIDIO" source="ID_TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS" source="SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS" source="CANTIDAD_SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS" source="CANTIDAD_BENEFICIARIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+      </input>
+      <input node="SUBSIDIOS_MES_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_MES_ANTERIOR" source="SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_MES_ANTERIOR" source="CANTIDAD_SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR" source="CANTIDAD_BENEFICIARIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_TIPO_SUBSIDIO" source="ID_TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+      </input>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_PIRAMIDE_2"/>
+    <joinAttribute name="ID_TIPO_SUBSIDIO"/>
+    <joinAttribute name="ID_ESTADO_SUBSIDIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUBSIDIOS_ANO_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="ID_TIPO_SUBSIDIO"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_ANO_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_YEARS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="SUBSIDIOS_ANO_ANTERIOR$$$$logical.data::T_COM_SUBSIDIOS$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="ID_TIPO_SUBSIDIO"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <viewAttribute id="SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_TIPO_SUBSIDIO" source="ID_TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS" source="SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS" source="CANTIDAD_SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS" source="CANTIDAD_BENEFICIARIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_MES_ANTERIOR" source="SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_MES_ANTERIOR" source="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR" source="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+      </input>
+      <input node="SUBSIDIOS_ANO_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_ANO_ANTERIOR" source="SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR" source="CANTIDAD_SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR" source="CANTIDAD_BENEFICIARIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_TIPO_SUBSIDIO" source="ID_TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+      </input>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_PIRAMIDE_2"/>
+    <joinAttribute name="ID_TIPO_SUBSIDIO"/>
+    <joinAttribute name="ID_ESTADO_SUBSIDIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PIRAMIDE_1">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_1"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_PIRAMIDE_1"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PIRAMIDE_2">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="ID_PIRAMIDE_1"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_PIRAMIDE_2"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      <viewAttribute hidden="true" id="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="PIRAMIDE_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1" source="ID_PIRAMIDE_1"/>
+      </input>
+      <input node="PIRAMIDE_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1" source="ID_PIRAMIDE_1"/>
+      </input>
+    <joinAttribute name="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_4" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_TIPO_SUBSIDIO"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <viewAttribute id="SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+      <viewAttribute hidden="true" id="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_TIPO_SUBSIDIO" source="ID_TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS" source="SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS" source="CANTIDAD_SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS" source="CANTIDAD_BENEFICIARIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_MES_ANTERIOR" source="SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_MES_ANTERIOR" source="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR" source="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_ANO_ANTERIOR" source="SUBSIDIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR" source="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR" source="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+      <input node="Join_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+    <joinAttribute name="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="TIPO_SUBSIDIO">
+    <viewAttributes>
+        <viewAttribute id="ID_TIPO_SUBSIDIO"/>
+        <viewAttribute id="TIPO_SUBSIDIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_TIPO_SUBSIDIO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_5" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <viewAttribute id="SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+        <viewAttribute id="TIPO_SUBSIDIO"/>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+      <viewAttribute hidden="true" id="JOIN$ID_TIPO_SUBSIDIO$ID_TIPO_SUBSIDIO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_4">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS" source="SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS" source="CANTIDAD_SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS" source="CANTIDAD_BENEFICIARIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_MES_ANTERIOR" source="SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_MES_ANTERIOR" source="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR" source="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_ANO_ANTERIOR" source="SUBSIDIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR" source="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR" source="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_TIPO_SUBSIDIO$ID_TIPO_SUBSIDIO" source="ID_TIPO_SUBSIDIO"/>
+      </input>
+      <input node="TIPO_SUBSIDIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_SUBSIDIO" source="TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_TIPO_SUBSIDIO$ID_TIPO_SUBSIDIO" source="ID_TIPO_SUBSIDIO"/>
+      </input>
+    <joinAttribute name="JOIN$ID_TIPO_SUBSIDIO$ID_TIPO_SUBSIDIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="ESTADO_SUBSIDIO">
+    <viewAttributes>
+        <viewAttribute id="ID_ESTADO_SUBSIDIO"/>
+        <viewAttribute id="ESTADO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_ESTADO_SUBSIDIO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_6" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS"/>
+        <viewAttribute id="SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <viewAttribute id="SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+        <viewAttribute id="TIPO_SUBSIDIO"/>
+        <viewAttribute id="ESTADO"/>
+      <viewAttribute hidden="true" id="JOIN$ID_ESTADO_SUBSIDIO$ID_ESTADO_SUBSIDIO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_5">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS" source="SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS" source="CANTIDAD_SUBSIDIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS" source="CANTIDAD_BENEFICIARIOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_MES_ANTERIOR" source="SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_MES_ANTERIOR" source="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR" source="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBSIDIOS_ANO_ANTERIOR" source="SUBSIDIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR" source="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR" source="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_SUBSIDIO" source="TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTADO_SUBSIDIO$ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+      </input>
+      <input node="ESTADO_SUBSIDIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ESTADO" source="ESTADO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTADO_SUBSIDIO$ID_ESTADO_SUBSIDIO" source="ID_ESTADO_SUBSIDIO"/>
+      </input>
+    <joinAttribute name="JOIN$ID_ESTADO_SUBSIDIO$ID_ESTADO_SUBSIDIO"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_6">
+    <attributes>
+      <attribute id="FECHA" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FECHA"/>
+        <keyMapping columnObjectName="Join_6" columnName="FECHA"/>
+      </attribute>
+      <attribute id="PIRAMIDE_2" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PIRAMIDE_2"/>
+        <keyMapping columnObjectName="Join_6" columnName="PIRAMIDE_2"/>
+      </attribute>
+      <attribute id="PIRAMIDE_1" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PIRAMIDE_1"/>
+        <keyMapping columnObjectName="Join_6" columnName="PIRAMIDE_1"/>
+      </attribute>
+      <attribute id="TIPO_SUBSIDIO" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_SUBSIDIO"/>
+        <keyMapping columnObjectName="Join_6" columnName="TIPO_SUBSIDIO"/>
+      </attribute>
+      <attribute id="ESTADO" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ESTADO"/>
+        <keyMapping columnObjectName="Join_6" columnName="ESTADO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="SUBSIDIOS" order="2" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="SUBSIDIOS MES"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_6" columnName="SUBSIDIOS"/>
+      </measure>
+      <measure id="CANTIDAD_SUBSIDIOS" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_SUBSIDIOS"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_SUBSIDIOS"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_TRABAJADORES"/>
+      </measure>
+      <measure id="CANTIDAD_BENEFICIARIOS" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_BENEFICIARIOS"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_BENEFICIARIOS"/>
+      </measure>
+      <measure id="SUBSIDIOS_MES_ANTERIOR" order="6" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="SUBSIDIOS_MES_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_6" columnName="SUBSIDIOS_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_SUBSIDIOS_MES_ANTERIOR" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_SUBSIDIOS_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES_MES_ANTERIOR" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_BENEFICIARIOS_MES_ANTERIOR"/>
+      </measure>
+      <measure id="SUBSIDIOS_ANO_ANTERIOR" order="10" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="SUBSIDIOS_ANO_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_6" columnName="SUBSIDIOS_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_SUBSIDIOS_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_6" columnName="CANTIDAD_BENEFICIARIOS_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="SUBSIDIOS_ACUM_ACTUAL" order="18" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="SUBSIDIOS_ACUM_ACTUAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_6" columnName="SUBSIDIOS"/>
+      </measure>
+      <measure id="SUBSIDIOS_ACUM_ANO_ANTERIOR" order="19" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="SUBSIDIOS_ACUM_ANO_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_6" columnName="SUBSIDIOS_ANO_ANTERIOR"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="PIRAMIDE1_2">
+        <attributeRef xsi:type="DataFoundation:Attribute">PIRAMIDE_1</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">PIRAMIDE_2</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="PIRAMIDE1_2" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions defaultDescription="PIRAMIDE1_2"/>
+            <levels>
+              <level levelAttribute="PIRAMIDE_1" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="PIRAMIDE_1" sortDirection="ASC"/>
+              <level levelAttribute="PIRAMIDE_2" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="PIRAMIDE_2" sortDirection="ASC"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="586" y="112"/>
+      
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUBSIDIOS" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="587" y="1016"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUBSIDIOS_MES_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="797" y="1016"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="722" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="SUBSIDIOS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SUBSIDIOS_MES_ANTERIOR" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="SUBSIDIOS_ANO_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="512" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="538" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SUBSIDIOS_ANO_ANTERIOR" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="PIRAMIDE_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="92" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PIRAMIDE_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="275" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="PIRAMIDE_1" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="PIRAMIDE_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_2" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_3" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="TIPO_SUBSIDIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="681" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="659" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_4" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="TIPO_SUBSIDIO" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="ESTADO_SUBSIDIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="449" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_6" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="586" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="Join_5" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="ESTADO_SUBSIDIO" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

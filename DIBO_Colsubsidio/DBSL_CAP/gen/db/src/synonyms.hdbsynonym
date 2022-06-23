@@ -1,0 +1,7 @@
+{
+    "LOGICAL_DATA_T_COR_PROYECTO": {
+        "target": {
+          "object": "logical.data::T_COR_PROYECTO"
+        }
+      } 
+}

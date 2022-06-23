@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.GEO::GEO_SUBCANAL" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="GEO_SUBCANAL"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_SUBCANAL">
+      <resourceUri>logical.data::T_COR_SUBCANAL</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews/>
+  <logicalModel id="logical.data::T_COR_SUBCANAL">
+    <attributes>
+      <attribute id="ID_SUBCANAL" key="true" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SUBCANAL"/>
+        <keyMapping columnObjectName="T_COR_SUBCANAL" columnName="ID_SUBCANAL"/>
+      </attribute>
+      <attribute id="LATITUD" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LATITUD"/>
+        <keyMapping columnObjectName="T_COR_SUBCANAL" columnName="LATITUD"/>
+      </attribute>
+      <attribute id="LONGITUD" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LONGITUD"/>
+        <keyMapping columnObjectName="T_COR_SUBCANAL" columnName="LONGITUD"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="ID_CANAL" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_CANAL"/>
+        <measureMapping columnObjectName="T_COR_SUBCANAL" columnName="ID_CANAL"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+</layout>
+</Calculation:scenario>

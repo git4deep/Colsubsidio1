@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	class="sapUiContentPadding">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm editable="false" layout="ResponsiveGridLayout" title="{i18n>dataSelected}" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+			labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+			singleContainerFullSize="false">
+			<f:content>
+				<core:Title text=""/>
+				<Label text="{i18n>selectedView}"/>
+				<Input id="viewConfirm" enabled="false"/>
+				<Label text="{i18n>selectedTable}"/>
+				<Input value="{/oSelectedTable/TABLE_NAME}" enabled="false"/>
+				<Label text="{i18n>selectedColumn}"/>
+				<Input value="{/oSelectedColumnByTable/TABLE_COLUMNS}" enabled="false"/>
+				<core:Title text=""/>
+				<Label text="{i18n>selectedOrden}"/>
+				<List items="{/aOrderOfRecords}">
+					<items>
+						<StandardListItem title="{RECORD}" highlight="None" type="Inactive" detailPress="onReturnStep"/>
+					</items>
+				</List>
+			</f:content>
+		</f:SimpleForm>
+		<f:SimpleForm editable="false" layout="ResponsiveGridLayout" title="{i18n>selectSaveLocation}" labelSpanXL="4" labelSpanL="4"
+			labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+			columnsL="2" columnsM="1" singleContainerFullSize="false">
+			<f:content>
+				<core:Title text=""/>
+				<Label text="{i18n>selectFilter}"/>
+				<ComboBox items="{/Filter}" placeholder="{i18n>select}" selectedKey="{/columnToFilter}" enabled="false">
+					<core:Item key="{id}" text="{filter}"/>
+				</ComboBox>
+				<core:Title text=""/>
+				<Label text="{i18n>selectOrder}"/>
+				<ComboBox items="{/Order}" placeholder="{i18n>select}" selectedKey="{/columnToOrder}" enabled="false">
+					<core:Item key="{id}" text="{order}"/>
+				</ComboBox>
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:FragmentDefinition>

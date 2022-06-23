@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV3_RETAIL_COBERTURA" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_RETAIL"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_COBERTURA">
+      <resourceUri>logical.data::T_COR_COBERTURA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SUBCANAL">
+      <resourceUri>logical.data::T_COR_SUBCANAL</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="COBERTURA">
+      <viewAttributes>
+        <viewAttribute id="ID_COBERTURA"/>
+        <viewAttribute id="ID_SUBCANAL"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="VENTAS"/>
+        <viewAttribute id="TRANSACCIONES"/>
+        <viewAttribute id="TKT_PROMEDIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_COBERTURA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_COBERTURA" source="ID_COBERTURA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTAS" source="VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRANSACCIONES" source="TRANSACCIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TKT_PROMEDIO" source="TKT_PROMEDIO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="COBE_SUBCA" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="ID_COBERTURA"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="VENTAS"/>
+        <viewAttribute id="TRANSACCIONES"/>
+        <viewAttribute id="TKT_PROMEDIO"/>
+        <viewAttribute id="ID_SUBCANAL"/>
+        <viewAttribute id="ID_CANAL"/>
+        <viewAttribute id="SUBCANAL"/>
+        <viewAttribute id="LATITUD"/>
+        <viewAttribute id="LONGITUD"/>
+        <viewAttribute hidden="true" id="JOIN$ID_SUBCANAL$ID_SUBCANAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#COBERTURA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_COBERTURA" source="ID_COBERTURA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTAS" source="VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRANSACCIONES" source="TRANSACCIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TKT_PROMEDIO" source="TKT_PROMEDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SUBCANAL$ID_SUBCANAL" source="ID_SUBCANAL"/>
+      </input>
+      <input node="#SUBCA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL" source="ID_CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBCANAL" source="SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LATITUD" source="LATITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUD" source="LONGITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SUBCANAL$ID_SUBCANAL" source="ID_SUBCANAL"/>
+      </input>
+      <joinAttribute name="JOIN$ID_SUBCANAL$ID_SUBCANAL"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="SUBCA">
+      <viewAttributes>
+        <viewAttribute id="ID_SUBCANAL"/>
+        <viewAttribute id="ID_CANAL"/>
+        <viewAttribute id="SUBCANAL"/>
+        <viewAttribute id="LATITUD"/>
+        <viewAttribute id="LONGITUD"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_SUBCANAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBCANAL" source="ID_SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL" source="ID_CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBCANAL" source="SUBCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LATITUD" source="LATITUD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUD" source="LONGITUD"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="COBE_SUBCA">
+    <attributes>
+      <attribute id="SUBCANAL" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SUBCANAL"/>
+        <keyMapping columnObjectName="COBE_SUBCA" columnName="SUBCANAL"/>
+      </attribute>
+      <attribute id="LATITUD" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LATITUD"/>
+        <keyMapping columnObjectName="COBE_SUBCA" columnName="LATITUD"/>
+      </attribute>
+      <attribute id="LONGITUD" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LONGITUD"/>
+        <keyMapping columnObjectName="COBE_SUBCA" columnName="LONGITUD"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="ID_COBERTURA" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_COBERTURA"/>
+        <measureMapping columnObjectName="COBE_SUBCA" columnName="ID_COBERTURA"/>
+      </measure>
+      <measure id="PERIODO" order="2" aggregationType="min" measureType="simple">
+        <descriptions defaultDescription="PERIODO"/>
+        <measureMapping columnObjectName="COBE_SUBCA" columnName="PERIODO"/>
+      </measure>
+      <measure id="VENTAS" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VENTAS"/>
+        <measureMapping columnObjectName="COBE_SUBCA" columnName="VENTAS"/>
+      </measure>
+      <measure id="TRANSACCIONES" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TRANSACCIONES"/>
+        <measureMapping columnObjectName="COBE_SUBCA" columnName="TRANSACCIONES"/>
+      </measure>
+      <measure id="TKT_PROMEDIO" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TKT_PROMEDIO"/>
+        <measureMapping columnObjectName="COBE_SUBCA" columnName="TKT_PROMEDIO"/>
+      </measure>
+      <measure id="ID_SUBCANAL" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_SUBCANAL"/>
+        <measureMapping columnObjectName="COBE_SUBCA" columnName="ID_SUBCANAL"/>
+      </measure>
+      <measure id="ID_CANAL" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_CANAL"/>
+        <measureMapping columnObjectName="COBE_SUBCA" columnName="ID_CANAL"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COBERTURA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="201" y="305"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COBE_SUBCA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="100" y="208"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUBCA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="221" y="293"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

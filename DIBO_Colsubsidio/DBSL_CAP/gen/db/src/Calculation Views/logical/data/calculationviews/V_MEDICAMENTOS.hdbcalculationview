@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews::V_MEDICAMENTOS" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="VISTA_MEDICAMENTOS"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_MEDICAMENTOS">
+      <resourceUri>logical.data::T_MEDICAMENTOS</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews/>
+  <logicalModel id="logical.data::T_MEDICAMENTOS">
+    <attributes>
+      <attribute id="ANO" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ANO"/>
+        <keyMapping columnObjectName="T_MEDICAMENTOS" columnName="ANO"/>
+      </attribute>
+      <attribute id="MES" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MES"/>
+        <keyMapping columnObjectName="T_MEDICAMENTOS" columnName="MES"/>
+      </attribute>
+      <attribute id="CANAL" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL"/>
+        <keyMapping columnObjectName="T_MEDICAMENTOS" columnName="CANAL"/>
+      </attribute>
+      <attribute id="ENTIDAD" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ENTIDAD"/>
+        <keyMapping columnObjectName="T_MEDICAMENTOS" columnName="ENTIDAD"/>
+      </attribute>
+      <attribute id="PERIODO" order="56" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="T_MEDICAMENTOS" columnName="PERIODO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="REAL_VENTAS_BRUTAS" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="REAL_DESCUENTOS_EN_VENTAS" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_DESCUENTOS_EN_VENTAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_DESCUENTOS_EN_VENTAS"/>
+      </measure>
+      <measure id="REAL_CMV_ANTES_DISTRIBUCION" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_CMV_ANTES_DISTRIBUCION"/>
+      </measure>
+      <measure id="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+      </measure>
+      <measure id="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+      </measure>
+      <measure id="REAL_VENTAS_NETAS" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_VENTAS_NETAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_VENTAS_NETAS"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_OPERACIONAL" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_OPERACIONAL"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_UTILIDAD_OPERACIONAL"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_BRUTA" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_BRUTA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_UTILIDAD_BRUTA"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS" order="15" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="REAL_PROVISION_FILTRACION" order="17" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_PROVISION_FILTRACION"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_PROVISION_FILTRACION"/>
+      </measure>
+      <measure id="REAL_INGRESOS_OPERACIONALES" order="18" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_INGRESOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_INGRESOS_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_INGRESOS_NO_OPERACIONALES" order="19" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_INGRESOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_IMPUESTO_A_LA_RIQUEZA" order="20" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="REAL_GASTO_VENTA" order="21" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTO_VENTA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_GASTO_VENTA"/>
+      </measure>
+      <measure id="REAL_GASTOS_OPERACIONALES" order="22" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_GASTOS_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_GASTOS_NO_OPERACIONALES" order="23" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_GASTOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS" order="24" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+      </measure>
+      <measure id="REAL_FILTRACION" order="25" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_FILTRACION"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_FILTRACION"/>
+      </measure>
+      <measure id="REAL_DISTRIBUIDOS" order="26" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="REAL_COSTO_FINANCIERO" order="27" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="REAL_COSTO_DE_VENTAS" order="28" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_COSTO_DE_VENTAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_COSTO_DE_VENTAS"/>
+      </measure>
+      <measure id="REAL_CMV_NIIF" order="29" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_CMV_NIIF"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_CMV_NIIF"/>
+      </measure>
+      <measure id="PPTO_CMV_ANTES_DISTRIBUCION" order="30" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_CMV_ANTES_DISTRIBUCION"/>
+      </measure>
+      <measure id="PPTO_CMV_NIIF" order="31" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_CMV_NIIF"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_CMV_NIIF"/>
+      </measure>
+      <measure id="PPTO_COSTO_DE_VENTAS" order="32" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_COSTO_DE_VENTAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_COSTO_DE_VENTAS"/>
+      </measure>
+      <measure id="PPTO_COSTO_FINANCIERO" order="33" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="PPTO_DESCUENTOS_EN_VENTAS" order="34" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_DESCUENTOS_EN_VENTAS"/>
+      </measure>
+      <measure id="PPTO_DISTRIBUIDOS" order="35" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="PPTO_FILTRACION" order="36" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_FILTRACION"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_FILTRACION"/>
+      </measure>
+      <measure id="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS" order="37" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+      </measure>
+      <measure id="PPTO_GASTOS_NO_OPERACIONALES" order="38" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_GASTOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_GASTOS_OPERACIONALES" order="39" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_GASTOS_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_GASTO_VENTA" order="40" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTO_VENTA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_GASTO_VENTA"/>
+      </measure>
+      <measure id="PPTO_IMPUESTO_A_LA_RIQUEZA" order="41" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="PPTO_INGRESOS_NO_OPERACIONALES" order="42" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_INGRESOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_INGRESOS_OPERACIONALES" order="43" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_INGRESOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_INGRESOS_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN" order="44" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+      </measure>
+      <measure id="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" order="45" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+      </measure>
+      <measure id="PPTO_PROVISION_FILTRACION" order="46" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_PROVISION_FILTRACION"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_PROVISION_FILTRACION"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" order="47" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" order="48" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS" order="49" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" order="50" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_BRUTA" order="51" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_BRUTA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_UTILIDAD_BRUTA"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" order="52" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_OPERACIONAL" order="53" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_OPERACIONAL"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_UTILIDAD_OPERACIONAL"/>
+      </measure>
+      <measure id="PPTO_VENTAS_BRUTAS" order="54" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="PPTO_VENTAS_NETAS" order="55" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="PPTO_VENTAS_NETAS"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="PPTO_VENTAS_NETAS"/>
+      </measure>
+      <measure id="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE" order="57" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+      </measure>
+      <measure id="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO" order="58" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" order="59" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+      </measure>
+      <measure id="TOTAL_EGRESOS_PPTO" order="60" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_EGRESOS_PPTO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="TOTAL_EGRESOS_PPTO"/>
+      </measure>
+      <measure id="TOTAL_EGRESOS_REAL" order="61" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_EGRESOS_REAL"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="TOTAL_EGRESOS_REAL"/>
+      </measure>
+      <measure id="TOTAL_INGRESOS_PPTO" order="62" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_INGRESOS_PPTO"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="TOTAL_INGRESOS_PPTO"/>
+      </measure>
+      <measure id="TOTAL_INGRESOS_REAL" order="63" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_INGRESOS_REAL"/>
+        <measureMapping columnObjectName="T_MEDICAMENTOS" columnName="TOTAL_INGRESOS_REAL"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+</layout>
+</Calculation:scenario>

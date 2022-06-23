@@ -1,0 +1,57 @@
+{
+	"tables":[{
+		"key": "T_COR_CAJA_PARTICIPACION",
+		"tabla": "logical.data::T_COR_CAJA_PARTICIPACION"
+	},{
+		"key": "T_COR_DOBLE_CONDICION",
+		"tabla": "logical.data::T_COR_DOBLE_CONDICION"
+	},
+	{
+		"key": "T_COR_DOBLE_TRIPLE_CONDICION",
+		"tabla": "logical.data::T_COR_DOBLE_TRIPLE_CONDICION"
+	},
+	{
+		"key": "T_COR_FONDO_CREDITO_PLANO",
+		"tabla": "logical.data::T_COR_FONDO_CREDITO_PLANO"
+	},
+	{
+		"key": "T_COR_FONDOS_PLANO",
+		"tabla": "logical.data::T_COR_FONDOS_PLANO"
+	},
+	{
+		"key": "T_COR_INGRESO_PLANO",
+		"tabla": "logical.data::T_COR_INGRESO_PLANO"
+	},
+	{
+		"key": "T_COR_INGRESO_CET",
+		"tabla": "logical.data::T_COR_INGRESO_CET"
+	},
+	{
+		"key": "T_COR_EGRESO_PLANO",
+		"tabla": "logical.data::T_COR_EGRESO_PLANO"
+	},
+	{
+		"key": "T_COR_REINTEGRO_VIVIENDA",
+		"tabla": "logical.data::T_COR_REINTEGRO_VIVIENDA"
+	},
+	{
+		"key": "T_COR_INVERSIONES",
+		"tabla": "logical.data::T_COR_INVERSIONES"
+	},
+	{
+		"key": "T_COR_PROY_INVERSION",
+		"tabla": "logical.data::T_COR_PROY_INVERSION"
+	},
+	{
+		"key": "T_COR_PROYECTO",
+		"tabla": "logical.data::T_COR_PROYECTO"
+	},
+	{
+		"key": "T_COR_PTCION_FILIALES",
+		"tabla": "logical.data::T_COR_PTCION_FILIALES"
+	},
+	{
+		"key": "T_COR_SERVICIO_CLIENTE",
+		"tabla": "logical.data::T_COR_SERVICIO_CLIENTE"
+	}]
+}

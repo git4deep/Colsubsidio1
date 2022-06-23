@@ -1,0 +1,1285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.MEDICAMENTOS::T_MED_TEST3" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+<origin/>
+  <descriptions defaultDescription="T_MED_TEST3"/>
+  <metadata changedAt="2020-06-01 20:44:39.832"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="42"/>
+  <dataSources>
+    <DataSource id="T_MED_MEDICAMENTOS">
+      <resourceUri>logical.data.calculationviews.MEDICAMENTOS::T_MED_MEDICAMENTOS</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_MEDICAMENTOS">
+      <resourceUri>logical.data::T_MEDICAMENTOS</resourceUri>
+    </DataSource>
+    <DataSource id="T_MED_MEDICASCP">
+      <resourceUri>logical.data.calculationviews.MEDICAMENTOS::T_MED_MEDICASCP</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="T_MED_MEDICA">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_MEDICAMENTOS"/>
+        <viewAttribute id="GASTONOOPE"/>
+        <viewAttribute id="REALFIL"/>
+        <viewAttribute id="PROVFIL"/>
+        <viewAttribute id="MVC_DES_FIN"/>
+        <viewAttribute id="MVC_CREDITO"/>
+        <viewAttribute id="CMV_ANTDIST"/>
+        <viewAttribute id="INGRESOS_NOPER"/>
+        <viewAttribute id="INGRESOS_OPER"/>
+        <viewAttribute id="DESCUENTOS_VENTAS"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="MES"/>
+        <viewAttribute id="VENTAS_BRUTAS"/>
+        <viewAttribute id="ANO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="DES_CANAL"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="T_MED_MEDICAMENTOS"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ANO"/>
+        <viewAttribute id="MES"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="REAL_VENTAS_BRUTAS"/>
+        <viewAttribute id="REAL_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute id="REAL_VENTAS_NETAS"/>
+        <viewAttribute id="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute id="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute id="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute id="REAL_CMV_NIIF"/>
+        <viewAttribute id="REAL_FILTRACION"/>
+        <viewAttribute id="REAL_PROVISION_FILTRACION"/>
+        <viewAttribute id="REAL_COSTO_DE_VENTAS"/>
+        <viewAttribute id="REAL_UTILIDAD_BRUTA"/>
+        <viewAttribute id="REAL_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="REAL_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute id="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute id="REAL_DISTRIBUIDOS"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute id="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute id="REAL_COSTO_FINANCIERO"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_VENTAS_BRUTAS"/>
+        <viewAttribute id="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute id="PPTO_VENTAS_NETAS"/>
+        <viewAttribute id="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute id="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute id="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute id="PPTO_CMV_NIIF"/>
+        <viewAttribute id="PPTO_FILTRACION"/>
+        <viewAttribute id="PPTO_PROVISION_FILTRACION"/>
+        <viewAttribute id="PPTO_COSTO_DE_VENTAS"/>
+        <viewAttribute id="PPTO_UTILIDAD_BRUTA"/>
+        <viewAttribute id="PPTO_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="PPTO_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="PPTO_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute id="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute id="PPTO_DISTRIBUIDOS"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute id="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute id="PPTO_COSTO_FINANCIERO"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_GASTO_VENTA"/>
+        <viewAttribute id="PPTO_GASTO_VENTA"/>
+        <viewAttribute id="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <viewAttribute id="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <viewAttribute id="TOTAL_INGRESOS_REAL"/>
+        <viewAttribute id="TOTAL_EGRESOS_REAL"/>
+        <viewAttribute id="TOTAL_INGRESOS_PPTO"/>
+        <viewAttribute id="TOTAL_EGRESOS_PPTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CANAL_HOMO" length="20" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;CANAL&quot;='Comercial','COMERCIAL',IF(&quot;CANAL&quot;='Institucional','INSTITUCIONAL',''))</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="logical.data::T_MEDICAMENTOS"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="MEDICASCP">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ANO"/>
+        <viewAttribute id="MES"/>
+        <viewAttribute id="DESCANAL"/>
+        <viewAttribute id="DESMES"/>
+        <viewAttribute id="DISTRIBUIDOS"/>
+        <viewAttribute id="COSTOFIN"/>
+        <viewAttribute id="GASTOPOLCORP"/>
+        <viewAttribute id="GASTOSOPE"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="T_MED_MEDICASCP"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ANO"/>
+        <viewAttribute id="MES"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="REAL_VENTAS_BRUTAS"/>
+        <viewAttribute id="REAL_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute id="REAL_VENTAS_NETAS"/>
+        <viewAttribute id="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute id="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute id="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute id="REAL_CMV_NIIF"/>
+        <viewAttribute id="REAL_FILTRACION"/>
+        <viewAttribute id="REAL_PROVISION_FILTRACION"/>
+        <viewAttribute id="REAL_COSTO_DE_VENTAS"/>
+        <viewAttribute id="REAL_UTILIDAD_BRUTA"/>
+        <viewAttribute id="REAL_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="REAL_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute id="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute id="REAL_DISTRIBUIDOS"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute id="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute id="REAL_COSTO_FINANCIERO"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_VENTAS_BRUTAS"/>
+        <viewAttribute id="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute id="PPTO_VENTAS_NETAS"/>
+        <viewAttribute id="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute id="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute id="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute id="PPTO_CMV_NIIF"/>
+        <viewAttribute id="PPTO_FILTRACION"/>
+        <viewAttribute id="PPTO_PROVISION_FILTRACION"/>
+        <viewAttribute id="PPTO_COSTO_DE_VENTAS"/>
+        <viewAttribute id="PPTO_UTILIDAD_BRUTA"/>
+        <viewAttribute id="PPTO_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="PPTO_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="PPTO_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute id="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute id="PPTO_DISTRIBUIDOS"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute id="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute id="PPTO_COSTO_FINANCIERO"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_GASTO_VENTA"/>
+        <viewAttribute id="PPTO_GASTO_VENTA"/>
+        <viewAttribute id="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <viewAttribute id="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <viewAttribute id="TOTAL_INGRESOS_REAL"/>
+        <viewAttribute id="TOTAL_EGRESOS_REAL"/>
+        <viewAttribute id="TOTAL_INGRESOS_PPTO"/>
+        <viewAttribute id="TOTAL_EGRESOS_PPTO"/>
+        <viewAttribute id="VENTAS_BRUTAS"/>
+        <viewAttribute id="DESCUENTOS_VENTAS"/>
+        <viewAttribute id="CMV_ANTDIST"/>
+        <viewAttribute id="MVC_CREDITO"/>
+        <viewAttribute id="MVC_DES_FIN"/>
+        <viewAttribute id="REALFIL"/>
+        <viewAttribute id="PROVFIL"/>
+        <viewAttribute id="INGRESOS_OPER"/>
+        <viewAttribute id="GASTOSOPE"/>
+        <viewAttribute id="GASTONOOPE"/>
+        <viewAttribute id="DISTRIBUIDOS"/>
+        <viewAttribute id="COSTOFIN"/>
+        <viewAttribute id="INGRESOS_NOPER"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_VENTAS_BRUTAS" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_VENTAS_BRUTAS&quot; + &quot;VENTAS_BRUTAS&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_DESCUENTOS_EN_VENTAS" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_DESCUENTOS_EN_VENTAS&quot; + &quot;DESCUENTOS_VENTAS&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_CMV_ANTES_DISTRIBUCION" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_CMV_ANTES_DISTRIBUCION&quot; + &quot;CMV_ANTDIST&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO&quot; + &quot;MVC_CREDITO&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_MENOR_VALOR_COSTO_X_DTOS_FIN&quot; + &quot;MVC_DES_FIN&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_FILTRACION" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_FILTRACION&quot; + &quot;REALFIL&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_PROVISION_FILTRACION" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_PROVISION_FILTRACION&quot; + &quot;PROVFIL&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_INGRESOS_OPERACIONALES" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_INGRESOS_OPERACIONALES&quot; + &quot;INGRESOS_OPER&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_GASTOS_OPERACIONALES" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_GASTOS_OPERACIONALES&quot; + &quot;GASTOSOPE&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_INGRESOS_NO_OPERACIONALES" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_INGRESOS_NO_OPERACIONALES&quot; + &quot;INGRESOS_NOPER&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_GASTOS_NO_OPERACIONALES" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_GASTOS_NO_OPERACIONALES&quot; + &quot;GASTONOOPE&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_DISTRIBUIDOS" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_DISTRIBUIDOS&quot; + &quot;DISTRIBUIDOS&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_REAL_COSTO_FINANCIERO" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;REAL_COSTO_FINANCIERO&quot; + &quot;COSTOFIN&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input emptyUnionBehavior="NO_ROW" node="Projection_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO" source="ANO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MES" source="MES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_VENTAS_BRUTAS" source="REAL_VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_DESCUENTOS_EN_VENTAS" source="REAL_DESCUENTOS_EN_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_VENTAS_NETAS" source="REAL_VENTAS_NETAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_CMV_ANTES_DISTRIBUCION" source="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" source="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" source="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_CMV_NIIF" source="REAL_CMV_NIIF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_FILTRACION" source="REAL_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_PROVISION_FILTRACION" source="REAL_PROVISION_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_COSTO_DE_VENTAS" source="REAL_COSTO_DE_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_BRUTA" source="REAL_UTILIDAD_BRUTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_INGRESOS_OPERACIONALES" source="REAL_INGRESOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTOS_OPERACIONALES" source="REAL_GASTOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_OPERACIONAL" source="REAL_UTILIDAD_OPERACIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_INGRESOS_NO_OPERACIONALES" source="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTOS_NO_OPERACIONALES" source="REAL_GASTOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS" source="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_DISTRIBUIDOS" source="REAL_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" source="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS" source="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" source="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_COSTO_FINANCIERO" source="REAL_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" source="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_IMPUESTO_A_LA_RIQUEZA" source="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" source="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_VENTAS_BRUTAS" source="PPTO_VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_DESCUENTOS_EN_VENTAS" source="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_VENTAS_NETAS" source="PPTO_VENTAS_NETAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_CMV_ANTES_DISTRIBUCION" source="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" source="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN" source="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_CMV_NIIF" source="PPTO_CMV_NIIF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_FILTRACION" source="PPTO_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_PROVISION_FILTRACION" source="PPTO_PROVISION_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_COSTO_DE_VENTAS" source="PPTO_COSTO_DE_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_BRUTA" source="PPTO_UTILIDAD_BRUTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_INGRESOS_OPERACIONALES" source="PPTO_INGRESOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTOS_OPERACIONALES" source="PPTO_GASTOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_OPERACIONAL" source="PPTO_UTILIDAD_OPERACIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_INGRESOS_NO_OPERACIONALES" source="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTOS_NO_OPERACIONALES" source="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS" source="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_DISTRIBUIDOS" source="PPTO_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" source="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS" source="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" source="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_COSTO_FINANCIERO" source="PPTO_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" source="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_IMPUESTO_A_LA_RIQUEZA" source="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" source="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTO_VENTA" source="REAL_GASTO_VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTO_VENTA" source="PPTO_GASTO_VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE" source="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO" source="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_INGRESOS_REAL" source="TOTAL_INGRESOS_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_EGRESOS_REAL" source="TOTAL_EGRESOS_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_INGRESOS_PPTO" source="TOTAL_INGRESOS_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_EGRESOS_PPTO" source="TOTAL_EGRESOS_PPTO"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="VENTAS_BRUTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DESCUENTOS_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CMV_ANTDIST" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="MVC_CREDITO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="MVC_DES_FIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REALFIL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PROVFIL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INGRESOS_OPER" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="GASTOSOPE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="GASTONOOPE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="COSTOFIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INGRESOS_NOPER" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL_HOMO"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="T_MED_MEDICA">
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_VENTAS_BRUTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_DESCUENTOS_EN_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_VENTAS_NETAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_CMV_ANTES_DISTRIBUCION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_CMV_NIIF" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_PROVISION_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_COSTO_DE_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_BRUTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_INGRESOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_GASTOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_OPERACIONAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_INGRESOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_GASTOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_VENTAS_BRUTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_DESCUENTOS_EN_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_VENTAS_NETAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_CMV_ANTES_DISTRIBUCION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_CMV_NIIF" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_PROVISION_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_COSTO_DE_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_BRUTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_INGRESOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_OPERACIONAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_INGRESOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_GASTO_VENTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTO_VENTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_INGRESOS_REAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_EGRESOS_REAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_INGRESOS_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_EGRESOS_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="GASTONOOPE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="COSTOFIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GASTOSOPE" source="GASTONOOPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REALFIL" source="REALFIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PROVFIL" source="PROVFIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MVC_DES_FIN" source="MVC_DES_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MVC_CREDITO" source="MVC_CREDITO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CMV_ANTDIST" source="CMV_ANTDIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCUENTOS_VENTAS" source="DESCUENTOS_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTAS_BRUTAS" source="VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESOS_NOPER" source="INGRESOS_NOPER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESOS_OPER" source="INGRESOS_OPER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MES" source="MES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO" source="ANO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="DES_CANAL"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="MEDICASCP">
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_VENTAS_BRUTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_DESCUENTOS_EN_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_VENTAS_NETAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_CMV_ANTES_DISTRIBUCION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_CMV_NIIF" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_PROVISION_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_COSTO_DE_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_BRUTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_INGRESOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_GASTOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_OPERACIONAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_INGRESOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_GASTOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_VENTAS_BRUTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_DESCUENTOS_EN_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_VENTAS_NETAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_CMV_ANTES_DISTRIBUCION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_CMV_NIIF" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_PROVISION_FILTRACION" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_COSTO_DE_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_BRUTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_INGRESOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTOS_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_OPERACIONAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_INGRESOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTOS_NO_OPERACIONALES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_DISTRIBUIDOS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_COSTO_FINANCIERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REAL_GASTO_VENTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PPTO_GASTO_VENTA" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_INGRESOS_REAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_EGRESOS_REAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_INGRESOS_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_EGRESOS_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="VENTAS_BRUTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DESCUENTOS_VENTAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CMV_ANTDIST" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="MVC_CREDITO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="MVC_DES_FIN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REALFIL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="PROVFIL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INGRESOS_OPER" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="GASTOSOPE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INGRESOS_NOPER" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="DESCANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO" source="ANO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MES" source="MES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DISTRIBUIDOS" source="DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COSTOFIN" source="COSTOFIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GASTONOOPE" source="GASTOSOPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS" source="GASTOPOLCORP"/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ANO"/>
+        <viewAttribute id="MES"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute aggregationType="sum" id="REAL_VENTAS_BRUTAS"/>
+        <viewAttribute aggregationType="sum" id="REAL_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute aggregationType="sum" id="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute aggregationType="sum" id="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute aggregationType="sum" id="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute aggregationType="sum" id="REAL_CMV_NIIF"/>
+        <viewAttribute aggregationType="sum" id="REAL_FILTRACION"/>
+        <viewAttribute aggregationType="sum" id="REAL_PROVISION_FILTRACION"/>
+        <viewAttribute aggregationType="sum" id="REAL_COSTO_DE_VENTAS"/>
+        <viewAttribute aggregationType="sum" id="REAL_UTILIDAD_BRUTA"/>
+        <viewAttribute aggregationType="sum" id="REAL_INGRESOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="REAL_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute aggregationType="sum" id="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute aggregationType="sum" id="REAL_DISTRIBUIDOS"/>
+        <viewAttribute aggregationType="sum" id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute aggregationType="sum" id="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute aggregationType="sum" id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute aggregationType="sum" id="REAL_COSTO_FINANCIERO"/>
+        <viewAttribute aggregationType="sum" id="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute aggregationType="sum" id="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute aggregationType="sum" id="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute aggregationType="sum" id="PPTO_VENTAS_BRUTAS"/>
+        <viewAttribute aggregationType="sum" id="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute aggregationType="sum" id="PPTO_VENTAS_NETAS"/>
+        <viewAttribute aggregationType="sum" id="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute aggregationType="sum" id="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute aggregationType="sum" id="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute aggregationType="sum" id="PPTO_CMV_NIIF"/>
+        <viewAttribute aggregationType="sum" id="PPTO_FILTRACION"/>
+        <viewAttribute aggregationType="sum" id="PPTO_PROVISION_FILTRACION"/>
+        <viewAttribute aggregationType="sum" id="PPTO_COSTO_DE_VENTAS"/>
+        <viewAttribute aggregationType="sum" id="PPTO_UTILIDAD_BRUTA"/>
+        <viewAttribute aggregationType="sum" id="PPTO_INGRESOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="PPTO_GASTOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="PPTO_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute aggregationType="sum" id="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute aggregationType="sum" id="PPTO_DISTRIBUIDOS"/>
+        <viewAttribute aggregationType="sum" id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute aggregationType="sum" id="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute aggregationType="sum" id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute aggregationType="sum" id="PPTO_COSTO_FINANCIERO"/>
+        <viewAttribute aggregationType="sum" id="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute aggregationType="sum" id="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute aggregationType="sum" id="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute aggregationType="sum" id="REAL_GASTO_VENTA"/>
+        <viewAttribute aggregationType="sum" id="PPTO_GASTO_VENTA"/>
+        <viewAttribute aggregationType="sum" id="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <viewAttribute aggregationType="sum" id="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <viewAttribute aggregationType="sum" id="TOTAL_INGRESOS_REAL"/>
+        <viewAttribute aggregationType="sum" id="TOTAL_EGRESOS_REAL"/>
+        <viewAttribute aggregationType="sum" id="TOTAL_INGRESOS_PPTO"/>
+        <viewAttribute aggregationType="sum" id="TOTAL_EGRESOS_PPTO"/>
+        <viewAttribute aggregationType="sum" id="VENTAS_BRUTAS"/>
+        <viewAttribute aggregationType="sum" id="DESCUENTOS_VENTAS"/>
+        <viewAttribute aggregationType="sum" id="CMV_ANTDIST"/>
+        <viewAttribute aggregationType="sum" id="MVC_CREDITO"/>
+        <viewAttribute aggregationType="sum" id="MVC_DES_FIN"/>
+        <viewAttribute aggregationType="sum" id="REALFIL"/>
+        <viewAttribute aggregationType="sum" id="PROVFIL"/>
+        <viewAttribute aggregationType="sum" id="INGRESOS_OPER"/>
+        <viewAttribute aggregationType="sum" id="GASTOSOPE"/>
+        <viewAttribute aggregationType="sum" id="GASTONOOPE"/>
+        <viewAttribute aggregationType="sum" id="DISTRIBUIDOS"/>
+        <viewAttribute aggregationType="sum" id="COSTOFIN"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_VENTAS_BRUTAS"/>
+        <viewAttribute aggregationType="sum" id="INGRESOS_NOPER"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_FILTRACION"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_PROVISION_FILTRACION"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_INGRESOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_DISTRIBUIDOS"/>
+        <viewAttribute aggregationType="sum" id="CC_REAL_COSTO_FINANCIERO"/>
+        <viewAttribute aggregationType="sum" id="REAL_VENTAS_NETAS"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CALMONTH_ANT" length="7" expressionLanguage="SQL">
+          <formula>left(&quot;PERIODO_ANT&quot;,7)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DATE" id="PERIODO_ANT" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;PERIODO&quot;-360</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="Union_1"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute aggregationType="sum" id="ANT_INGRESOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="ANT_REAL_VENTAS_BRUTAS"/>
+        <viewAttribute aggregationType="sum" id="ANT_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="ANT_REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="ANT_REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute aggregationType="sum" id="ANT_REAL_DISTRIBUIDOS"/>
+        <viewAttribute aggregationType="sum" id="ANT_REAL_COSTO_FINANCIERO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CALMONTH" length="7" expressionLanguage="SQL">
+          <formula>left(&quot;PERIODO&quot;,7)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="Union_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_INGRESOS_OPERACIONALES" source="CC_REAL_INGRESOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_VENTAS_BRUTAS" source="CC_REAL_VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_INGRESOS_NO_OPERACIONALES" source="CC_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_GASTOS_OPERACIONALES" source="CC_REAL_GASTOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_GASTOS_NO_OPERACIONALES" source="CC_REAL_GASTOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_DISTRIBUIDOS" source="CC_REAL_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_COSTO_FINANCIERO" source="CC_REAL_COSTO_FINANCIERO"/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ANO"/>
+        <viewAttribute id="MES"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="REAL_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute id="REAL_VENTAS_BRUTAS"/>
+        <viewAttribute id="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute id="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute id="REAL_CMV_NIIF"/>
+        <viewAttribute id="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute id="REAL_FILTRACION"/>
+        <viewAttribute id="REAL_PROVISION_FILTRACION"/>
+        <viewAttribute id="REAL_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="REAL_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute id="PPTO_CMV_NIIF"/>
+        <viewAttribute id="REAL_UTILIDAD_BRUTA"/>
+        <viewAttribute id="REAL_COSTO_DE_VENTAS"/>
+        <viewAttribute id="REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute id="REAL_DISTRIBUIDOS"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute id="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute id="REAL_COSTO_FINANCIERO"/>
+        <viewAttribute id="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_VENTAS_BRUTAS"/>
+        <viewAttribute id="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute id="PPTO_VENTAS_NETAS"/>
+        <viewAttribute id="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute id="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute id="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute id="CC_REAL_DESCUENTOS_EN_VENTAS"/>
+        <viewAttribute id="INGRESOS_NOPER"/>
+        <viewAttribute id="CC_REAL_VENTAS_BRUTAS"/>
+        <viewAttribute id="COSTOFIN"/>
+        <viewAttribute id="GASTONOOPE"/>
+        <viewAttribute id="GASTOSOPE"/>
+        <viewAttribute id="INGRESOS_OPER"/>
+        <viewAttribute id="PROVFIL"/>
+        <viewAttribute id="REALFIL"/>
+        <viewAttribute id="MVC_DES_FIN"/>
+        <viewAttribute id="MVC_CREDITO"/>
+        <viewAttribute id="CMV_ANTDIST"/>
+        <viewAttribute id="DESCUENTOS_VENTAS"/>
+        <viewAttribute id="VENTAS_BRUTAS"/>
+        <viewAttribute id="TOTAL_EGRESOS_PPTO"/>
+        <viewAttribute id="TOTAL_INGRESOS_PPTO"/>
+        <viewAttribute id="TOTAL_EGRESOS_REAL"/>
+        <viewAttribute id="TOTAL_INGRESOS_REAL"/>
+        <viewAttribute id="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <viewAttribute id="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <viewAttribute id="PPTO_GASTO_VENTA"/>
+        <viewAttribute id="REAL_GASTO_VENTA"/>
+        <viewAttribute id="PPTO_COSTO_FINANCIERO"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <viewAttribute id="DISTRIBUIDOS"/>
+        <viewAttribute id="CC_REAL_CMV_ANTES_DISTRIBUCION"/>
+        <viewAttribute id="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <viewAttribute id="CC_REAL_COSTO_FINANCIERO"/>
+        <viewAttribute id="CC_REAL_DISTRIBUIDOS"/>
+        <viewAttribute id="CC_REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="CC_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <viewAttribute id="CC_REAL_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="CC_REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="CC_REAL_PROVISION_FILTRACION"/>
+        <viewAttribute id="CC_REAL_FILTRACION"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <viewAttribute id="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <viewAttribute id="PPTO_DISTRIBUIDOS"/>
+        <viewAttribute id="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <viewAttribute id="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="PPTO_UTILIDAD_OPERACIONAL"/>
+        <viewAttribute id="PPTO_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="PPTO_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="PPTO_UTILIDAD_BRUTA"/>
+        <viewAttribute id="PPTO_COSTO_DE_VENTAS"/>
+        <viewAttribute id="PPTO_PROVISION_FILTRACION"/>
+        <viewAttribute id="PPTO_FILTRACION"/>
+        <viewAttribute id="ANT_INGRESOS_OPERACIONALES"/>
+        <viewAttribute id="ANT_REAL_VENTAS_BRUTAS"/>
+        <viewAttribute id="ANT_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <viewAttribute id="ANT_REAL_GASTOS_OPERACIONALES"/>
+        <viewAttribute id="ANT_REAL_GASTOS_NO_OPERACIONALES"/>
+        <viewAttribute id="ANT_REAL_DISTRIBUIDOS"/>
+        <viewAttribute id="ANT_REAL_COSTO_FINANCIERO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="REAL_VENTAS_NETAS"/>
+      <viewAttribute hidden="true" id="JOIN$CALMONTH_ANT$CALMONTH"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Aggregation_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO" source="ANO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MES" source="MES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_DESCUENTOS_EN_VENTAS" source="REAL_DESCUENTOS_EN_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_VENTAS_BRUTAS" source="REAL_VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_CMV_ANTES_DISTRIBUCION" source="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" source="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_CMV_NIIF" source="REAL_CMV_NIIF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" source="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_FILTRACION" source="REAL_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_PROVISION_FILTRACION" source="REAL_PROVISION_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_INGRESOS_OPERACIONALES" source="REAL_INGRESOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_OPERACIONAL" source="REAL_UTILIDAD_OPERACIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_CMV_NIIF" source="PPTO_CMV_NIIF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_BRUTA" source="REAL_UTILIDAD_BRUTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_COSTO_DE_VENTAS" source="REAL_COSTO_DE_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTOS_OPERACIONALES" source="REAL_GASTOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_INGRESOS_NO_OPERACIONALES" source="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTOS_NO_OPERACIONALES" source="REAL_GASTOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS" source="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_DISTRIBUIDOS" source="REAL_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" source="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS" source="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" source="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_COSTO_FINANCIERO" source="REAL_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" source="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_IMPUESTO_A_LA_RIQUEZA" source="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" source="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_VENTAS_BRUTAS" source="PPTO_VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_DESCUENTOS_EN_VENTAS" source="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_VENTAS_NETAS" source="PPTO_VENTAS_NETAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_CMV_ANTES_DISTRIBUCION" source="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" source="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN" source="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_DESCUENTOS_EN_VENTAS" source="CC_REAL_DESCUENTOS_EN_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESOS_NOPER" source="INGRESOS_NOPER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_VENTAS_BRUTAS" source="CC_REAL_VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COSTOFIN" source="COSTOFIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GASTONOOPE" source="GASTONOOPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GASTOSOPE" source="GASTOSOPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESOS_OPER" source="INGRESOS_OPER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PROVFIL" source="PROVFIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REALFIL" source="REALFIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MVC_DES_FIN" source="MVC_DES_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MVC_CREDITO" source="MVC_CREDITO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CMV_ANTDIST" source="CMV_ANTDIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCUENTOS_VENTAS" source="DESCUENTOS_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTAS_BRUTAS" source="VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_EGRESOS_PPTO" source="TOTAL_EGRESOS_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_INGRESOS_PPTO" source="TOTAL_INGRESOS_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_EGRESOS_REAL" source="TOTAL_EGRESOS_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_INGRESOS_REAL" source="TOTAL_INGRESOS_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO" source="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE" source="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTO_VENTA" source="PPTO_GASTO_VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_GASTO_VENTA" source="REAL_GASTO_VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_COSTO_FINANCIERO" source="PPTO_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" source="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_IMPUESTO_A_LA_RIQUEZA" source="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" source="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DISTRIBUIDOS" source="DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_CMV_ANTES_DISTRIBUCION" source="CC_REAL_CMV_ANTES_DISTRIBUCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" source="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_COSTO_FINANCIERO" source="CC_REAL_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_DISTRIBUIDOS" source="CC_REAL_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_GASTOS_NO_OPERACIONALES" source="CC_REAL_GASTOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_INGRESOS_NO_OPERACIONALES" source="CC_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" source="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_INGRESOS_OPERACIONALES" source="CC_REAL_INGRESOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_GASTOS_OPERACIONALES" source="CC_REAL_GASTOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_PROVISION_FILTRACION" source="CC_REAL_PROVISION_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CC_REAL_FILTRACION" source="CC_REAL_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" source="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS" source="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" source="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_DISTRIBUIDOS" source="PPTO_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS" source="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTOS_NO_OPERACIONALES" source="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_INGRESOS_NO_OPERACIONALES" source="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_OPERACIONAL" source="PPTO_UTILIDAD_OPERACIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_GASTOS_OPERACIONALES" source="PPTO_GASTOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_INGRESOS_OPERACIONALES" source="PPTO_INGRESOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_UTILIDAD_BRUTA" source="PPTO_UTILIDAD_BRUTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_COSTO_DE_VENTAS" source="PPTO_COSTO_DE_VENTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_PROVISION_FILTRACION" source="PPTO_PROVISION_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PPTO_FILTRACION" source="PPTO_FILTRACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REAL_VENTAS_NETAS" source="REAL_VENTAS_NETAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CALMONTH_ANT$CALMONTH" source="CALMONTH_ANT"/>
+      </input>
+      <input node="Aggregation_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_INGRESOS_OPERACIONALES" source="ANT_INGRESOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_VENTAS_BRUTAS" source="ANT_REAL_VENTAS_BRUTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_INGRESOS_NO_OPERACIONALES" source="ANT_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_GASTOS_OPERACIONALES" source="ANT_REAL_GASTOS_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_GASTOS_NO_OPERACIONALES" source="ANT_REAL_GASTOS_NO_OPERACIONALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_DISTRIBUIDOS" source="ANT_REAL_DISTRIBUIDOS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANT_REAL_COSTO_FINANCIERO" source="ANT_REAL_COSTO_FINANCIERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CALMONTH_ANT$CALMONTH" source="CALMONTH"/>
+      </input>
+    <joinAttribute name="CANAL"/>
+    <joinAttribute name="ENTIDAD"/>
+    <joinAttribute name="JOIN$CALMONTH_ANT$CALMONTH"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="ANO" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ANO"/>
+        <keyMapping columnObjectName="Join_1" columnName="ANO"/>
+      </attribute>
+      <attribute id="MES" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MES"/>
+        <keyMapping columnObjectName="Join_1" columnName="MES"/>
+      </attribute>
+      <attribute id="CANAL" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL"/>
+        <keyMapping columnObjectName="Join_1" columnName="CANAL"/>
+      </attribute>
+      <attribute id="ENTIDAD" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ENTIDAD"/>
+        <keyMapping columnObjectName="Join_1" columnName="ENTIDAD"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="REAL_DESCUENTOS_EN_VENTAS" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_DESCUENTOS_EN_VENTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_DESCUENTOS_EN_VENTAS"/>
+      </measure>
+      <measure id="REAL_VENTAS_BRUTAS" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="REAL_CMV_ANTES_DISTRIBUCION" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_CMV_ANTES_DISTRIBUCION"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_CMV_ANTES_DISTRIBUCION"/>
+      </measure>
+      <measure id="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+      </measure>
+      <measure id="REAL_CMV_NIIF" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_CMV_NIIF"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_CMV_NIIF"/>
+      </measure>
+      <measure id="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+      </measure>
+      <measure id="REAL_FILTRACION" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_FILTRACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_FILTRACION"/>
+      </measure>
+      <measure id="REAL_PROVISION_FILTRACION" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_PROVISION_FILTRACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_PROVISION_FILTRACION"/>
+      </measure>
+      <measure id="REAL_INGRESOS_OPERACIONALES" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_INGRESOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_INGRESOS_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_OPERACIONAL" order="15" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_OPERACIONAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_UTILIDAD_OPERACIONAL"/>
+      </measure>
+      <measure id="PPTO_CMV_NIIF" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_CMV_NIIF"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_CMV_NIIF"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_BRUTA" order="17" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_BRUTA"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_UTILIDAD_BRUTA"/>
+      </measure>
+      <measure id="REAL_COSTO_DE_VENTAS" order="18" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_COSTO_DE_VENTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_COSTO_DE_VENTAS"/>
+      </measure>
+      <measure id="REAL_GASTOS_OPERACIONALES" order="19" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_GASTOS_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_INGRESOS_NO_OPERACIONALES" order="20" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_INGRESOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_INGRESOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_GASTOS_NO_OPERACIONALES" order="21" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_GASTOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS" order="22" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="REAL_DISTRIBUIDOS" order="23" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" order="24" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS" order="25" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" order="26" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+      </measure>
+      <measure id="REAL_COSTO_FINANCIERO" order="27" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" order="28" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="REAL_IMPUESTO_A_LA_RIQUEZA" order="29" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" order="30" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="PPTO_VENTAS_BRUTAS" order="31" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="PPTO_DESCUENTOS_EN_VENTAS" order="32" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_DESCUENTOS_EN_VENTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_DESCUENTOS_EN_VENTAS"/>
+      </measure>
+      <measure id="PPTO_VENTAS_NETAS" order="33" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_VENTAS_NETAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_VENTAS_NETAS"/>
+      </measure>
+      <measure id="PPTO_CMV_ANTES_DISTRIBUCION" order="34" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_CMV_ANTES_DISTRIBUCION"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_CMV_ANTES_DISTRIBUCION"/>
+      </measure>
+      <measure id="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" order="35" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+      </measure>
+      <measure id="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN" order="36" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+      </measure>
+      <measure id="CC_REAL_DESCUENTOS_EN_VENTAS" order="37" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_DESCUENTOS_EN_VENTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_DESCUENTOS_EN_VENTAS"/>
+      </measure>
+      <measure id="INGRESOS_NOPER" order="38" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESOS_NOPER"/>
+        <measureMapping columnObjectName="Join_1" columnName="INGRESOS_NOPER"/>
+      </measure>
+      <measure id="CC_REAL_VENTAS_BRUTAS" order="39" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="COSTOFIN" order="40" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="COSTOFIN"/>
+        <measureMapping columnObjectName="Join_1" columnName="COSTOFIN"/>
+      </measure>
+      <measure id="GASTONOOPE" order="41" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="GASTONOOPE"/>
+        <measureMapping columnObjectName="Join_1" columnName="GASTONOOPE"/>
+      </measure>
+      <measure id="GASTOSOPE" order="42" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="GASTOSOPE"/>
+        <measureMapping columnObjectName="Join_1" columnName="GASTOSOPE"/>
+      </measure>
+      <measure id="INGRESOS_OPER" order="43" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESOS_OPER"/>
+        <measureMapping columnObjectName="Join_1" columnName="INGRESOS_OPER"/>
+      </measure>
+      <measure id="PROVFIL" order="44" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PROVFIL"/>
+        <measureMapping columnObjectName="Join_1" columnName="PROVFIL"/>
+      </measure>
+      <measure id="REALFIL" order="45" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REALFIL"/>
+        <measureMapping columnObjectName="Join_1" columnName="REALFIL"/>
+      </measure>
+      <measure id="MVC_DES_FIN" order="46" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="MVC_DES_FIN"/>
+        <measureMapping columnObjectName="Join_1" columnName="MVC_DES_FIN"/>
+      </measure>
+      <measure id="MVC_CREDITO" order="47" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="MVC_CREDITO"/>
+        <measureMapping columnObjectName="Join_1" columnName="MVC_CREDITO"/>
+      </measure>
+      <measure id="CMV_ANTDIST" order="48" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CMV_ANTDIST"/>
+        <measureMapping columnObjectName="Join_1" columnName="CMV_ANTDIST"/>
+      </measure>
+      <measure id="DESCUENTOS_VENTAS" order="49" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="DESCUENTOS_VENTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="DESCUENTOS_VENTAS"/>
+      </measure>
+      <measure id="VENTAS_BRUTAS" order="50" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="TOTAL_EGRESOS_PPTO" order="51" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_EGRESOS_PPTO"/>
+        <measureMapping columnObjectName="Join_1" columnName="TOTAL_EGRESOS_PPTO"/>
+      </measure>
+      <measure id="TOTAL_INGRESOS_PPTO" order="52" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_INGRESOS_PPTO"/>
+        <measureMapping columnObjectName="Join_1" columnName="TOTAL_INGRESOS_PPTO"/>
+      </measure>
+      <measure id="TOTAL_EGRESOS_REAL" order="53" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_EGRESOS_REAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="TOTAL_EGRESOS_REAL"/>
+      </measure>
+      <measure id="TOTAL_INGRESOS_REAL" order="54" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_INGRESOS_REAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="TOTAL_INGRESOS_REAL"/>
+      </measure>
+      <measure id="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO" order="55" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+        <measureMapping columnObjectName="Join_1" columnName="CRECIMIENTO_INGRESO_VS_GASTO_ESTADISTICO"/>
+      </measure>
+      <measure id="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE" order="56" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+        <measureMapping columnObjectName="Join_1" columnName="CRECIMIENTO_INGRESOS_VS_EGRESOS_CONTABLE"/>
+      </measure>
+      <measure id="PPTO_GASTO_VENTA" order="57" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTO_VENTA"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_GASTO_VENTA"/>
+      </measure>
+      <measure id="REAL_GASTO_VENTA" order="58" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_GASTO_VENTA"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_GASTO_VENTA"/>
+      </measure>
+      <measure id="PPTO_COSTO_FINANCIERO" order="59" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA" order="60" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_UTILIDAD_ANTES_DE_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA" order="61" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_UTILIDAD_CON_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="PPTO_IMPUESTO_A_LA_RIQUEZA" order="62" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_IMPUESTO_A_LA_RIQUEZA"/>
+      </measure>
+      <measure id="DISTRIBUIDOS" order="63" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="Join_1" columnName="DISTRIBUIDOS"/>
+      </measure>
+      <measure id="CC_REAL_CMV_ANTES_DISTRIBUCION" order="64" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_CMV_ANTES_DISTRIBUCION"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_CMV_ANTES_DISTRIBUCION"/>
+      </measure>
+      <measure id="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO" order="65" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_MENOR_VALOR_COSTO_X_NOTAS_CREDITO"/>
+      </measure>
+      <measure id="CC_REAL_COSTO_FINANCIERO" order="66" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="CC_REAL_DISTRIBUIDOS" order="67" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="CC_REAL_GASTOS_NO_OPERACIONALES" order="68" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_GASTOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_GASTOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="CC_REAL_INGRESOS_NO_OPERACIONALES" order="69" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_INGRESOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN" order="70" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_MENOR_VALOR_COSTO_X_DTOS_FIN"/>
+      </measure>
+      <measure id="CC_REAL_INGRESOS_OPERACIONALES" order="71" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_INGRESOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_INGRESOS_OPERACIONALES"/>
+      </measure>
+      <measure id="CC_REAL_GASTOS_OPERACIONALES" order="72" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_GASTOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_GASTOS_OPERACIONALES"/>
+      </measure>
+      <measure id="CC_REAL_PROVISION_FILTRACION" order="73" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_PROVISION_FILTRACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_PROVISION_FILTRACION"/>
+      </measure>
+      <measure id="CC_REAL_FILTRACION" order="74" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_REAL_FILTRACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_REAL_FILTRACION"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2" order="75" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO2"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO" order="76" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_UTILIDAD_ANTES_DE_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS" order="77" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_GASTOS_DE_POLITICAS__CORPORATIVAS"/>
+      </measure>
+      <measure id="PPTO_DISTRIBUIDOS" order="78" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS" order="79" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_UTILIDAD_ANTES_DE_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="PPTO_GASTOS_NO_OPERACIONALES" order="80" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_GASTOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_INGRESOS_NO_OPERACIONALES" order="81" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_INGRESOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_INGRESOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_OPERACIONAL" order="82" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_OPERACIONAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_UTILIDAD_OPERACIONAL"/>
+      </measure>
+      <measure id="PPTO_GASTOS_OPERACIONALES" order="83" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_GASTOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_GASTOS_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_INGRESOS_OPERACIONALES" order="84" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_INGRESOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_INGRESOS_OPERACIONALES"/>
+      </measure>
+      <measure id="PPTO_UTILIDAD_BRUTA" order="85" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_UTILIDAD_BRUTA"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_UTILIDAD_BRUTA"/>
+      </measure>
+      <measure id="PPTO_COSTO_DE_VENTAS" order="86" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_COSTO_DE_VENTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_COSTO_DE_VENTAS"/>
+      </measure>
+      <measure id="PPTO_PROVISION_FILTRACION" order="87" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_PROVISION_FILTRACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_PROVISION_FILTRACION"/>
+      </measure>
+      <measure id="PPTO_FILTRACION" order="88" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PPTO_FILTRACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="PPTO_FILTRACION"/>
+      </measure>
+      <measure id="ANT_INGRESOS_OPERACIONALES" order="89" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANT_INGRESOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANT_INGRESOS_OPERACIONALES"/>
+      </measure>
+      <measure id="ANT_REAL_VENTAS_BRUTAS" order="90" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANT_REAL_VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANT_REAL_VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="ANT_REAL_INGRESOS_NO_OPERACIONALES" order="91" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANT_REAL_INGRESOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANT_REAL_INGRESOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="ANT_REAL_GASTOS_OPERACIONALES" order="92" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANT_REAL_GASTOS_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANT_REAL_GASTOS_OPERACIONALES"/>
+      </measure>
+      <measure id="ANT_REAL_GASTOS_NO_OPERACIONALES" order="93" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANT_REAL_GASTOS_NO_OPERACIONALES"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANT_REAL_GASTOS_NO_OPERACIONALES"/>
+      </measure>
+      <measure id="ANT_REAL_DISTRIBUIDOS" order="94" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANT_REAL_DISTRIBUIDOS"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANT_REAL_DISTRIBUIDOS"/>
+      </measure>
+      <measure id="ANT_REAL_COSTO_FINANCIERO" order="95" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANT_REAL_COSTO_FINANCIERO"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANT_REAL_COSTO_FINANCIERO"/>
+      </measure>
+      <measure id="REAL_VENTAS_NETAS" order="96" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REAL_VENTAS_NETAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="REAL_VENTAS_NETAS"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="390.27823685390933" y="112"/>
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="T_MED_MEDICA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="91.99999999999997" y="656.9999964237213"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="512" y="656.9999964237213"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="MEDICASCP" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302" y="656.9999964237213"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302" y="501.9999976158142"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="236.5383617318688" y="376.9999988079071"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="446.5383617318688" y="376.9999988079071"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="390.27823685390933" y="217"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Aggregation_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

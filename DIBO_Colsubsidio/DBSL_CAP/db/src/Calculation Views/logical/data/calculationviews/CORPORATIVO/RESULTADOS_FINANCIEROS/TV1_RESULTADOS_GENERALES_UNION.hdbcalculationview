@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.RESULTADOS_FINANCIEROS::TV1_RESULTADOS_GENERALES_UNION" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV1_RESULTADOS_GENERALES"/>
+  <metadata changedAt="2021-06-16 17:06:51.928"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="47"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_INGRESO">
+      <resourceUri>logical.data::T_COR_INGRESO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_EGRESO">
+      <resourceUri>logical.data::T_COR_EGRESO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_VISTA">
+      <resourceUri>logical.data::T_COR_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_ORDEN_VISTA">
+      <resourceUri>logical.data::T_COR_ORDEN_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_CAJA">
+      <resourceUri>logical.data::T_COR_CAJA</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="INGRESO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="logical.data::T_COR_INGRESO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUMA_INGRESO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_PPTO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL_AN"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>COMPONENT(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="TIP_TERCERO" length="50" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF (isNull(&quot;TIPO_TERCERO&quot;),'0',&quot;TIPO_TERCERO&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="INGRESO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="EGRESO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="EGRESO_PPTO"/>
+        <viewAttribute id="EGRESO_REAL"/>
+        <viewAttribute id="EGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="logical.data::T_COR_EGRESO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUMA_EGRESO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute aggregationType="sum" id="EGRESO_PPTO"/>
+        <viewAttribute aggregationType="sum" id="EGRESO_REAL"/>
+        <viewAttribute aggregationType="sum" id="EGRESO_REAL_AN"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>COMPONENT(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="NIV_1" length="50" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF (isNull(&quot;NIVEL_1&quot;),'0',&quot;NIVEL_1&quot;)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="NIV_2" length="50" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF (isNull(&quot;NIVEL_2&quot;),'0',&quot;NIVEL_2&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="EGRESO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SERVICIO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="FILTRO_1" length="40" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;ID_SERVICIO&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_SERVICIO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="NIVEL_2">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="ANIO"/>
+        <viewAttribute aggregationType="sum" id="ANIO_EGRESO_PPTO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="SUMA_EGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_EGRESO_PPTO" source="EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIV_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIV_2"/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUM_EGRESO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute aggregationType="sum" id="EGRESO_PPTO"/>
+        <viewAttribute aggregationType="sum" id="EGRESO_REAL"/>
+        <viewAttribute aggregationType="sum" id="EGRESO_REAL_AN"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>COMPONENT(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="SUMA_EGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIV_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIV_2"/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="JOIN_EGR" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ANIO_EGRESO_PPTO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="EGRESO_PPTO"/>
+        <viewAttribute id="EGRESO_REAL"/>
+        <viewAttribute id="EGRESO_REAL_AN"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+      <viewAttribute hidden="true" id="JOIN$ID_CAJA$ID_CAJA"/>
+      <viewAttribute hidden="true" id="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+      <viewAttribute hidden="true" id="JOIN$TIPO_ANALISIS$TIPO_ANALISIS"/>
+      <viewAttribute hidden="true" id="JOIN$ANIO$ANIO"/>
+      <viewAttribute hidden="true" id="JOIN$NIVEL_1$NIVEL_1"/>
+      <viewAttribute hidden="true" id="JOIN$NIVEL_2$NIVEL_2"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="NIVEL_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_EGRESO_PPTO" source="ANIO_EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CAJA$ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_ANALISIS$TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_1$NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_2$NIVEL_2" source="NIVEL_2"/>
+      </input>
+      <input node="SUM_EGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_PPTO" source="EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL" source="EGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL_AN" source="EGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CAJA$ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_ANALISIS$TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_1$NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_2$NIVEL_2" source="NIVEL_2"/>
+      </input>
+    <joinAttribute name="JOIN$ID_CAJA$ID_CAJA"/>
+    <joinAttribute name="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+    <joinAttribute name="JOIN$TIPO_ANALISIS$TIPO_ANALISIS"/>
+    <joinAttribute name="JOIN$ANIO$ANIO"/>
+    <joinAttribute name="JOIN$NIVEL_1$NIVEL_1"/>
+    <joinAttribute name="JOIN$NIVEL_2$NIVEL_2"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PPTO_ANIO_ING">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="ANIO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute aggregationType="sum" id="ANIO_INGRESO_PPTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="SUMA_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIP_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_INGRESO_PPTO" source="INGRESO_PPTO"/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUM_INGRESO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_PPTO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL_AN"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>COMPONENT(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="SUMA_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIP_TERCERO"/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="JOIN_ING" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ANIO_INGRESO_PPTO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+      <viewAttribute hidden="true" id="JOIN$ID_CAJA$ID_CAJA"/>
+      <viewAttribute hidden="true" id="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+      <viewAttribute hidden="true" id="JOIN$TIPO_ANALISIS$TIPO_ANALISIS"/>
+      <viewAttribute hidden="true" id="JOIN$NIVEL_1$NIVEL_1"/>
+      <viewAttribute hidden="true" id="JOIN$NIVEL_2$NIVEL_2"/>
+      <viewAttribute hidden="true" id="JOIN$TIPO_TERCERO$TIPO_TERCERO"/>
+      <viewAttribute hidden="true" id="JOIN$ANIO$ANIO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="PPTO_ANIO_ING">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_INGRESO_PPTO" source="ANIO_INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CAJA$ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_ANALISIS$TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_1$NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_2$NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_TERCERO$TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+      </input>
+      <input node="SUM_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CAJA$ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_ANALISIS$TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_1$NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$NIVEL_2$NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_TERCERO$TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+      </input>
+    <joinAttribute name="JOIN$ID_CAJA$ID_CAJA"/>
+    <joinAttribute name="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+    <joinAttribute name="JOIN$TIPO_ANALISIS$TIPO_ANALISIS"/>
+    <joinAttribute name="JOIN$NIVEL_1$NIVEL_1"/>
+    <joinAttribute name="JOIN$NIVEL_2$NIVEL_2"/>
+    <joinAttribute name="JOIN$TIPO_TERCERO$TIPO_TERCERO"/>
+    <joinAttribute name="JOIN$ANIO$ANIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="U_ING_EGR">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="EGRESO_PPTO"/>
+        <viewAttribute id="EGRESO_REAL"/>
+        <viewAttribute id="EGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="ANIO_EGRESO_PPTO"/>
+        <viewAttribute id="ANIO_INGRESO_PPTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input emptyUnionBehavior="NO_ROW" node="JOIN_EGR">
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INGRESO_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INGRESO_REAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="INGRESO_REAL_AN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TIPO_TERCERO" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_PPTO" source="EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL" source="EGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL_AN" source="EGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_EGRESO_PPTO" source="ANIO_EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="ANIO_INGRESO_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="JOIN_ING">
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="EGRESO_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="EGRESO_REAL" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="EGRESO_REAL_AN" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="ANIO_EGRESO_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_INGRESO_PPTO" source="ANIO_INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="VISTA">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="DESCRIPCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_VISTA"/>
+    <filter>(&quot;ID_VISTA&quot;=3)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="COR_ORDEN_VISTA">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_ORDEN_VISTAS"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="ORDEN_3"/>
+        <viewAttribute id="ORDEN_4"/>
+        <viewAttribute id="ID_VISTA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_ORDEN_VISTA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="VISTA_ORDEN" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ID_ORDEN_VISTAS"/>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="DESCRIPCION"/>
+        <viewAttribute id="ORDEN_3"/>
+        <viewAttribute id="ORDEN_4"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+      </input>
+      <input node="COR_ORDEN_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ORDEN_VISTAS" source="ID_ORDEN_VISTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_3" source="ORDEN_3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_4" source="ORDEN_4"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+      </input>
+    <joinAttribute name="ID_VISTA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="SERVICIO_ORDEN" joinType="leftOuter">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      <viewAttribute hidden="true" id="JOIN$FILTRO_1$FILTRO_1"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTRO_1$FILTRO_1" source="FILTRO_1"/>
+      </input>
+      <input node="VISTA_ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTRO_1$FILTRO_1" source="FILTRO_1"/>
+      </input>
+    <joinAttribute name="JOIN$FILTRO_1$FILTRO_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="SE_IN_EG" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="EGRESO_PPTO"/>
+        <viewAttribute id="EGRESO_REAL"/>
+        <viewAttribute id="EGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="ANIO_EGRESO_PPTO"/>
+        <viewAttribute id="ANIO_INGRESO_PPTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>COMPONENT(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="SERVICIO_ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+      </input>
+      <input node="U_ING_EGR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_PPTO" source="EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL" source="EGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL_AN" source="EGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_EGRESO_PPTO" source="ANIO_EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_INGRESO_PPTO" source="ANIO_INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+    <joinAttribute name="ID_SERVICIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="COR_CAJA">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="CAJA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_CAJA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="CA_SE_IN_EG" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TIPO_ANALISIS_1"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="EGRESO_PPTO"/>
+        <viewAttribute id="EGRESO_REAL"/>
+        <viewAttribute id="EGRESO_REAL_AN"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="ANIO_EGRESO_PPTO"/>
+        <viewAttribute id="ANIO_INGRESO_PPTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>COMPONENT(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="SE_IN_EG">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS_1" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_PPTO" source="EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL" source="EGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EGRESO_REAL_AN" source="EGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_EGRESO_PPTO" source="ANIO_EGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO_INGRESO_PPTO" source="ANIO_INGRESO_PPTO"/>
+      </input>
+      <input node="COR_CAJA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CAJA" source="CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+      </input>
+    <joinAttribute name="ID_CAJA"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="CA_SE_IN_EG">
+    <descriptions/>
+    <attributes>
+      <attribute id="ID_SERVICIO" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="SERVICIO" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="SERVICIO"/>
+      </attribute>
+      <attribute id="ORDEN_1" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_1"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="ORDEN_1"/>
+      </attribute>
+      <attribute id="ORDEN_2" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_2"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="ORDEN_2"/>
+      </attribute>
+      <attribute id="PERIODO" order="17" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="ID_CAJA" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_CAJA"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="ID_CAJA"/>
+      </attribute>
+      <attribute id="CAJA" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CAJA"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="CAJA"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS_1" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS_1"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="TIPO_ANALISIS_1"/>
+      </attribute>
+      <attribute id="NIVEL_1" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_1"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="NIVEL_1"/>
+      </attribute>
+      <attribute id="NIVEL_2" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_2"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="NIVEL_2"/>
+      </attribute>
+      <attribute id="TIPO_TERCERO" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_TERCERO"/>
+        <keyMapping columnObjectName="CA_SE_IN_EG" columnName="TIPO_TERCERO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="INGRESO_PPTO" order="20" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="INGRESO_PPTO"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="INGRESO_PPTO"/>
+      </measure>
+      <measure id="INGRESO_REAL" order="21" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="INGRESO_REAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="INGRESO_REAL"/>
+      </measure>
+      <measure id="INGRESO_REAL_AN" order="22" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="INGRESO_REAL_AN"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="INGRESO_REAL_AN"/>
+      </measure>
+      <measure id="EGRESO_PPTO" order="27" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="EGRESO_PPTO"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="EGRESO_PPTO"/>
+      </measure>
+      <measure id="EGRESO_REAL" order="28" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="EGRESO_REAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="EGRESO_REAL"/>
+      </measure>
+      <measure id="EGRESO_REAL_AN" order="29" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="EGRESO_REAL_AN"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="EGRESO_REAL_AN"/>
+      </measure>
+      <measure id="ANIO_EGRESO_PPTO" order="31" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANIO_EGRESO_PPTO"/>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="ANIO_EGRESO_PPTO"/>
+      </measure>
+      <measure id="ANIO_INGRESO_PPTO" order="32" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANIO_INGRESO_PPTO"/>
+        <measureMapping columnObjectName="CA_SE_IN_EG" columnName="ANIO_INGRESO_PPTO"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="PPTO_RESULTADO" hidden="false" order="1" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="PPTO_RESULTADO"/>
+        <formula>&quot;INGRESO_PPTO&quot;-&quot;EGRESO_PPTO&quot;</formula>
+      </measure>
+      <measure id="CREC_INGRESO" hidden="false" order="2" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="CREC_INGRESO"/>
+        <formula>IF(&quot;INGRESO_REAL_AN&quot;=0,0,((&quot;INGRESO_REAL&quot;/&quot;INGRESO_REAL_AN&quot;)-1))</formula>
+      </measure>
+      <measure id="CUMP_PPTO_INGRESO" hidden="false" order="3" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="CUMP_PPTO_INGRESO"/>
+        <formula>IF(&quot;INGRESO_PPTO&quot;=0,0,&quot;INGRESO_REAL&quot;/&quot;INGRESO_PPTO&quot;)</formula>
+      </measure>
+      <measure id="VAR_PPTO_INGRESO" hidden="false" order="4" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="VAR_PPTO_INGRESO"/>
+        <formula>&quot;INGRESO_REAL&quot;-&quot;INGRESO_PPTO&quot;</formula>
+      </measure>
+      <measure id="CREC_EGRESO" hidden="false" order="5" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="CREC_EGRESO"/>
+        <formula>IF(&quot;EGRESO_REAL_AN&quot;=0,0,((&quot;EGRESO_REAL&quot;/&quot;EGRESO_REAL_AN&quot;)-1))</formula>
+      </measure>
+      <measure id="CUMP_PPTO_EGRESO" hidden="false" order="6" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="CUMP_PPTO_EGRESO"/>
+        <formula>IF(&quot;EGRESO_PPTO&quot;=0,0,&quot;EGRESO_REAL&quot;/&quot;EGRESO_PPTO&quot;)</formula>
+      </measure>
+      <measure id="VAR_PPTO_EGRESO" hidden="false" order="7" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="VAR_PPTO_EGRESO"/>
+        <formula>&quot;EGRESO_REAL&quot;-&quot;EGRESO_PPTO&quot;</formula>
+      </measure>
+      <measure id="RESULTADO_REAL" hidden="false" order="8" semanticType="amount" aggregationType="sum" measureType="amount" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="3">
+        <descriptions defaultDescription="RESULTADO_REAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <formula>&quot;INGRESO_REAL&quot;-&quot;EGRESO_REAL&quot;</formula>
+      </measure>
+      <measure id="RESULTADO_AN" hidden="false" order="9" semanticType="amount" aggregationType="sum" measureType="amount" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="3">
+        <descriptions defaultDescription="RESULTADO_AN"/>
+        <fixedCurrency>$</fixedCurrency>
+        <formula>&quot;INGRESO_REAL_AN&quot;-&quot;EGRESO_REAL_AN&quot;</formula>
+      </measure>
+      <measure id="CREC_RESULTADO" hidden="false" order="10" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="CREC_RESULTADO"/>
+        <formula>IF(&quot;RESULTADO_AN&quot;=0,0,((&quot;RESULTADO_REAL&quot;/&quot;RESULTADO_AN&quot;)-1))</formula>
+      </measure>
+      <measure id="VAR_PPTO_RESULTADO" hidden="false" order="11" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="VAR_PPTO_RESULTADO"/>
+        <formula>&quot;RESULTADO_REAL&quot;-&quot;PPTO_RESULTADO&quot;</formula>
+      </measure>
+      <measure id="CUMP_PPTO_RESULTADO" hidden="false" order="12" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="CUMP_PPTO_RESULTADO"/>
+        <formula>IF(&quot;PPTO_RESULTADO&quot;=0,0,&quot;RESULTADO_REAL&quot;/&quot;PPTO_RESULTADO&quot;)</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="LEVEL_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">NIVEL_1</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">NIVEL_2</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="LEVEL_1" aggregateAllNodes="true" multipleParents="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions/>
+            <levels>
+              <level levelAttribute="NIVEL_1" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="NIVEL_1" sortDirection="ASC"/>
+              <level levelAttribute="NIVEL_2" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="NIVEL_2" sortDirection="ASC"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="849" y="112"/>
+        <rectangleSize height="0" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="983" y="1106"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUMA_INGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="983" y="1001"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="EGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="605" y="1106"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUMA_EGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="605" y="1001"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="469" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="NIVEL_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="722" y="866"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUM_EGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="512" y="866"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="JOIN_EGR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="695" y="696"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    <shape modelObjectName="NIVEL_2" modelObjectNameSpace="JOIN_EGR" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SUM_EGRESO" modelObjectNameSpace="JOIN_EGR" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="PPTO_ANIO_ING" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="932" y="866"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUM_INGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="1142" y="866"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="JOIN_ING" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="951" y="696"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    <shape modelObjectName="PPTO_ANIO_ING" modelObjectNameSpace="JOIN_ING" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SUM_INGRESO" modelObjectNameSpace="JOIN_ING" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="U_ING_EGR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="706" y="550"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_ORDEN_VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="92" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="VISTA_ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="VISTA" modelObjectNameSpace="VISTA_ORDEN" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="COR_ORDEN_VISTA" modelObjectNameSpace="VISTA_ORDEN" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="SERVICIO_ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="442" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="SERVICIO" modelObjectNameSpace="SERVICIO_ORDEN" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="VISTA_ORDEN" modelObjectNameSpace="SERVICIO_ORDEN" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="SE_IN_EG" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="469" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="SERVICIO_ORDEN" modelObjectNameSpace="SE_IN_EG" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="U_ING_EGR" modelObjectNameSpace="SE_IN_EG" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="COR_CAJA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="876" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CA_SE_IN_EG" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="849" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="SE_IN_EG" modelObjectNameSpace="CA_SE_IN_EG" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="COR_CAJA" modelObjectNameSpace="CA_SE_IN_EG" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

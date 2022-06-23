@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV2_RETAIL" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV2_RETAIL"/>
+  <metadata changedAt="2019-11-24 09:42:04.617"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="40"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_REDENCIONES">
+      <resourceUri>logical.data::T_COR_REDENCIONES</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_CANAL">
+      <resourceUri>logical.data::T_COR_CANAL</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="REDENCIONES">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_CANAL"/>
+        <viewAttribute id="ID_REDENCIONES"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TIPO"/>
+        <viewAttribute id="CANTIDAD_COMPRA"/>
+        <viewAttribute id="CANTIDAD_REDENCION"/>
+        <viewAttribute id="VALOR_REDENCION"/>
+        <viewAttribute id="VALOR_COMPRA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_REDENCIONES"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="CANAL">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ID_CANAL"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_CANAL"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_CANAL"/>
+        <viewAttribute id="ID_REDENCIONES"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TIPO"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="CANTIDAD_COMPRA"/>
+        <viewAttribute id="CANTIDAD_REDENCION"/>
+        <viewAttribute id="VALOR_REDENCION"/>
+        <viewAttribute id="VALOR_COMPRA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="REDENCIONES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL" source="ID_CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_REDENCIONES" source="ID_REDENCIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO" source="TIPO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_COMPRA" source="CANTIDAD_COMPRA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_REDENCION" source="CANTIDAD_REDENCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR_REDENCION" source="VALOR_REDENCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR_COMPRA" source="VALOR_COMPRA"/>
+      </input>
+      <input node="CANAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL" source="ID_CANAL"/>
+      </input>
+    <joinAttribute name="ID_CANAL"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="TIPO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO"/>
+      </attribute>
+      <attribute id="CANAL" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL"/>
+        <keyMapping columnObjectName="Join_1" columnName="CANAL"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="ID_CANAL" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_CANAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="ID_CANAL"/>
+      </measure>
+      <measure id="ID_REDENCIONES" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_REDENCIONES"/>
+        <measureMapping columnObjectName="Join_1" columnName="ID_REDENCIONES"/>
+      </measure>
+      <measure id="CANTIDAD_COMPRA" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_COMPRA"/>
+        <measureMapping columnObjectName="Join_1" columnName="CANTIDAD_COMPRA"/>
+      </measure>
+      <measure id="CANTIDAD_REDENCION" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_REDENCION"/>
+        <measureMapping columnObjectName="Join_1" columnName="CANTIDAD_REDENCION"/>
+      </measure>
+      <measure id="VALOR_REDENCION" order="8" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="VALOR_REDENCION"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_1" columnName="VALOR_REDENCION"/>
+      </measure>
+      <measure id="VALOR_COMPRA" order="9" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="VALOR_COMPRA"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_1" columnName="VALOR_COMPRA"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="CANAL_SUBCANAL">
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="CANAL_SUBCANAL" aggregateAllNodes="true" multipleParents="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions defaultDescription="CANAL_SUBCANAL"/>
+            <levels/>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="REDENCIONES" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="24" y="558"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CANAL" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="236" y="562"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="136" y="448"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    
+    <shape modelObjectName="REDENCIONES" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="CANAL" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

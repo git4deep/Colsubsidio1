@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV4_PENETRACION_FILIALES" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV4_PENETRACION_FILIALES"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_PTCION_FILIALES">
+      <resourceUri>logical.data::T_COR_PTCION_FILIALES</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="PENETRACION_FILIALES">
+      <viewAttributes>
+        <viewAttribute id="ANO_ACTUAL"/>
+        <viewAttribute id="ANO_ANTERIOR"/>
+        <viewAttribute id="DESCRIPCION"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="ID_PTCION_FILIALES"/>
+        <viewAttribute id="PERIODO"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DOUBLE" id="VARIACION_COP" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;ANO_ACTUAL&quot;-&quot;ANO_ANTERIOR&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="VARIACION_PORC" length="34" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;ANO_ANTERIOR&quot;=0,0,&quot;ANO_ACTUAL&quot;/&quot;ANO_ANTERIOR&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_PTCION_FILIALES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO_ACTUAL" source="ANO_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO_ANTERIOR" source="ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PTCION_FILIALES" source="ID_PTCION_FILIALES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="PENETRACION_FILIALES">
+    <attributes>
+      <attribute id="DESCRIPCION" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DESCRIPCION"/>
+        <keyMapping columnObjectName="PENETRACION_FILIALES" columnName="DESCRIPCION"/>
+      </attribute>
+      <attribute id="ENTIDAD" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ENTIDAD"/>
+        <keyMapping columnObjectName="PENETRACION_FILIALES" columnName="ENTIDAD"/>
+      </attribute>
+      <attribute id="PERIODO" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="PENETRACION_FILIALES" columnName="PERIODO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="ANO_ACTUAL" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANO_ACTUAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="PENETRACION_FILIALES" columnName="ANO_ACTUAL"/>
+      </measure>
+      <measure id="ANO_ANTERIOR" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANO_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="PENETRACION_FILIALES" columnName="ANO_ANTERIOR"/>
+      </measure>
+      <measure id="ID_PTCION_FILIALES" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_PTCION_FILIALES"/>
+        <measureMapping columnObjectName="PENETRACION_FILIALES" columnName="ID_PTCION_FILIALES"/>
+      </measure>
+      <measure id="VARIACION_COP" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VARIACION_COP"/>
+        <measureMapping columnObjectName="PENETRACION_FILIALES" columnName="VARIACION_COP"/>
+      </measure>
+      <measure id="VARIACION_PORC" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VARIACION_PORC"/>
+        <measureMapping columnObjectName="PENETRACION_FILIALES" columnName="VARIACION_PORC"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PENETRACION_FILIALES" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="35" y="586"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

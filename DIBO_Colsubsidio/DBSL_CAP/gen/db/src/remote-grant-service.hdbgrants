@@ -1,0 +1,14 @@
+{
+	"remote-grant-service": {
+		"object_owner": {
+			"roles": [
+                "MODELING"
+			]
+		},
+		"application_user": {
+			"roles": [				
+                "MODELING"
+			]
+		}
+	}
+}

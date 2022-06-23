@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.COMERCIAL::GESTION_COM_APORTES_RETENCION_FALLA" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="GESTION_COM_APORTES_RETENCION_FALLA"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COM_RETENCION_FALLA">
+      <resourceUri>logical.data::T_COM_RETENCION_FALLA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_RET_FORMALIZACION">
+      <resourceUri>logical.data::T_COM_RET_FORMALIZACION</resourceUri>
+    </DataSource>
+    <DataSource id="RETENCION_FALLA_ANO_ANTERIOR$$$$logical.data::T_COM_RETENCION_FALLA$$">
+      <resourceUri>logical.data::T_COM_RETENCION_FALLA</resourceUri>
+    </DataSource>
+    <DataSource id="RETENCION_FALLA_MES_ANTERIOR$$$$logical.data::T_COM_RETENCION_FALLA$$">
+      <resourceUri>logical.data::T_COM_RETENCION_FALLA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_ESTADO_GESTION">
+      <resourceUri>logical.data::T_COM_ESTADO_GESTION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_RET_DIAGNOSTICO">
+      <resourceUri>logical.data::T_COM_RET_DIAGNOSTICO</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_FALLA">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_FORMALIZACION"/>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_ESTADO_GESTION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_RETENCION_FALLA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="FORMALIZACION">
+    <viewAttributes>
+        <viewAttribute id="ID_FORMALIZACION"/>
+        <viewAttribute id="FORMALIZACION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_RET_FORMALIZACION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="FORMALIZACION"/>
+        <viewAttribute id="ID_ESTADO_GESTION"/>
+      <viewAttribute hidden="true" id="JOIN$ID_FORMALIZACION$ID_FORMALIZACION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_GESTION" source="ID_ESTADO_GESTION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_FORMALIZACION$ID_FORMALIZACION" source="ID_FORMALIZACION"/>
+      </input>
+      <input node="FORMALIZACION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FORMALIZACION" source="FORMALIZACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_FORMALIZACION$ID_FORMALIZACION" source="ID_FORMALIZACION"/>
+      </input>
+    <joinAttribute name="JOIN$ID_FORMALIZACION$ID_FORMALIZACION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="ID_ESTADO_GESTION"/>
+      
+        <viewAttribute id="ID_FORMALIZACION"/></viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_FORMALIZACION" source="ID_FORMALIZACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_GESTION" source="ID_ESTADO_GESTION"/>
+      </input>
+      <input node="RETENCION_FALLA_ANO_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_FORMALIZACION" source="ID_FORMALIZACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_GESTION" source="ID_ESTADO_GESTION"/>
+      </input>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_FORMALIZACION"/>
+    <joinAttribute name="ID_DIAGNOSTICO"/>
+    <joinAttribute name="ID_ESTADO_GESTION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_FORMALIZACION"/>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="ID_ESTADO_GESTION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="RETENCION_FALLA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_FORMALIZACION" source="ID_FORMALIZACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_GESTION" source="ID_ESTADO_GESTION"/>
+      </input>
+      <input node="RETENCION_FALLA_MES_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_FORMALIZACION" source="ID_FORMALIZACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_GESTION" source="ID_ESTADO_GESTION"/>
+      </input>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_FORMALIZACION"/>
+    <joinAttribute name="ID_DIAGNOSTICO"/>
+    <joinAttribute name="ID_ESTADO_GESTION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_FALLA_ANO_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_FORMALIZACION"/>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="ID_ESTADO_GESTION"/>
+      
+        <viewAttribute id="FECHA"/></viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_ANO_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_YEARS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="RETENCION_FALLA_ANO_ANTERIOR$$$$logical.data::T_COM_RETENCION_FALLA$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_FALLA_MES_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_FORMALIZACION"/>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="ID_ESTADO_GESTION"/>
+      
+        <viewAttribute id="FECHA"/></viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_MES_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_MONTHS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="RETENCION_FALLA_MES_ANTERIOR$$$$logical.data::T_COM_RETENCION_FALLA$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_4" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="FORMALIZACION"/>
+        <viewAttribute id="DESCRIPCION"/>
+      <viewAttribute hidden="true" id="JOIN$ID_ESTADO_GESTION$ID_ESTADO_GESTION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FORMALIZACION" source="FORMALIZACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTADO_GESTION$ID_ESTADO_GESTION" source="ID_ESTADO_GESTION"/>
+      </input>
+      <input node="ESTADO_GESTION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTADO_GESTION$ID_ESTADO_GESTION" source="ID_ESTADO_GESTION"/>
+      </input>
+    <joinAttribute name="JOIN$ID_ESTADO_GESTION$ID_ESTADO_GESTION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="ESTADO_GESTION">
+    <viewAttributes>
+        <viewAttribute id="DESCRIPCION"/>
+      
+        <viewAttribute id="ID_ESTADO_GESTION"/></viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_ESTADO_GESTION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="DIAGNOSTICO">
+    <viewAttributes>
+        <viewAttribute id="ID_DIAGNOSTICO"/>
+        <viewAttribute id="DIAGNOSTICO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_RET_DIAGNOSTICO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_5" joinType="rightOuter">
+    <viewAttributes>
+        <viewAttribute id="DIAGNOSTICO"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="FORMALIZACION"/>
+        <viewAttribute id="DESCRIPCION"/>
+      <viewAttribute hidden="true" id="JOIN$ID_DIAGNOSTICO$ID_DIAGNOSTICO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="DIAGNOSTICO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIAGNOSTICO" source="DIAGNOSTICO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_DIAGNOSTICO$ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+      </input>
+      <input node="Join_4">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FORMALIZACION" source="FORMALIZACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_DIAGNOSTICO$ID_DIAGNOSTICO" source="ID_DIAGNOSTICO"/>
+      </input>
+    <joinAttribute name="JOIN$ID_DIAGNOSTICO$ID_DIAGNOSTICO"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_5">
+    <attributes>
+      <attribute id="DIAGNOSTICO" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DIAGNOSTICO"/>
+        <keyMapping columnObjectName="Join_5" columnName="DIAGNOSTICO"/>
+      </attribute>
+      <attribute id="FECHA" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FECHA"/>
+        <keyMapping columnObjectName="Join_5" columnName="FECHA"/>
+      </attribute>
+      <attribute id="FORMALIZACION" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FORMALIZACION"/>
+        <keyMapping columnObjectName="Join_5" columnName="FORMALIZACION"/>
+      </attribute>
+      <attribute id="DESCRIPCION" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DESCRIPCION"/>
+        <keyMapping columnObjectName="Join_5" columnName="DESCRIPCION"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="APORTES" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS"/>
+      </measure>
+      <measure id="APORTES_MES_ANTERIOR" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_MES_ANTERIOR" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ANO_ANTERIOR" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_ANO_ANTERIOR" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ACUM_ACTUAL" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ACUM_ACTUAL"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES"/>
+      </measure>
+      <measure id="APORTES_ACUM_ANO_ANTERIOR" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ACUM_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="APORTES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_ACUM_EMPRESAS" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD ACUM EMPRESAS ACTUAL"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS"/>
+      </measure>
+      <measure id="CANTIDAD_ACUM_EMPRESAS_ANO_ANTERIOR" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD ACUM EMPRESAS ANO ANTERIOR"/>
+        <measureMapping columnObjectName="Join_5" columnName="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="660.3038801290666" y="112"/>
+      
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="RETENCION_FALLA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="91.99999999999999" y="1016.9999940395355"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="FORMALIZACION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="474.7983235081821" y="696.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="172" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_3" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="FORMALIZACION" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="145.33333333333337" y="696.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="RETENCION_FALLA_ANO_ANTERIOR" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118.66666666666661" y="856.9999952316284"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="RETENCION_FALLA" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="RETENCION_FALLA_MES_ANTERIOR" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="RETENCION_FALLA_ANO_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="380.18794682697023" y="856.9999952316284"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="RETENCION_FALLA_MES_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302.00000000000006" y="1016.9999940395355"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="198.66666666666663" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="ESTADO_GESTION" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="ESTADO_GESTION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="584.5795303100989" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+      <shape expanded="true" modelObjectName="DIAGNOSTICO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="708.3361339234377" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="660.3038801290664" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="DIAGNOSTICO" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_4" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

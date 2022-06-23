@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV3_SIST_DE_SALUD_DOB_TRIP_COND" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="DOBLE_TRIPLE"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_DOBLE_TRIPLE_CONDICION">
+      <resourceUri>logical.data::T_COR_DOBLE_TRIPLE_CONDICION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_CAJA">
+      <resourceUri>logical.data::T_COR_CAJA</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="DOBLE_TRIPLE_COND">
+    <viewAttributes>
+        <viewAttribute id="AFILIADOS_CAJAS"/>
+        <viewAttribute id="CAJAS_FAMISANAR"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_DOBLE_TRIPLE_CONDICION"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="PTCION_CAJA"/>
+        <viewAttribute id="PTCION_FAMISANAR"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_DOBLE_TRIPLE_CONDICION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="CAJA">
+    <viewAttributes>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="ID_CAJA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_CAJA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="AFILIADOS_CAJAS"/>
+        <viewAttribute id="CAJAS_FAMISANAR"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_DOBLE_TRIPLE_CONDICION"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="PTCION_CAJA"/>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="PTCION_FAMISANAR"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="DOBLE_TRIPLE_COND">
+        <mapping xsi:type="Calculation:AttributeMapping" target="AFILIADOS_CAJAS" source="AFILIADOS_CAJAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CAJAS_FAMISANAR" source="CAJAS_FAMISANAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DOBLE_TRIPLE_CONDICION" source="ID_DOBLE_TRIPLE_CONDICION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PTCION_CAJA" source="PTCION_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PTCION_FAMISANAR" source="PTCION_FAMISANAR"/>
+      </input>
+      <input node="CAJA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CAJA" source="CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+      </input>
+    <joinAttribute name="ID_CAJA"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_1">
+    <attributes>
+      <attribute id="ID_CAJA" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_CAJA"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_CAJA"/>
+      </attribute>
+      <attribute id="PERIODO" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="CAJA" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CAJA"/>
+        <keyMapping columnObjectName="Join_1" columnName="CAJA"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="AFILIADOS_CAJAS" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="AFILIADOS_CAJAS"/>
+        <measureMapping columnObjectName="Join_1" columnName="AFILIADOS_CAJAS"/>
+      </measure>
+      <measure id="CAJAS_FAMISANAR" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CAJAS_FAMISANAR"/>
+        <measureMapping columnObjectName="Join_1" columnName="CAJAS_FAMISANAR"/>
+      </measure>
+      <measure id="ID_DOBLE_TRIPLE_CONDICION" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_DOBLE_TRIPLE_CONDICION"/>
+        <measureMapping columnObjectName="Join_1" columnName="ID_DOBLE_TRIPLE_CONDICION"/>
+      </measure>
+      <measure id="PTCION_CAJA" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PTCION_CAJA"/>
+        <measureMapping columnObjectName="Join_1" columnName="PTCION_CAJA"/>
+      </measure>
+      <measure id="PTCION_FAMISANAR" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PTCION_FAMISANAR"/>
+        <measureMapping columnObjectName="Join_1" columnName="PTCION_FAMISANAR"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="DOBLE_TRIPLE_COND" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="13" y="525"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CAJA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="288" y="538"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="157" y="400"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    
+    <shape modelObjectName="DOBLE_TRIPLE_COND" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="CAJA" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

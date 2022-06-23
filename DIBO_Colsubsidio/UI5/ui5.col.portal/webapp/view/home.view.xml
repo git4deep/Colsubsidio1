@@ -1,0 +1,48 @@
+<mvc:View controllerName="ui5.col.portal.controller.home" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:u="sap.ui.unified" 
+	xmlns:c="sap.ui.core"
+	displayBlock="true" 
+	xmlns:t="sap.ui.table"
+	xmlns="sap.m" 
+	class="sapUiSizeCompact" >
+
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<HBox class="sapUiLargeMargin" >
+							<GenericTile header="{i18n>appOrder}"
+										 subheader="" press="onAppOrder">
+								<TileContent unit="" footer="">
+									<ImageContent src="sap-icon://alphabetical-order" />
+								</TileContent>
+							</GenericTile>
+							
+							<HBox width="30px" />
+							
+							<GenericTile header="{i18n>appImport}"
+										 subheader="" press="onAppImport">
+								<TileContent unit="" footer="">
+									<ImageContent src="sap-icon://excel-attachment" />
+								</TileContent>
+							</GenericTile>
+							
+						</HBox>
+					</content>
+					<footer>
+						<Bar>
+							<contentLeft>
+							</contentLeft>
+							<contentMiddle>
+							</contentMiddle>
+							<contentRight>
+							</contentRight>
+						</Bar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

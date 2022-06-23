@@ -1,0 +1,11 @@
+---
+applications:
+  - name: DBSL_CAP-db-deployer
+    path: .
+    no-route: true
+    health-check-type: process
+    memory: 256M
+    buildpacks:
+      - nodejs_buildpack
+    services:
+      - DBSL_CAP-db

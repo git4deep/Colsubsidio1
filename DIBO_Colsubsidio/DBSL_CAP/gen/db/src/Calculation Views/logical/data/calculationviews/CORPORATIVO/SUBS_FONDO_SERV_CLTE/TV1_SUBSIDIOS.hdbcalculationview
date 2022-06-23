@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.SUBS_FONDO_SERV_CLTE::TV1_SUBSIDIOS" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV2_SUBSIDIOS"/>
+  <metadata changedAt="2021-05-06 17:41:02.164"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="39"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_SUBSIDIOS">
+      <resourceUri>logical.data::T_COR_SUBSIDIOS</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_VISTA">
+      <resourceUri>logical.data::T_COR_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_ORDEN_VISTA">
+      <resourceUri>logical.data::T_COR_ORDEN_VISTA</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="SUBSIDIOS">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SUBSIDIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TIPO_SUBSIDIO"/>
+        <viewAttribute id="DESCRIPCION"/>
+        <viewAttribute aggregationType="sum" id="ACTUAL_PPTO"/>
+        <viewAttribute aggregationType="sum" id="ACTUAL_EJECUCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="FILTRO_1" length="40" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;TIPO_SUBSIDIO&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>component(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_SUBSIDIOS"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="COR_VISTA">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="DESCRIPCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_VISTA"/>
+    <filter>(&quot;ID_VISTA&quot;=7)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="COR_VISTA_ORDEN">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_ORDEN_VISTA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="VISTA_ORDEN" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      <viewAttribute hidden="true" id="JOIN$ID_VISTA$ID_VISTA"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="COR_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_VISTA$ID_VISTA" source="ID_VISTA"/>
+      </input>
+      <input node="COR_VISTA_ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_VISTA$ID_VISTA" source="ID_VISTA"/>
+      </input>
+    <joinAttribute name="JOIN$ID_VISTA$ID_VISTA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="SUB_ORD" joinType="leftOuter">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SUBSIDIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TIPO_SUBSIDIO"/>
+        <viewAttribute id="DESCRIPCION"/>
+        <viewAttribute id="ACTUAL_PPTO"/>
+        <viewAttribute id="ACTUAL_EJECUCION"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      <viewAttribute hidden="true" id="JOIN$FILTRO_1$FILTRO_1"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ANIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>component(&quot;PERIODO&quot;,1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="SUBSIDIOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBSIDIO" source="ID_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_SUBSIDIO" source="TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTUAL_PPTO" source="ACTUAL_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTUAL_EJECUCION" source="ACTUAL_EJECUCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTRO_1$FILTRO_1" source="FILTRO_1"/>
+      </input>
+      <input node="VISTA_ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTRO_1$FILTRO_1" source="FILTRO_1"/>
+      </input>
+    <joinAttribute name="JOIN$FILTRO_1$FILTRO_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PPTO_ANIO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ANIO"/>
+        <viewAttribute aggregationType="sum" id="ACTUAL_PPTO_ANIO"/>
+        <viewAttribute id="DESCRIPCION"/>
+        <viewAttribute id="TIPO_SUBSIDIO"/>
+        <viewAttribute id="ID_SUBSIDIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="SUBSIDIOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTUAL_PPTO_ANIO" source="ACTUAL_PPTO"/></input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SUBSIDIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TIPO_SUBSIDIO"/>
+        <viewAttribute id="DESCRIPCION"/>
+        <viewAttribute id="ACTUAL_PPTO"/>
+        <viewAttribute id="ACTUAL_EJECUCION"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="ANIO"/>
+        <viewAttribute id="ACTUAL_PPTO_ANIO"/>
+      <viewAttribute hidden="true" id="JOIN$ANIO$ANIO"/>
+      <viewAttribute hidden="true" id="JOIN$TIPO_SUBSIDIO$TIPO_SUBSIDIO"/>
+      <viewAttribute hidden="true" id="JOIN$DESCRIPCION$DESCRIPCION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="PPTO_ANIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTUAL_PPTO_ANIO" source="ACTUAL_PPTO_ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_SUBSIDIO$TIPO_SUBSIDIO" source="TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DESCRIPCION$DESCRIPCION" source="DESCRIPCION"/>
+      </input>
+      <input node="SUB_ORD">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SUBSIDIO" source="ID_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_SUBSIDIO" source="TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTUAL_PPTO" source="ACTUAL_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTUAL_EJECUCION" source="ACTUAL_EJECUCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ANIO$ANIO" source="ANIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$TIPO_SUBSIDIO$TIPO_SUBSIDIO" source="TIPO_SUBSIDIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DESCRIPCION$DESCRIPCION" source="DESCRIPCION"/>
+      </input>
+    <joinAttribute name="JOIN$ANIO$ANIO"/>
+    <joinAttribute name="JOIN$TIPO_SUBSIDIO$TIPO_SUBSIDIO"/>
+    <joinAttribute name="JOIN$DESCRIPCION$DESCRIPCION"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="TIPO_SUBSIDIO" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_SUBSIDIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO_SUBSIDIO"/>
+      </attribute>
+      <attribute id="DESCRIPCION" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DESCRIPCION"/>
+        <keyMapping columnObjectName="Join_1" columnName="DESCRIPCION"/>
+      </attribute>
+      <attribute id="ORDEN_1" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_1"/>
+        <keyMapping columnObjectName="Join_1" columnName="ORDEN_1"/>
+      </attribute>
+      <attribute id="ORDEN_2" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_2"/>
+        <keyMapping columnObjectName="Join_1" columnName="ORDEN_2"/>
+      </attribute>
+      <attribute id="ANIO" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ANIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="ANIO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="ID_SUBSIDIO" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_SUBSIDIO"/>
+        <measureMapping columnObjectName="Join_1" columnName="ID_SUBSIDIO"/>
+      </measure>
+      <measure id="ACTUAL_PPTO" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ACTUAL_PPTO"/>
+        <measureMapping columnObjectName="Join_1" columnName="ACTUAL_PPTO"/>
+      </measure>
+      <measure id="ACTUAL_PPTO_ANIO" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ACTUAL_PPTO_ANIO"/>
+        <measureMapping columnObjectName="Join_1" columnName="ACTUAL_PPTO_ANIO"/>
+      </measure>
+      <measure id="ACTUAL_EJECUCION" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ACTUAL_EJECUCION"/>
+        <measureMapping columnObjectName="Join_1" columnName="ACTUAL_EJECUCION"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="CUMP_PPTO" hidden="false" order="1" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="CUMP_PPTO"/>
+        <formula>IF(&quot;ACTUAL_PPTO&quot;=0,0,&quot;ACTUAL_EJECUCION&quot;/&quot;ACTUAL_PPTO&quot;)</formula>
+      </measure>
+      <measure id="VAR_PPTO" hidden="false" order="2" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="34" scale="2">
+        <descriptions defaultDescription="VAR_PPTO"/>
+        <formula>&quot;ACTUAL_PPTO&quot;-&quot;ACTUAL_EJECUCION&quot;</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="368.27696048327897" y="112"/>
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SUBSIDIOS" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="397.4454249475971" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="91.99999999999999" y="696.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_VISTA_ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302.00000000000006" y="696.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="VISTA_ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118.66666666666663" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="COR_VISTA" modelObjectNameSpace="VISTA_ORDEN" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="COR_VISTA_ORDEN" modelObjectNameSpace="VISTA_ORDEN" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="SUB_ORD" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="145.33333333333326" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="SUBSIDIOS" modelObjectNameSpace="SUB_ORD" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="VISTA_ORDEN" modelObjectNameSpace="SUB_ORD" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="PPTO_ANIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="458.98588056299945" y="394.4999988079071"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="368.27696048327897" y="217"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="PPTO_ANIO" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SUB_ORD" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

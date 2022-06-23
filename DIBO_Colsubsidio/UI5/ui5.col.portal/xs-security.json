@@ -1,0 +1,29 @@
+{
+  "xsappname": "portal",
+  "tenant-mode": "dedicated",
+    "description": "Security profile of called application",
+    "scopes": [
+        {
+            "name": "$XSAPPNAME.user",
+            "description": "Sample UAA"
+        }
+    ],
+    "role-templates": [
+        {
+            "name": "UI5Approletemplate",
+            "description": "Role ",
+            "scope-references": [
+                "$XSAPPNAME.user"
+            ]
+        }
+    ],
+    "role-collections": [
+		{
+			"name": "UI5Appsportal",
+			"description": "UI5 App Role Collection",
+			"role-template-references": [
+				"$XSAPPNAME.UI5Approletemplate"
+			]
+		}
+	]
+}

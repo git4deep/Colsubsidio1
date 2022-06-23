@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="3.0" id="logical.data.calculationviews.COMERCIAL::GESTION_COM_APORTES_RETENCION" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="GESTION_COM_APORTES_RETENCION"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COM_RETENCION">
+      <resourceUri>logical.data::T_COM_RETENCION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_RET_MOTIVO">
+      <resourceUri>logical.data::T_COM_RET_MOTIVO</resourceUri>
+    </DataSource>
+    <DataSource id="RETENCION_ANO_ANTERIOR$$$$logical.data::T_COM_RETENCION$$">
+      <resourceUri>logical.data::T_COM_RETENCION</resourceUri>
+    </DataSource>
+    <DataSource id="RETENCION_MES_ANTERIOR$$$$logical.data::T_COM_RETENCION$$">
+      <resourceUri>logical.data::T_COM_RETENCION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_PIRAMIDE_1">
+      <resourceUri>logical.data::T_COM_PIRAMIDE_1</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_PIRAMIDE_2">
+      <resourceUri>logical.data::T_COM_PIRAMIDE_2</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_ATR_CANAL_COMUNICACION">
+      <resourceUri>logical.data::T_COM_ATR_CANAL_COMUNICACION</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_MOTIVO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="ID_CANAL_COMUNICACION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_RETENCION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="MOTIVO">
+    <viewAttributes>
+        <viewAttribute id="ID_MOTIVO"/>
+        <viewAttribute id="MOTIVO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_RET_MOTIVO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="ID_CANAL_COMUNICACION"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="MOTIVO"/>
+      <viewAttribute hidden="true" id="JOIN$ID_MOTIVO$ID_MOTIVO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_6">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL_COMUNICACION" source="ID_CANAL_COMUNICACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_MOTIVO$ID_MOTIVO" source="ID_MOTIVO"/>
+      </input>
+      <input node="MOTIVO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOTIVO" source="MOTIVO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_MOTIVO$ID_MOTIVO" source="ID_MOTIVO"/>
+      </input>
+    <joinAttribute name="JOIN$ID_MOTIVO$ID_MOTIVO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_6" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="ID_CANAL_COMUNICACION"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="ID_MOTIVO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_5">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_MOTIVO" source="ID_MOTIVO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL_COMUNICACION" source="ID_CANAL_COMUNICACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+      </input>
+      <input node="RETENCION_ANO_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_MOTIVO" source="ID_MOTIVO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL_COMUNICACION" source="ID_CANAL_COMUNICACION"/>
+      </input>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_PIRAMIDE_2"/>
+    <joinAttribute name="ID_MOTIVO"/>
+    <joinAttribute name="ID_CANAL_COMUNICACION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_5" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_MOTIVO"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="ID_CANAL_COMUNICACION"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="RETENCION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_MOTIVO" source="ID_MOTIVO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL_COMUNICACION" source="ID_CANAL_COMUNICACION"/>
+      </input>
+      <input node="RETENCION_MES_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_MOTIVO" source="ID_MOTIVO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CANAL_COMUNICACION" source="ID_CANAL_COMUNICACION"/>
+      </input>
+    <joinAttribute name="FECHA"/>
+    <joinAttribute name="ID_PIRAMIDE_2"/>
+    <joinAttribute name="ID_MOTIVO"/>
+    <joinAttribute name="ID_CANAL_COMUNICACION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_ANO_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="ID_MOTIVO"/>
+        <viewAttribute id="ID_CANAL_COMUNICACION"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES_PPTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_ANO_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_YEARS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="RETENCION_ANO_ANTERIOR$$$$logical.data::T_COM_RETENCION$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="RETENCION_MES_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="ID_MOTIVO"/>
+        <viewAttribute id="ID_CANAL_COMUNICACION"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES_PPTO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_MES_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_MONTHS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="RETENCION_MES_ANTERIOR$$$$logical.data::T_COM_RETENCION$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PIRAMIDE_1">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_1"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_PIRAMIDE_1"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="PIRAMIDE_2">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="ID_PIRAMIDE_1"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_PIRAMIDE_2"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      <viewAttribute hidden="true" id="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="PIRAMIDE_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1" source="ID_PIRAMIDE_1"/>
+      </input>
+      <input node="PIRAMIDE_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1" source="ID_PIRAMIDE_1"/>
+      </input>
+    <joinAttribute name="JOIN$ID_PIRAMIDE_1$ID_PIRAMIDE_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="CANAL_COMUNICACION">
+    <viewAttributes>
+        <viewAttribute id="ID_CANAL_COMUNICACION"/>
+        <viewAttribute id="CANAL_COMUNICACION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_ATR_CANAL_COMUNICACION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="CANAL_COMUNICACION"/>
+        <viewAttribute id="ID_PIRAMIDE_2"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="MOTIVO"/>
+      <viewAttribute hidden="true" id="JOIN$ID_CANAL_COMUNICACION$ID_CANAL_COMUNICACION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOTIVO" source="MOTIVO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CANAL_COMUNICACION$ID_CANAL_COMUNICACION" source="ID_CANAL_COMUNICACION"/>
+      </input>
+      <input node="CANAL_COMUNICACION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL_COMUNICACION" source="CANAL_COMUNICACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CANAL_COMUNICACION$ID_CANAL_COMUNICACION" source="ID_CANAL_COMUNICACION"/>
+      </input>
+    <joinAttribute name="JOIN$ID_CANAL_COMUNICACION$ID_CANAL_COMUNICACION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_4" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="PIRAMIDE_2"/>
+        <viewAttribute id="CANAL_COMUNICACION"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="MOTIVO"/>
+        <viewAttribute id="PIRAMIDE_1"/>
+      <viewAttribute hidden="true" id="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL_COMUNICACION" source="CANAL_COMUNICACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOTIVO" source="MOTIVO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+      <input node="Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_2" source="PIRAMIDE_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PIRAMIDE_1" source="PIRAMIDE_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2" source="ID_PIRAMIDE_2"/>
+      </input>
+    <joinAttribute name="JOIN$ID_PIRAMIDE_2$ID_PIRAMIDE_2"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_4">
+    <attributes>
+      <attribute id="PIRAMIDE_2" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PIRAMIDE_2"/>
+        <keyMapping columnObjectName="Join_4" columnName="PIRAMIDE_2"/>
+      </attribute>
+      <attribute id="CANAL_COMUNICACION" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL_COMUNICACION"/>
+        <keyMapping columnObjectName="Join_4" columnName="CANAL_COMUNICACION"/>
+      </attribute>
+      <attribute id="FECHA" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FECHA"/>
+        <keyMapping columnObjectName="Join_4" columnName="FECHA"/>
+      </attribute>
+      <attribute id="MOTIVO" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MOTIVO"/>
+        <keyMapping columnObjectName="Join_4" columnName="MOTIVO"/>
+      </attribute>
+      <attribute id="PIRAMIDE_1" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PIRAMIDE_1"/>
+        <keyMapping columnObjectName="Join_4" columnName="PIRAMIDE_1"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="APORTES" order="4" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES MES"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_4" columnName="APORTES"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS"/>
+        <measureMapping columnObjectName="Join_4" columnName="CANTIDAD_EMPRESAS"/>
+      </measure>
+      <measure id="APORTES_PPTO" order="6" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_PPTO"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_4" columnName="APORTES_PPTO"/>
+      </measure>
+      <measure id="APORTES_MES_ANTERIOR" order="7" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_MES_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_4" columnName="APORTES_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_MES_ANTERIOR" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_4" columnName="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ANO_ANTERIOR" order="9" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_ANO_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_4" columnName="APORTES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_ANO_ANTERIOR" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_4" columnName="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ACUM_ACTUAL" order="13" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_ACUM_ACTUAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_4" columnName="APORTES"/>
+      </measure>
+      <measure id="APORTES_ACUM_ANO_ANTERIOR" order="14" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_ACUM_ANO_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_4" columnName="APORTES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ACUM_PPTO" order="15" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_ACUM_PPTO"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_4" columnName="APORTES_PPTO"/>
+      </measure>
+      <measure id="CANTIDAD_ACUM_EMPRESAS" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD ACUM EMPRESAS ACTUAL"/>
+        <measureMapping columnObjectName="Join_4" columnName="CANTIDAD_EMPRESAS"/>
+      </measure>
+      <measure id="CANTIDAD_ACUM_EMPRESAS_ANO_ANTERIOR" order="17" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD ACUM EMPRESAS AÑO ANTERIOR"/>
+        <measureMapping columnObjectName="Join_4" columnName="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="PIRAMIDE1_2">
+        <attributeRef xsi:type="DataFoundation:Attribute">PIRAMIDE_1</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">PIRAMIDE_2</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="PIRAMIDE1_2" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions defaultDescription="PIRAMIDE1_2"/>
+            <levels>
+              <level levelAttribute="PIRAMIDE_1" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="PIRAMIDE_1" sortDirection="ASC"/>
+              <level levelAttribute="PIRAMIDE_2" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="PIRAMIDE_2" sortDirection="ASC"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="474" y="112"/>
+      
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="RETENCION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="128" y="1016"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="MOTIVO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="91" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_6" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="MOTIVO" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_6" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="385" y="696"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_5" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="RETENCION_ANO_ANTERIOR" modelObjectNameSpace="Join_6" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="155" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="RETENCION" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="RETENCION_MES_ANTERIOR" modelObjectNameSpace="Join_5" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="RETENCION_ANO_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="411" y="856"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="RETENCION_MES_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="338" y="1016"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PIRAMIDE_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="748" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PIRAMIDE_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="538" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="565" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="PIRAMIDE_2" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="PIRAMIDE_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="CANAL_COMUNICACION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="328" y="536"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="301" y="376"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="CANAL_COMUNICACION" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="474" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="Join_3" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_2" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

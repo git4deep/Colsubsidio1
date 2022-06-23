@@ -1,0 +1,98 @@
+<mvc:View controllerName="ui5.col.importcsv.controller.home" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:u="sap.ui.unified" 
+	xmlns:c="sap.ui.core"
+	displayBlock="true" 
+	xmlns:t="sap.ui.table"
+	xmlns="sap.m" 
+	class="sapUiSizeCompact" >
+
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						
+						<VBox class="sapUiLargeMargin" >
+							<HBox height="20px" />
+							<Select id="sltTables" width="100%"  items="{/tables}" change="onChangeTable" forceSelection="false"  >
+								<items>
+									<c:Item  key="{key}" text="{tabla}"/>
+								</items>
+							</Select>
+							
+							<HBox height="20px" />
+							
+							<t:Table rows="{/info}"  visibleRowCount="6" 
+								selectionMode="Single" selectionBehavior="RowOnly"  visibleRowCountMode="Interactive">
+								
+								<t:extension>
+									<Toolbar>
+										<ToolbarSpacer/>
+										<Button type="Reject" icon="sap-icon://delete" tooltip="{i18n>deleteData}"  press="onDeleteData" />
+										<Switch id="swtDeleteData" state="false" tooltip="{i18n>deleteData}" change="onChangeDeleteData" enabled="false" />
+									</Toolbar>
+								</t:extension>
+								
+								<t:columns>
+									<t:Column width="20%" sortProperty="COLUMN_NAME"  >
+										<Label text="{i18n>table}" />
+										<t:template>
+											<ObjectStatus text="{COLUMN_NAME}" state="Warning" />
+										</t:template>
+									</t:Column>
+									<t:Column width="20%">
+										<Label text="{i18n>type}" />
+										<t:template>
+											<ObjectStatus text="{DATA_TYPE_NAME}" state="Success" />
+										</t:template>
+									</t:Column>
+									<t:Column width="20%">
+										<Label text="{i18n>length}" />
+										<t:template>
+											<ObjectStatus text="{LENGTH}" />
+										</t:template>
+									</t:Column>
+									<t:Column width="20%">
+										<Label text="{i18n>scale}" />
+										<t:template>
+											<ObjectStatus text="{SCALE}" />
+										</t:template>
+									</t:Column>
+									<t:Column width="20%">
+										<Label text="{i18n>is_nullable}" />
+										<t:template>
+											<ObjectStatus text="{IS_NULLABLE}" />
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
+							
+							<HBox height="50px" />
+							
+							<u:FileUploader
+								id="fileUploader"
+								width="100%"
+								name="myFileUpload"
+								uploadComplete="handleUploadComplete"/>
+							<HBox height="10px" />
+							<Button	type="Accept" icon="sap-icon://upload" width="100%" text="{i18n>uploadFile}" press="handleUploadPress"/>
+						</VBox>
+					</content>
+					<footer>
+						<Bar>
+							<contentLeft>
+							</contentLeft>
+							<contentMiddle>
+								<Button	type="Accept" icon="sap-icon://excel-attachment" text="{i18n>download}" press="onDownloadFormat"/>
+							</contentMiddle>
+							<contentRight>
+								<Button	type="Reject" icon="sap-icon://sys-cancel" text="{i18n>cancel}" press="toCleanForm"/>
+							</contentRight>
+						</Bar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

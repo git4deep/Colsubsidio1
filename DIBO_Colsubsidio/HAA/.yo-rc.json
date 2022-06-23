@@ -1,0 +1,11 @@
+{
+  "generator-saphanaacademy-haa": {
+    "projectName": "HAA",
+    "newDir": true,
+    "hdiContainerName": "HDI_DBSL",
+    "authorization": true,
+    "clientHostname": "*",
+    "personalizeJWT": false,
+    "useNamedUser": false
+  }
+}

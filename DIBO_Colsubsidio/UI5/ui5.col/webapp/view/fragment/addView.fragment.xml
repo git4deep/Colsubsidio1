@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" xmlns:m="sap.m" xmlns:layout="sap.ui.layout">
+	<m:Dialog contentWidth="45%" contentHeight="25%" title="Tratar vista" class="sapUiSizeCompact">
+		<m:content>
+			<m:Panel visible="true" width="auto" class="sapUiResponsiveMargin">
+				<m:headerToolbar>
+					<m:Toolbar height="2rem">
+						<!--<m:ToolbarSpacer/>-->
+					</m:Toolbar>
+				</m:headerToolbar>
+				<m:content>
+					<m:Input id="inpAddView" placeholder="Descripción" change="onUpdateViewDescription" class="sapUiSmallMarginTopBottom"/>
+				</m:content>
+			</m:Panel>
+		</m:content>
+		<m:buttons>
+			<m:Button text="Agregar" press="onCreateView" icon="sap-icon://add" type="Accept"></m:Button>
+			<m:Button text="Cancelar" press="onCloseAddViewFragment" icon="sap-icon://decline" type="Reject"></m:Button>
+		</m:buttons>
+	</m:Dialog>
+</core:FragmentDefinition>

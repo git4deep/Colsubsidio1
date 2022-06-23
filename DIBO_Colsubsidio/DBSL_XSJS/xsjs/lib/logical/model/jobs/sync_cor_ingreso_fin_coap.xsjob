@@ -1,0 +1,11 @@
+{
+    "description": "Jobs from BW",
+    "action": "logical.xs_service.data.corporativo.cor_ingreso_fin:cor_ingreso_fin_coad.xsjs::getMetadata",
+    "schedules": [
+       {
+          "description": "Sync cor_ingreso_fin_coap",
+          "xscron": "* * * * 18 27 0",
+          "parameter": {}
+       }
+    ]
+}

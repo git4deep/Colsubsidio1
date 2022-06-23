@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::T_COR_OTRAS_CAJAS" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="T_COR_OTRAS_CAJAS"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_INGRESO">
+      <resourceUri>logical.data::T_COR_INGRESO</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="INGRESOS" filterExpressionLanguage="COLUMN_ENGINE">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="TIPO_TERCERO" length="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(IN(&quot;ID_SERVICIO&quot;, 'COCS', 'COEC', 'CORT', 'COVD'), '4',
+IF(&quot;ID_SERVICIO&quot; = 'COAP', '1',
+IF( &quot;ID_SERVICIO&quot; = 'COIP' OR &quot;NIVEL_1&quot; = 'DROGUERIAS', '2',
+IF(&quot;ID_SERVICIO&quot; = 'COMS' OR &quot;NIVEL_1&quot; = 'MEDICAMENTOS', '3',
+IF(&quot;ID_SERVICIO&quot; = 'COAD', '11', 'ERROR'
+
+)))))</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+      </input>
+      <filter>&quot;TIPO_ANALISIS&quot; = 'INGRESOS POR LÍNEA DE ACCIÓN ESTRATÉGICA'</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="PARTE_1" filterExpressionLanguage="COLUMN_ENGINE">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="TIPO_TERCERO" length="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>'0'</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#INGRESOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+      </input>
+      <filter>IN(&quot;ID_SERVICIO&quot;, 'COAP', 'COEC', 'COIP', 'COMD', 'COAD', 'CORT', 'COMS', 'COVD', 'COCS')</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="PARTE_2" filterExpressionLanguage="COLUMN_ENGINE">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ID_SERVICIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>'OTRO'</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#INGRESOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+      </input>
+      <filter>&quot;TIPO_TERCERO&quot; != 'ERROR'</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input emptyUnionBehavior="NO_ROW" node="#PARTE_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="#PARTE_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="ANO_ACTUAL">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Union_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="ANO_ANTERIOR">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="PERIODO_ANT" expressionLanguage="SQL">
+          <formula>ADD_YEARS(&quot;PERIODO&quot;, 1)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="INGRESO_REAL_AN" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;INGRESO_REAL&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#ANO_ACTUAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#ANO_ACTUAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+      </input>
+      <input node="#ANO_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO_ANT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+      </input>
+      <joinAttribute name="PERIODO"/>
+      <joinAttribute name="ID_SERVICIO"/>
+      <joinAttribute name="TIPO_TERCERO"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_1">
+    <attributes>
+      <attribute id="PERIODO" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="ID_SERVICIO" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="TIPO_TERCERO" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_TERCERO"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO_TERCERO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="ID_GRUPO_LINEA_ACCION" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_GRUPO_LINEA_ACCION"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="2">
+          <formula>IF(&quot;ID_SERVICIO&quot; = 'OTRO', '1', '6')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="ID_CAJA" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_CAJA"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="2">
+          <formula>'22'</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="TIPO_ANALISIS" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="10">
+          <formula>'OTRAS CAJAS'</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <baseMeasures>
+      <measure id="INGRESO_REAL" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESO_REAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="INGRESO_REAL"/>
+      </measure>
+      <measure id="INGRESO_REAL_AN" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESO_REAL_AN"/>
+        <measureMapping columnObjectName="Join_1" columnName="INGRESO_REAL_AN"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESOS" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="69" y="447"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PARTE_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="65" y="504"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PARTE_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="284" y="509"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="248" y="311"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ANO_ACTUAL" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="482" y="136"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ANO_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="612" y="60"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="556" y="28"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.COMERCIAL::ATRACCION_ESTRATEGIA" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="ATRACCION_PIRAMIDE"/>
+  <metadata changedAt="2020-01-09 12:13:58.95"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="52"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COM_ATRACCION">
+      <resourceUri>logical.data::T_COM_ATRACCION</resourceUri>
+    </DataSource>
+    <DataSource id="ATRACCION_ESTRATEGIA$$$$logical.data::T_COM_ATRACCION$$">
+      <resourceUri>logical.data::T_COM_ATRACCION</resourceUri>
+    </DataSource>
+    <DataSource id="ATRACCION_ANO_ANTERIOR$$$$logical.data::T_COM_ATRACCION$$">
+      <resourceUri>logical.data::T_COM_ATRACCION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_ATR_ESTADO_ATR">
+      <resourceUri>logical.data::T_COM_ATR_ESTADO_ATR</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COM_ATR_ESTRATEGIA">
+      <resourceUri>logical.data::T_COM_ATR_ESTRATEGIA</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="ATRACCION_MES_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute aggregationType="sum" id="APORTES"/>
+        <viewAttribute aggregationType="sum" id="REMANENTE"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="ID_ESTADO_ATRACCION"/>
+        <viewAttribute id="ID_ESTRATEGIA"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_MES_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_MONTHS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COM_ATRACCION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="ATRACCION_ESTRATEGIA">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute aggregationType="sum" id="APORTES"/>
+        <viewAttribute aggregationType="sum" id="APORTES_PPTO"/>
+        <viewAttribute aggregationType="sum" id="REMANENTE"/>
+        <viewAttribute aggregationType="sum" id="REMANENTE_PPTO"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="ID_ESTADO_ATRACCION"/>
+        <viewAttribute id="ID_ESTRATEGIA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="ATRACCION_ESTRATEGIA$$$$logical.data::T_COM_ATRACCION$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="MES_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="REMANENTE"/>
+        <viewAttribute id="REMANENTE_PPTO"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_ESTADO_ATRACCION"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="ID_ESTRATEGIA"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input emptyUnionBehavior="NO_ROW" node="ATRACCION_ESTRATEGIA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE" source="REMANENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_PPTO" source="REMANENTE_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_ATRACCION" source="ID_ESTADO_ATRACCION"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="APORTES_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REMANENTE_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTRATEGIA" source="ID_ESTRATEGIA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="ATRACCION_MES_ANTERIOR">
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="APORTES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="APORTES_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REMANENTE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REMANENTE_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_EMPRESAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_ATRACCION" source="ID_ESTADO_ATRACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_MES_ANTERIOR" source="REMANENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTRATEGIA" source="ID_ESTRATEGIA"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_TRABAJADORES" null="true" value=""/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="ATRACCION_ANO_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute aggregationType="sum" id="APORTES"/>
+        <viewAttribute aggregationType="sum" id="REMANENTE"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="ID_ESTADO_ATRACCION"/>
+        <viewAttribute id="ID_ESTRATEGIA"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DATE" id="FECHA_ANO_ANTERIOR" expressionLanguage="SQL">
+          <formula>ADD_YEARS(&quot;FECHA&quot;, 1)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+      <input node="ATRACCION_ANO_ANTERIOR$$$$logical.data::T_COM_ATRACCION$$"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="ANO_ANTERIOR">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="REMANENTE"/>
+        <viewAttribute id="REMANENTE_PPTO"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="ID_ESTADO_ATRACCION"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <viewAttribute id="ID_ESTRATEGIA"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input emptyUnionBehavior="NO_ROW" node="MES_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE" source="REMANENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_PPTO" source="REMANENTE_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_ATRACCION" source="ID_ESTADO_ATRACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_MES_ANTERIOR" source="REMANENTE_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="APORTES_ANO_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REMANENTE_ANO_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTRATEGIA" source="ID_ESTRATEGIA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="ATRACCION_ANO_ANTERIOR">
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="APORTES" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="APORTES_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REMANENTE" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REMANENTE_PPTO" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_EMPRESAS" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTADO_ATRACCION" source="ID_ESTADO_ATRACCION"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="APORTES_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REMANENTE_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" null="true" value=""/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ANO_ANTERIOR" source="REMANENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTRATEGIA" source="ID_ESTRATEGIA"/>
+        <mapping xsi:type="Calculation:ConstantAttributeMapping" target="CANTIDAD_TRABAJADORES" null="true" value=""/>
+      </input>
+    </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="ESTADO_ATR">
+    <viewAttributes>
+        <viewAttribute id="ID_ESTADO_ATRACCION"/>
+        <viewAttribute id="ESTADO_ATRACCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="logical.data::T_COM_ATR_ESTADO_ATR"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="REMANENTE"/>
+        <viewAttribute id="REMANENTE_PPTO"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <viewAttribute id="ESTADO_ATRACCION"/>
+        <viewAttribute id="APORTES_ACUM_ACTUAL"/>
+        <viewAttribute id="APORTES_ACUM_PPTO"/>
+        <viewAttribute id="REMANENTE_ACUM_ACTUAL"/>
+        <viewAttribute id="REMANENTE_ACUM_PPTO"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ACUM_ACTUAL"/>
+        <viewAttribute id="APORTES_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="ID_ESTRATEGIA"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ACUM_ACTUAL"/>
+      <viewAttribute hidden="true" id="JOIN$ID_ESTADO_ATRACCION$ID_ESTADO_ATRACCION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="ANO_ANTERIOR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE" source="REMANENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_PPTO" source="REMANENTE_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_MES_ANTERIOR" source="REMANENTE_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ANO_ANTERIOR" source="REMANENTE_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ACUM_ACTUAL" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ACUM_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ACUM_ACTUAL" source="REMANENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ACUM_PPTO" source="REMANENTE_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ACUM_ACTUAL" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ACUM_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ACUM_ANO_ANTERIOR" source="REMANENTE_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ESTRATEGIA" source="ID_ESTRATEGIA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ACUM_ACTUAL" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTADO_ATRACCION$ID_ESTADO_ATRACCION" source="ID_ESTADO_ATRACCION"/>
+      </input>
+      <input node="ESTADO_ATR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ESTADO_ATRACCION" source="ESTADO_ATRACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTADO_ATRACCION$ID_ESTADO_ATRACCION" source="ID_ESTADO_ATRACCION"/>
+      </input>
+    <joinAttribute name="JOIN$ID_ESTADO_ATRACCION$ID_ESTADO_ATRACCION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="ESTRATEGIA">
+    <viewAttributes>
+        <viewAttribute id="ID_ESTRATEGIA"/>
+        <viewAttribute id="ESTRATEGIA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="logical.data::T_COM_ATR_ESTRATEGIA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="APORTES"/>
+        <viewAttribute id="APORTES_PPTO"/>
+        <viewAttribute id="REMANENTE"/>
+        <viewAttribute id="REMANENTE_PPTO"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS"/>
+        <viewAttribute id="APORTES_MES_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <viewAttribute id="FECHA"/>
+        <viewAttribute id="APORTES_ANO_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <viewAttribute id="ESTADO_ATRACCION"/>
+        <viewAttribute id="APORTES_ACUM_ACTUAL"/>
+        <viewAttribute id="APORTES_ACUM_PPTO"/>
+        <viewAttribute id="REMANENTE_ACUM_ACTUAL"/>
+        <viewAttribute id="REMANENTE_ACUM_PPTO"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ACUM_ACTUAL"/>
+        <viewAttribute id="APORTES_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="REMANENTE_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR"/>
+        <viewAttribute id="ESTRATEGIA"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES"/>
+        <viewAttribute id="CANTIDAD_TRABAJADORES_ACUM_ACTUAL"/>
+      <viewAttribute hidden="true" id="JOIN$ID_ESTRATEGIA$ID_ESTRATEGIA"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES" source="APORTES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_PPTO" source="APORTES_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE" source="REMANENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_PPTO" source="REMANENTE_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS" source="CANTIDAD_EMPRESAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_MES_ANTERIOR" source="APORTES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_MES_ANTERIOR" source="REMANENTE_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_MES_ANTERIOR" source="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_MES_ANTERIOR" source="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FECHA" source="FECHA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANO_ANTERIOR" source="APORTES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ANO_ANTERIOR" source="REMANENTE_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ESTADO_ATRACCION" source="ESTADO_ATRACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ACUM_ACTUAL" source="APORTES_ACUM_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ACUM_PPTO" source="APORTES_ACUM_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ACUM_ACTUAL" source="REMANENTE_ACUM_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ACUM_PPTO" source="REMANENTE_ACUM_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ACUM_ACTUAL" source="CANTIDAD_EMPRESAS_ACUM_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ACUM_ANO_ANTERIOR" source="APORTES_ACUM_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REMANENTE_ACUM_ANO_ANTERIOR" source="REMANENTE_ACUM_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR" source="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR" source="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES" source="CANTIDAD_TRABAJADORES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_TRABAJADORES_ACUM_ACTUAL" source="CANTIDAD_TRABAJADORES_ACUM_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTRATEGIA$ID_ESTRATEGIA" source="ID_ESTRATEGIA"/>
+      </input>
+      <input node="ESTRATEGIA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ESTRATEGIA" source="ESTRATEGIA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_ESTRATEGIA$ID_ESTRATEGIA" source="ID_ESTRATEGIA"/>
+      </input>
+    <joinAttribute name="JOIN$ID_ESTRATEGIA$ID_ESTRATEGIA"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_2">
+    <descriptions/>
+    <attributes>
+      <attribute id="FECHA" order="10" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FECHA"/>
+        <keyMapping columnObjectName="Join_2" columnName="FECHA"/>
+      </attribute>
+      <attribute id="ESTADO_ATRACCION" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ESTADO_ATRACCION"/>
+        <keyMapping columnObjectName="Join_2" columnName="ESTADO_ATRACCION"/>
+      </attribute>
+      <attribute id="ESTRATEGIA" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ESTRATEGIA"/>
+        <keyMapping columnObjectName="Join_2" columnName="ESTRATEGIA"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="APORTES" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES"/>
+        <measureMapping columnObjectName="Join_2" columnName="APORTES"/>
+      </measure>
+      <measure id="APORTES_PPTO" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_PPTO"/>
+        <measureMapping columnObjectName="Join_2" columnName="APORTES_PPTO"/>
+      </measure>
+      <measure id="REMANENTE" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMANENTE"/>
+        <measureMapping columnObjectName="Join_2" columnName="REMANENTE"/>
+      </measure>
+      <measure id="REMANENTE_PPTO" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMANENTE_PPTO"/>
+        <measureMapping columnObjectName="Join_2" columnName="REMANENTE_PPTO"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_EMPRESAS"/>
+      </measure>
+      <measure id="APORTES_MES_ANTERIOR" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="APORTES_MES_ANTERIOR"/>
+      </measure>
+      <measure id="REMANENTE_MES_ANTERIOR" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMANENTE_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="REMANENTE_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_MES_ANTERIOR" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_EMPRESAS_MES_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES_MES_ANTERIOR" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_TRABAJADORES_MES_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ANO_ANTERIOR" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="APORTES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="REMANENTE_ANO_ANTERIOR" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMANENTE_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="REMANENTE_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_ANO_ANTERIOR" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_EMPRESAS_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES_ANO_ANTERIOR" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_TRABAJADORES_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="APORTES_ACUM_ACTUAL" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ACUM_ACTUAL"/>
+        <measureMapping columnObjectName="Join_2" columnName="APORTES_ACUM_ACTUAL"/>
+      </measure>
+      <measure id="APORTES_ACUM_PPTO" order="17" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ACUM_PPTO"/>
+        <measureMapping columnObjectName="Join_2" columnName="APORTES_ACUM_PPTO"/>
+      </measure>
+      <measure id="REMANENTE_ACUM_ACTUAL" order="18" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMANENTE_ACUM_ACTUAL"/>
+        <measureMapping columnObjectName="Join_2" columnName="REMANENTE_ACUM_ACTUAL"/>
+      </measure>
+      <measure id="REMANENTE_ACUM_PPTO" order="19" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMANENTE_ACUM_PPTO"/>
+        <measureMapping columnObjectName="Join_2" columnName="REMANENTE_ACUM_PPTO"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_ACUM_ACTUAL" order="20" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_ACUM_ACTUAL"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_EMPRESAS_ACUM_ACTUAL"/>
+      </measure>
+      <measure id="APORTES_ACUM_ANO_ANTERIOR" order="21" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="APORTES_ACUM_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="APORTES_ACUM_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="REMANENTE_ACUM_ANO_ANTERIOR" order="22" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMANENTE_ACUM_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="REMANENTE_ACUM_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR" order="23" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_EMPRESAS_ACUM_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR" order="24" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_TRABAJADORES_ACUM_ANO_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES" order="26" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_TRABAJADORES"/>
+      </measure>
+      <measure id="CANTIDAD_TRABAJADORES_ACUM_ACTUAL" order="27" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_TRABAJADORES_ACUM_ACTUAL"/>
+        <measureMapping columnObjectName="Join_2" columnName="CANTIDAD_TRABAJADORES_ACUM_ACTUAL"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="534.5823433691181" y="112"/>
+      
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ATRACCION_MES_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="91.99999999999994" y="816.9999952316284"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ATRACCION_ESTRATEGIA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302" y="816.9999952316284"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="MES_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118.66666666666666" y="676.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ATRACCION_ANO_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="380.70227186916225" y="676.9999964237213"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ANO_ANTERIOR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="145.33333333333337" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ESTADO_ATR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="477.76671071096587" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="172" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="ANO_ANTERIOR" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="ESTADO_ATR" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="ESTRATEGIA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="592.7406712788052" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="534.5823433691181" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="ESTRATEGIA" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

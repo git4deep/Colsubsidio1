@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.RESULTADOS_FINANCIEROS::TV3_OTRAS_CAJAS_2" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_OTRAS_CAJAS_2"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_INGRESO">
+      <resourceUri>logical.data::T_COR_INGRESO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_GRUPO_LINEA_ACCION">
+      <resourceUri>logical.data::T_COR_GRUPO_LINEA_ACCION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_CAJA">
+      <resourceUri>logical.data::T_COR_CAJA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_ORDEN_VISTA">
+      <resourceUri>logical.data::T_COR_ORDEN_VISTA</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="INGRESO">
+    <viewAttributes>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="PERIODO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_INGRESO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="LINEA_ACCION">
+    <viewAttributes>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_GRUPO_LINEA_ACCION"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="IN_LIN_ACC" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="PERIODO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+      </input>
+      <input node="LINEA_ACCION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="ID_GRUPO_LINEA_ACCION"/>
+      </input>
+    <joinAttribute name="TIPO_TERCERO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="CAJA">
+    <viewAttributes>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="ID_CAJA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_CAJA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="IN_CAJA" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="PERIODO"/>
+      <viewAttribute hidden="true" id="JOIN$ID_CAJA$ID_CAJA"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="FILTRO_1" length="40" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;GRUPO_LINEA_ACCION&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="CAJA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CAJA" source="CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CAJA$ID_CAJA" source="ID_CAJA"/>
+      </input>
+      <input node="IN_LIN_ACC">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_CAJA$ID_CAJA" source="ID_CAJA"/>
+      </input>
+    <joinAttribute name="JOIN$ID_CAJA$ID_CAJA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="ORDEN" filterExpressionLanguage="COLUMN_ENGINE">
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_ORDEN_VISTA"/>
+    <filter>(&quot;ID_VISTA&quot;=10)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="IN_OR" joinType="leftOuter">
+    <viewAttributes>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="PERIODO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="IN_CAJA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CAJA" source="CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+      </input>
+      <input node="ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+      </input>
+    <joinAttribute name="FILTRO_1"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="IN_OR">
+    <attributes>
+      <attribute id="CAJA" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CAJA"/>
+        <keyMapping columnObjectName="IN_OR" columnName="CAJA"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="IN_OR" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="TIPO_TERCERO" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_TERCERO"/>
+        <keyMapping columnObjectName="IN_OR" columnName="TIPO_TERCERO"/>
+      </attribute>
+      <attribute id="GRUPO_LINEA_ACCION" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GRUPO_LINEA_ACCION"/>
+        <keyMapping columnObjectName="IN_OR" columnName="GRUPO_LINEA_ACCION"/>
+      </attribute>
+      <attribute id="ID_CAJA" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_CAJA"/>
+        <keyMapping columnObjectName="IN_OR" columnName="ID_CAJA"/>
+      </attribute>
+      <attribute id="FILTRO_1" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FILTRO_1"/>
+        <keyMapping columnObjectName="IN_OR" columnName="FILTRO_1"/>
+      </attribute>
+      <attribute id="ORDEN_1" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_1"/>
+        <keyMapping columnObjectName="IN_OR" columnName="ORDEN_1"/>
+      </attribute>
+      <attribute id="ORDEN_2" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_2"/>
+        <keyMapping columnObjectName="IN_OR" columnName="ORDEN_2"/>
+      </attribute>
+      <attribute id="PERIODO" order="10" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="IN_OR" columnName="PERIODO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="INGRESO_REAL" order="4" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="INGRESO_REAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="IN_OR" columnName="INGRESO_REAL"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="30" y="350"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="LINEA_ACCION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="246" y="354"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="IN_LIN_ACC" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="142" y="267"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    <shape modelObjectName="INGRESO" modelObjectNameSpace="IN_LIN_ACC" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="LINEA_ACCION" modelObjectNameSpace="IN_LIN_ACC" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="CAJA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="293" y="271"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="IN_CAJA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="191" y="200"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    <shape modelObjectName="CAJA" modelObjectNameSpace="IN_CAJA" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="IN_LIN_ACC" modelObjectNameSpace="IN_CAJA" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="27" y="221"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="IN_OR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="151" y="142"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    
+    <shape modelObjectName="IN_CAJA" modelObjectNameSpace="IN_OR" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="ORDEN" modelObjectNameSpace="IN_OR" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

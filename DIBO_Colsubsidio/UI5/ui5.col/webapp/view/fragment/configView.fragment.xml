@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" xmlns:m="sap.m" xmlns:layout="sap.ui.layout">
+	<m:Dialog contentWidth="80%" contentHeight="100%" title="Tratar vista" class="sapUiSizeCompact" afterClose="onCloseConfigViewFragment" >
+		<m:content>
+			<m:Panel visible="true" width="auto" class="sapUiResponsiveMargin">
+				<m:headerToolbar>
+					<m:Toolbar height="2rem">
+						<m:Title text="Resumen de vista {/aResumeView/DESCRIPCION}" title="test"></m:Title>
+						<m:ToolbarSpacer/>
+					</m:Toolbar>
+				</m:headerToolbar>
+				<m:content>
+					<m:Panel height="120px"  visible="true" headerText="{i18n>selectedTable}">
+						<m:content>
+							<m:Title text="Tabla seleccionada"></m:Title>
+							<m:List>
+								<items>
+									<StandardListItem id="resumeTable" title="{/TABLE_NAME}" type="Detail" detailPress="onValidateViews"/>
+								</items>
+							</m:List>
+						</m:content>
+					</m:Panel>
+					<m:Panel height="120px"  visible="true" headerText="{i18n>selectedColumn}">
+						<m:content>
+							<m:Title text="Columna seleccionada"></m:Title>
+							<m:List>
+								<items>
+									<StandardListItem id="resumeColumns" title="{/TABLE_COLUMNS}" type="Detail" detailPress="onValidateViews"/>
+								</items>
+							</m:List>
+						</m:content>
+					</m:Panel>
+					<m:Panel height="400px"  visible="true" headerText="{i18n>selectedOrden}">
+						<m:content>
+							<m:Title text="Registros ordenados"></m:Title>
+							<m:List items="{/aResumeOrderOfRecords}">
+								<items>
+									<StandardListItem id="resumeOrder" title="{FILTRO_1}"  type="Detail" detailPress="onValidateViews"/>
+								</items>
+							</m:List>
+						</m:content>
+					</m:Panel>
+				</m:content>
+			</m:Panel>
+		</m:content>
+		<m:buttons>
+			<m:Button text="Cancelar" press="onCloseConfigViewFragment" icon="sap-icon://decline" type="Reject"></m:Button>
+		</m:buttons>
+	</m:Dialog>
+</core:FragmentDefinition>

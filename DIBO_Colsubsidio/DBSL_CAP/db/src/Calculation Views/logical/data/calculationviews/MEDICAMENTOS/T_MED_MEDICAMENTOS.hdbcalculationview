@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.MEDICAMENTOS::T_MED_MEDICAMENTOS" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="T_MED_MEDICAMENTOS"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_MED_MEDICAMENTOS">
+      <resourceUri>logical.data::T_MED_MEDICAMENTOS</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="logical.data::T_MED_MEDICAMENTOS">
+    <attributes>
+      <attribute id="DES_MES" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DES_MES"/>
+        <keyMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="DES_MES"/>
+      </attribute>
+      <attribute id="DES_CANAL" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DES_CANAL"/>
+        <keyMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="DES_CANAL"/>
+      </attribute>
+      <attribute id="ENTIDAD" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ENTIDAD"/>
+        <keyMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="ENTIDAD"/>
+      </attribute>
+      <attribute id="CANAL" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL"/>
+        <keyMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="CANAL"/>
+      </attribute>
+      <attribute id="MES" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MES"/>
+        <keyMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="MES"/>
+      </attribute>
+      <attribute id="ANO" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ANO"/>
+        <keyMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="ANO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="ID_MEDICAMENTOS" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_MEDICAMENTOS"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="ID_MEDICAMENTOS"/>
+      </measure>
+      <measure id="GASTONOOPE" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="GASTONOOPE"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="GASTONOOPE"/>
+      </measure>
+      <measure id="REALFIL" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REALFIL"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="REALFIL"/>
+      </measure>
+      <measure id="PROVFIL" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PROVFIL"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="PROVFIL"/>
+      </measure>
+      <measure id="MVC_DES_FIN" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="MVC_DES_FIN"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="MVC_DES_FIN"/>
+      </measure>
+      <measure id="MVC_CREDITO" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="MVC_CREDITO"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="MVC_CREDITO"/>
+      </measure>
+      <measure id="CMV_ANTDIST" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CMV_ANTDIST"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="CMV_ANTDIST"/>
+      </measure>
+      <measure id="INGRESOS_NOPER" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESOS_NOPER"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="INGRESOS_NOPER"/>
+      </measure>
+      <measure id="INGRESOS_OPER" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESOS_OPER"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="INGRESOS_OPER"/>
+      </measure>
+      <measure id="DESCUENTOS_VENTAS" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="DESCUENTOS_VENTAS"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="DESCUENTOS_VENTAS"/>
+      </measure>
+      <measure id="VENTAS_BRUTAS" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VENTAS_BRUTAS"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="VENTAS_BRUTAS"/>
+      </measure>
+      <measure id="PERIODO" order="18" aggregationType="min" measureType="simple">
+        <descriptions defaultDescription="PERIODO"/>
+        <measureMapping columnObjectName="logical.data::T_MED_MEDICAMENTOS" columnName="PERIODO"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.MEDICAMENTOS::DBMED_DISTRIBUIDOS" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="REAL DISTRIBUIDOS"/>
+  <metadata changedAt="2020-08-12 14:53:44.335"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="48"/>
+  <dataSources>
+    <DataSource id="logical.data::T_MED_HOMO_CREDITO_DIST_GASTO">
+      <resourceUri>logical.data::T_MED_HOMO_CREDITO_DIST_GASTO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_MED_REAL_DISTRIBUIDOS">
+      <resourceUri>logical.data::T_MED_REAL_DISTRIBUIDOS</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_MED_DIST_GASTO_BASE">
+      <resourceUri>logical.data::T_MED_DIST_GASTO_BASE</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_MED_PART_DEFINIDA_CLIENTE_VENTA">
+      <resourceUri>logical.data::T_MED_PART_DEFINIDA_CLIENTE_VENTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_MED_PAR_TLCVE_CV">
+      <resourceUri>logical.data::T_MED_PAR_TLCVE_CV</resourceUri>
+    </DataSource>
+    <DataSource id="PartAntioq$$$$logical.data::T_MED_PAR_TLCVE_CV$$">
+      <resourceUri>logical.data::T_MED_PAR_TLCVE_CV</resourceUri>
+    </DataSource>
+    <DataSource id="PartAntiAntioq$$$$logical.data::T_MED_PAR_TLCVE_CV$$">
+      <resourceUri>logical.data::T_MED_PAR_TLCVE_CV</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Homologacion" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="TIPO_GASTO"/>
+        <viewAttribute id="CE_CO_I"/>
+        <viewAttribute id="CE_CO_F"/>
+        <viewAttribute id="CUENTA"/>
+        <viewAttribute id="TIPO_DIST"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CECOI" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>'0'+&quot;CE_CO_I&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="CECOF" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>'0'+&quot;CE_CO_F&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_MED_HOMO_CREDITO_DIST_GASTO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_GASTO" source="TIPO_GASTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CE_CO_I" source="CE_CO_I"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CE_CO_F" source="CE_CO_F"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CUENTA" source="CUENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+      </input>
+      <filter>&quot;TIPO_GASTO&quot;='DISTRIBUIDOS'</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_4">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="COSTCENTER"/>
+        <viewAttribute id="FISCPER"/>
+        <viewAttribute aggregationType="sum" id="VALOR"/>
+        <viewAttribute id="GL_ACCOUNT"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CALMONTH" length="6" expressionLanguage="COLUMN_ENGINE">
+          <formula>leftstr(&quot;FISCPER&quot;, 4)+rightstr(&quot;FISCPER&quot;, 2)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_MED_REAL_DISTRIBUIDOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="COSTCENTER" source="COSTCENTER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FISCPER" source="FISCPER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GL_ACCOUNT" source="GL_ACCOUNT"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinOrder="OUTSIDE_IN" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="CECOF"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute hidden="true" id="JOIN$COSTCENTER$CECOI"/>
+        <viewAttribute hidden="true" id="JOIN$GL_ACCOUNT$CUENTA"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Aggregation_4">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COSTCENTER$CECOI" source="COSTCENTER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$GL_ACCOUNT$CUENTA" source="GL_ACCOUNT"/>
+      </input>
+      <input node="#Homologacion">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CECOF" source="CECOF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COSTCENTER$CECOI" source="CECOI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$GL_ACCOUNT$CUENTA" source="CUENTA"/>
+      </input>
+      <joinAttribute name="JOIN$COSTCENTER$CECOI"/>
+      <joinAttribute name="JOIN$GL_ACCOUNT$CUENTA"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="DistCanal">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="CE_COF"/>
+        <viewAttribute id="PORC_COMERCIAL"/>
+        <viewAttribute id="PORC_INSTITUCIONAL"/>
+        <viewAttribute id="CE_LOG"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_MED_DIST_GASTO_BASE">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CE_COF" source="CE_COF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_COMERCIAL" source="PORC_COMERCIAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_INSTITUCIONAL" source="PORC_INSTITUCIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CE_LOG" source="CE_LOG"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_7" joinOrder="OUTSIDE_IN" joinType="rightOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="CECOF"/>
+        <viewAttribute hidden="true" id="JOIN$CECOF$CECOF"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Homologacion">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CECOF$CECOF" source="CECOF"/>
+      </input>
+      <input node="#Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CECOF" source="CECOF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CECOF$CECOF" source="CECOF"/>
+      </input>
+      <joinAttribute name="JOIN$CECOF$CECOF"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinOrder="OUTSIDE_IN" joinType="rightOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PORC_COMERCIAL"/>
+        <viewAttribute id="PORC_INSTITUCIONAL"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="CECOF"/>
+        <viewAttribute hidden="true" id="JOIN$CE_COF$CECOF"/>
+        <viewAttribute hidden="true" id="JOIN$CALMONTH$CALMONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="VALINS" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;VALOR&quot;*&quot;PORC_INSTITUCIONAL&quot;/(&quot;PORC_COMERCIAL&quot;+&quot;PORC_INSTITUCIONAL&quot;)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="VALCOM" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;VALOR&quot;*&quot;PORC_COMERCIAL&quot;/(&quot;PORC_COMERCIAL&quot;+&quot;PORC_INSTITUCIONAL&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#DistCanal">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_COMERCIAL" source="PORC_COMERCIAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_INSTITUCIONAL" source="PORC_INSTITUCIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CALMONTH$CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CE_COF$CECOF" source="CE_COF"/>
+      </input>
+      <input node="#Join_7">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CECOF" source="CECOF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CALMONTH$CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CE_COF$CECOF" source="CECOF"/>
+      </input>
+      <joinAttribute name="JOIN$CALMONTH$CALMONTH"/>
+      <joinAttribute name="JOIN$CE_COF$CECOF"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="PartDefClienteVen">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CE_CO"/>
+        <viewAttribute id="CLIENTE_CONV"/>
+        <viewAttribute id="PORCENTAJE"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CECOF" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>'0'+&quot;CE_CO&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_MED_PART_DEFINIDA_CLIENTE_VENTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CE_CO" source="CE_CO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTE_CONV" source="CLIENTE_CONV"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORCENTAJE" source="PORCENTAJE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PORC_COMERCIAL"/>
+        <viewAttribute id="PORC_INSTITUCIONAL"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="CECOF"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_COMERCIAL" source="PORC_COMERCIAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_INSTITUCIONAL" source="PORC_INSTITUCIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CECOF" source="CECOF"/>
+      </input>
+      <filter>&quot;TIPO_DIST&quot;='Participación Definida Cliente y Venta'</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinOrder="OUTSIDE_IN" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CLIENTE_CONV"/>
+        <viewAttribute id="PORCENTAJE"/>
+        <viewAttribute id="PORC_COMERCIAL"/>
+        <viewAttribute id="PORC_INSTITUCIONAL"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="CECOF"/>
+        <viewAttribute hidden="true" id="JOIN$CECOF$CECOF"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="VALINS" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;PORCENTAJE&quot;*&quot;PORC_INSTITUCIONAL&quot;*&quot;VALOR&quot;/(&quot;PORC_COMERCIAL&quot;+&quot;PORC_INSTITUCIONAL&quot;)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="VALCOM" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;PORC_COMERCIAL&quot;*&quot;VALOR&quot;/(&quot;PORC_COMERCIAL&quot;+&quot;PORC_INSTITUCIONAL&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#PartDefClienteVen">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTE_CONV" source="CLIENTE_CONV"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORCENTAJE" source="PORCENTAJE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CECOF$CECOF" source="CECOF"/>
+      </input>
+      <input node="#Projection_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_COMERCIAL" source="PORC_COMERCIAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORC_INSTITUCIONAL" source="PORC_INSTITUCIONAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CECOF" source="CECOF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CECOF$CECOF" source="CECOF"/>
+      </input>
+      <joinAttribute name="JOIN$CECOF$CECOF"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="PARTLC">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="PARTICIPA_CANTI_ENTI"/>
+        <viewAttribute id="BIC_ZCH_AGCON"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_MED_PAR_TLCVE_CV">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BIC_ZCH_AGCON" source="BIC_ZCH_AGCON"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_3" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute aggregationType="sum" id="VALINS"/>
+        <viewAttribute aggregationType="sum" id="VALCOM"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute aggregationType="sum" id="VALOR"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+      <filter>&quot;TIPO_DIST&quot; != 'Participación Definida Cliente y Venta' AND &quot;TIPO_DIST&quot; != 'Unidades Cliente y Venta sin Antioquia'
+</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_4" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PARTICIPA_CANTI_ENTI"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="VALINS"/>
+        <viewAttribute id="VALCOM"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="VALOR"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Aggregation_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+      <input node="#PARTLC">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+      </input>
+      <joinAttribute name="CALMONTH"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="PartAntioq" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="PARTICIPA_CANTI_ENTI"/>
+        <viewAttribute id="CALMONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#PartAntioq$$$$logical.data::T_MED_PAR_TLCVE_CV$$">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+      </input>
+      <filter>&quot;ENTIDAD&quot;!='SURA' AND &quot;ENTIDAD&quot;!='NEPS ANTIOQUIA'</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="PartAntiAntioq" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="PARTICIPA_CANTI_ENTI"/>
+        <viewAttribute id="CALMONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#PartAntiAntioq$$$$logical.data::T_MED_PAR_TLCVE_CV$$">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+      </input>
+      <filter>&quot;ENTIDAD&quot;!='SURA' AND &quot;ENTIDAD&quot;!='NEPS ANTIOQUIA'</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="PartAntiTOT">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute aggregationType="sum" id="PARTICIPA_CANTI_ENTI"/>
+        <viewAttribute id="CALMONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#PartAntiAntioq">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_5" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions>
+        <comment text=""/>
+      </descriptions>
+      <viewAttributes>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="PARTICIPA_CANTI_ENTI"/>
+        <viewAttribute id="PARTICIPA_CANTI_ENTI_1"/>
+        <viewAttribute id="CALMONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DOUBLE" id="Nuev" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;CANAL&quot;='2',IF(&quot;PARTICIPA_CANTI_ENTI_1&quot;>0,&quot;PARTICIPA_CANTI_ENTI&quot;/&quot;PARTICIPA_CANTI_ENTI_1&quot;,0),0)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#PartAntioq">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+      </input>
+      <input node="#PartAntiTOT">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI_1" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+      </input>
+      <joinAttribute name="CALMONTH"/>
+      <joinAttribute name="CANAL"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute aggregationType="sum" id="VALINS"/>
+        <viewAttribute aggregationType="sum" id="VALCOM"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute aggregationType="sum" id="VALOR"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+      <filter>&quot;TIPO_DIST&quot;='Unidades Cliente y Venta sin Antioquia'</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_6" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="Nuev"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="VALINS"/>
+        <viewAttribute id="VALCOM"/>
+        <viewAttribute id="TIPO_DIST"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="VALOR"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Aggregation_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_DIST" source="TIPO_DIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+      <input node="#Join_5">
+        <mapping xsi:type="Calculation:AttributeMapping" target="Nuev" source="Nuev"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+      </input>
+      <joinAttribute name="CALMONTH"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute aggregationType="sum" id="VALINS"/>
+        <viewAttribute aggregationType="sum" id="VALCOM"/>
+        <viewAttribute id="CLIENTE_CONV"/>
+        <viewAttribute aggregationType="count" id="VALOR"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTE_CONV" source="CLIENTE_CONV"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_8" joinOrder="OUTSIDE_IN" joinType="rightOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="VALINS"/>
+        <viewAttribute id="VALCOM"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="PARTICIPA_CANTI_ENTI"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute hidden="true" id="JOIN$CLIENTE_CONV$ENTIDAD"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Aggregation_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CLIENTE_CONV$ENTIDAD" source="CLIENTE_CONV"/>
+      </input>
+      <input node="#PARTLC">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPA_CANTI_ENTI" source="PARTICIPA_CANTI_ENTI"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CLIENTE_CONV$ENTIDAD" source="ENTIDAD"/>
+      </input>
+      <joinAttribute name="CALMONTH"/>
+      <joinAttribute name="JOIN$CLIENTE_CONV$ENTIDAD"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="VALINS"/>
+        <viewAttribute id="VALCOM"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input emptyUnionBehavior="NO_ROW" node="#Join_4">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="#Join_6">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+      </input>
+      <input emptyUnionBehavior="NO_ROW" node="#Join_8">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALINS" source="VALINS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALCOM" source="VALCOM"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Union_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="CALMONTH" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CALMONTH"/>
+        <keyMapping columnObjectName="Union_1" columnName="CALMONTH"/>
+      </attribute>
+      <attribute id="ENTIDAD" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ENTIDAD"/>
+        <keyMapping columnObjectName="Union_1" columnName="ENTIDAD"/>
+      </attribute>
+      <attribute id="CANAL" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL"/>
+        <keyMapping columnObjectName="Union_1" columnName="CANAL"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="VALOR" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALOR"/>
+        <measureMapping columnObjectName="Union_1" columnName="VALOR"/>
+      </measure>
+      <measure id="VALCOM" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALCOM"/>
+        <measureMapping columnObjectName="Union_1" columnName="VALCOM"/>
+      </measure>
+      <measure id="VALINS" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALINS"/>
+        <measureMapping columnObjectName="Union_1" columnName="VALINS"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="DISTRIBUIDOS" hidden="false" order="7" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="17" scale="2">
+        <descriptions defaultDescription="DISTRIBUIDOS"/>
+        <formula>IF(&quot;CANAL&quot;='2',&quot;VALINS&quot;,IF(&quot;CANAL&quot;='1',&quot;VALCOM&quot;,0))</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="407" y="87"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Homologacion" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="484" y="953"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="397" y="857"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="DistCanal" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="330" y="761"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_7" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="484" y="761"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="407" y="665"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PartDefClienteVen" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="649" y="587"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="495" y="587"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="649" y="491"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PARTLC" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="561" y="395"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="407" y="395"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="407" y="299"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PartAntioq" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="176" y="491"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PartAntiAntioq" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="587"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PartAntiTOT" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="491"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_5" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="99" y="395"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="253" y="395"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_6" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="253" y="299"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="715" y="395"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_8" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="561" y="299"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="407" y="165"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="330" y="953"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

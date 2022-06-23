@@ -1,0 +1,25 @@
+<mvc:View controllerName="ui5.col.controller.home" xmlns="sap.ui.table" xmlns:dnd="sap.ui.core.dnd" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:c="sap.ui.core" xmlns:m="sap.m" height="100%">
+	<m:Page showHeader="false" enableScrolling="false" class="sapUiContentPadding" floatingFooter="true">
+		<m:content>
+			<m:HBox>
+				<Table id="tblColumns" selectionMode="Single" rows="{/aColumnsByTable}" visibleRowCount="10"  width="100%">
+					<extension>
+						<m:OverflowToolbar>
+							<m:Title text="Columnas disponibles de {/oSelectedTable/TABLE_NAME}"/>
+							<m:ToolbarSpacer/>
+						</m:OverflowToolbar>
+					</extension>
+					<columns>
+						<Column sortProperty="TABLE_COLUMNS" filterProperty="TABLE_COLUMNS">
+							<m:Text text="{i18n>column}"/>
+							<template>
+								<m:Text text="{TABLE_COLUMNS}" wrapping="false"/>
+							</template>
+						</Column>
+					</columns>
+				</Table>
+			</m:HBox>
+		</m:content>
+	</m:Page>
+</mvc:View>

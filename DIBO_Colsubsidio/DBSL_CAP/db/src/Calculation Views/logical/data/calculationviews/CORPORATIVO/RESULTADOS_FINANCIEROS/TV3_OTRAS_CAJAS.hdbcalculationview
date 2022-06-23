@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.RESULTADOS_FINANCIEROS::TV3_OTRAS_CAJAS" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_OTRAS_CAJAS"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_CAJA">
+      <resourceUri>logical.data::T_COR_CAJA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_CAJA_PARTICIPACION">
+      <resourceUri>logical.data::T_COR_CAJA_PARTICIPACION</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="ID_CAJA">
+    <viewAttributes>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="ID_CAJA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_CAJA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+        <viewAttribute id="CAJA"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="ID_CAJA_PARTICIPACION"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="APORTES_ACTUAL"/>
+        <viewAttribute id="APORTES_ANTERIOR"/>
+        <viewAttribute id="EMPLEADORES_ACTUAL"/>
+        <viewAttribute id="EMPLEADORES_ANTERIOR"/>
+        <viewAttribute id="PERSONAS_A_CARGO_ACTUAL"/>
+        <viewAttribute id="PERSONAS_A_CARGO_ANTERIOR"/>
+        <viewAttribute id="PERSONAS_A_CARGO_BENEFICIARIAS_ACTUAL"/>
+        <viewAttribute id="PERSONAS_A_CARGO_BENEFICIARIAS_ANTERIOR"/>
+        <viewAttribute id="TRABAJADORES_ACTUAL"/>
+        <viewAttribute id="TRABAJADORES_ANTERIOR"/>
+        <viewAttribute id="TRABAJADORES_BENEFICIARIOS_ACTUAL"/>
+        <viewAttribute id="TRABAJADORES_BENEFICIARIOS_ANTERIOR"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="ID_CAJA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CAJA" source="CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+      </input>
+      <input node="Aggregation_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA_PARTICIPACION" source="ID_CAJA_PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ACTUAL" source="APORTES_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APORTES_ANTERIOR" source="APORTES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMPLEADORES_ACTUAL" source="EMPLEADORES_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMPLEADORES_ANTERIOR" source="EMPLEADORES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSONAS_A_CARGO_ACTUAL" source="PERSONAS_A_CARGO_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSONAS_A_CARGO_ANTERIOR" source="PERSONAS_A_CARGO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSONAS_A_CARGO_BENEFICIARIAS_ACTUAL" source="PERSONAS_A_CARGO_BENEFICIARIAS_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSONAS_A_CARGO_BENEFICIARIAS_ANTERIOR" source="PERSONAS_A_CARGO_BENEFICIARIAS_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRABAJADORES_ACTUAL" source="TRABAJADORES_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRABAJADORES_ANTERIOR" source="TRABAJADORES_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRABAJADORES_BENEFICIARIOS_ACTUAL" source="TRABAJADORES_BENEFICIARIOS_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRABAJADORES_BENEFICIARIOS_ANTERIOR" source="TRABAJADORES_BENEFICIARIOS_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+      </input>
+    <joinAttribute name="ID_CAJA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+        <viewAttribute id="ID_CAJA_PARTICIPACION"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="APORTES_ACTUAL"/>
+        <viewAttribute id="APORTES_ANTERIOR"/>
+        <viewAttribute id="EMPLEADORES_ACTUAL"/>
+        <viewAttribute id="EMPLEADORES_ANTERIOR"/>
+        <viewAttribute id="PERSONAS_A_CARGO_ACTUAL"/>
+        <viewAttribute id="PERSONAS_A_CARGO_ANTERIOR"/>
+        <viewAttribute id="PERSONAS_A_CARGO_BENEFICIARIAS_ACTUAL"/>
+        <viewAttribute id="PERSONAS_A_CARGO_BENEFICIARIAS_ANTERIOR"/>
+        <viewAttribute id="TRABAJADORES_ACTUAL"/>
+        <viewAttribute id="TRABAJADORES_ANTERIOR"/>
+        <viewAttribute id="TRABAJADORES_BENEFICIARIOS_ACTUAL"/>
+        <viewAttribute id="TRABAJADORES_BENEFICIARIOS_ANTERIOR"/>
+        <viewAttribute id="ID_CAJA"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_CAJA_PARTICIPACION"/>
+    </calculationView>
+</calculationViews>
+  <logicalModel id="Join_1">
+    <attributes>
+      <attribute id="CAJA" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CAJA"/>
+        <keyMapping columnObjectName="Join_1" columnName="CAJA"/>
+      </attribute>
+      <attribute id="ID_CAJA" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_CAJA"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_CAJA"/>
+      </attribute>
+      <attribute id="PERIODO" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="ID_CAJA_PARTICIPACION" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_CAJA_PARTICIPACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="ID_CAJA_PARTICIPACION"/>
+      </measure>
+      <measure id="APORTES_ACTUAL" order="5" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_ACTUAL"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_1" columnName="APORTES_ACTUAL"/>
+      </measure>
+      <measure id="APORTES_ANTERIOR" order="6" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="APORTES_ANTERIOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="Join_1" columnName="APORTES_ANTERIOR"/>
+      </measure>
+      <measure id="EMPLEADORES_ACTUAL" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="EMPLEADORES_ACTUAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="EMPLEADORES_ACTUAL"/>
+      </measure>
+      <measure id="EMPLEADORES_ANTERIOR" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="EMPLEADORES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="EMPLEADORES_ANTERIOR"/>
+      </measure>
+      <measure id="PERSONAS_A_CARGO_ACTUAL" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PERSONAS_A_CARGO_ACTUAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="PERSONAS_A_CARGO_ACTUAL"/>
+      </measure>
+      <measure id="PERSONAS_A_CARGO_ANTERIOR" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PERSONAS_A_CARGO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="PERSONAS_A_CARGO_ANTERIOR"/>
+      </measure>
+      <measure id="PERSONAS_A_CARGO_BENEFICIARIAS_ACTUAL" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PERSONAS_A_CARGO_BENEFICIARIAS_ACTUAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="PERSONAS_A_CARGO_BENEFICIARIAS_ACTUAL"/>
+      </measure>
+      <measure id="PERSONAS_A_CARGO_BENEFICIARIAS_ANTERIOR" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PERSONAS_A_CARGO_BENEFICIARIAS_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="PERSONAS_A_CARGO_BENEFICIARIAS_ANTERIOR"/>
+      </measure>
+      <measure id="TRABAJADORES_ACTUAL" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TRABAJADORES_ACTUAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="TRABAJADORES_ACTUAL"/>
+      </measure>
+      <measure id="TRABAJADORES_ANTERIOR" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TRABAJADORES_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="TRABAJADORES_ANTERIOR"/>
+      </measure>
+      <measure id="TRABAJADORES_BENEFICIARIOS_ACTUAL" order="15" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TRABAJADORES_BENEFICIARIOS_ACTUAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="TRABAJADORES_BENEFICIARIOS_ACTUAL"/>
+      </measure>
+      <measure id="TRABAJADORES_BENEFICIARIOS_ANTERIOR" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TRABAJADORES_BENEFICIARIOS_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="TRABAJADORES_BENEFICIARIOS_ANTERIOR"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="FECHA">
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="FECHA" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED">
+            <descriptions defaultDescription="FECHA"/>
+            <levels/>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ID_CAJA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="12" y="348"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="101" y="236"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    <shape modelObjectName="ID_CAJA" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="298" y="353"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+</layout>
+</Calculation:scenario>

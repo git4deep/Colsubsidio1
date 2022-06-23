@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV2_INGRESOS-PART-AVG" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV2_INGRESOS_V2"/>
+  <metadata changedAt="2020-05-26 19:41:41.448"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="45"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_VISTA">
+      <resourceUri>logical.data::T_COR_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_ORDEN_VISTA">
+      <resourceUri>logical.data::T_COR_ORDEN_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_INGRESO">
+      <resourceUri>logical.data::T_COR_INGRESO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_GRUPO_LINEA_ACCION">
+      <resourceUri>logical.data::T_COR_GRUPO_LINEA_ACCION</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_INGRESO_PARTICIPACION">
+      <resourceUri>logical.data::T_COR_INGRESO_PARTICIPACION</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="COR_VISTA">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="DESCRIPCION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPCION" source="DESCRIPCION"/>
+      </input>
+      <filter>(&quot;ID_VISTA&quot; ='5')</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="COR_ORDEN_VISTA">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ID_ORDEN_VISTAS"/>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="FILTRO_2"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="ORDEN_3"/>
+        <viewAttribute id="ORDEN_4"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_ORDEN_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ORDEN_VISTAS" source="ID_ORDEN_VISTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_2" source="FILTRO_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_3" source="ORDEN_3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_4" source="ORDEN_4"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="ORDEN_VISTA" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ID_ORDEN_VISTAS"/>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="FILTRO_2"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="ORDEN_3"/>
+        <viewAttribute id="ORDEN_4"/>
+        <viewAttribute hidden="true" id="JOIN$ID_VISTA$ID_VISTA"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#COR_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_VISTA$ID_VISTA" source="ID_VISTA"/>
+      </input>
+      <input node="#COR_ORDEN_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ORDEN_VISTAS" source="ID_ORDEN_VISTAS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_2" source="FILTRO_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_3" source="ORDEN_3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_4" source="ORDEN_4"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_VISTA$ID_VISTA" source="ID_VISTA"/>
+      </input>
+      <joinAttribute name="JOIN$ID_VISTA$ID_VISTA"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="COR_INGRESO">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TMS_ANTERIOR"/>
+        <viewAttribute id="TMS_ACTUAL"/>
+        <viewAttribute id="CANTIDAD_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD"/>
+        <viewAttribute id="VENTA_PPTO"/>
+        <viewAttribute id="VENTA_ANTERIOR"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="OCUPACION_HABITACIONES"/>
+        <viewAttribute id="CANTIDAD_HABITACIONES"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="TIPO"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="BASE_PARTICIPACION"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="FILTER_1" length="40" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;ID_SERVICIO&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ANTERIOR" source="TMS_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ACTUAL" source="TMS_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_ANTERIOR" source="CANTIDAD_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_PPTO" source="VENTA_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_ANTERIOR" source="VENTA_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OCUPACION_HABITACIONES" source="OCUPACION_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_HABITACIONES" source="CANTIDAD_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO" source="TIPO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BASE_PARTICIPACION" source="BASE_PARTICIPACION"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="INGRESO_ORDEN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TMS_ANTERIOR"/>
+        <viewAttribute id="TMS_ACTUAL"/>
+        <viewAttribute id="CANTIDAD_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD"/>
+        <viewAttribute id="VENTA_PPTO"/>
+        <viewAttribute id="VENTA_ANTERIOR"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="OCUPACION_HABITACIONES"/>
+        <viewAttribute id="CANTIDAD_HABITACIONES"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="TIPO"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="BASE_PARTICIPACION"/>
+        <viewAttribute hidden="true" id="JOIN$FILTER_1$FILTRO_1"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#COR_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ANTERIOR" source="TMS_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ACTUAL" source="TMS_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_ANTERIOR" source="CANTIDAD_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_PPTO" source="VENTA_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_ANTERIOR" source="VENTA_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OCUPACION_HABITACIONES" source="OCUPACION_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_HABITACIONES" source="CANTIDAD_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO" source="TIPO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BASE_PARTICIPACION" source="BASE_PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTER_1$FILTRO_1" source="FILTER_1"/>
+      </input>
+      <input node="#ORDEN_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$FILTER_1$FILTRO_1" source="FILTRO_1"/>
+      </input>
+      <joinAttribute name="JOIN$FILTER_1$FILTRO_1"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="COR_GRUPO_LINEA">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_GRUPO_LINEA_ACCION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="INGRESO_GR" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TMS_ANTERIOR"/>
+        <viewAttribute id="TMS_ACTUAL"/>
+        <viewAttribute id="CANTIDAD_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD"/>
+        <viewAttribute id="VENTA_PPTO"/>
+        <viewAttribute id="VENTA_ANTERIOR"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="OCUPACION_HABITACIONES"/>
+        <viewAttribute id="CANTIDAD_HABITACIONES"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="TIPO"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="BASE_PARTICIPACION"/>
+        <viewAttribute hidden="true" id="JOIN$ID_GRUPO_LINEA_ACCION$ID_GRUPO_LINEA_ACCION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#COR_GRUPO_LINEA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_GRUPO_LINEA_ACCION$ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+      </input>
+      <input node="#INGRESO_ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ANTERIOR" source="TMS_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ACTUAL" source="TMS_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_ANTERIOR" source="CANTIDAD_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_PPTO" source="VENTA_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_ANTERIOR" source="VENTA_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OCUPACION_HABITACIONES" source="OCUPACION_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_HABITACIONES" source="CANTIDAD_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO" source="TIPO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BASE_PARTICIPACION" source="BASE_PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_GRUPO_LINEA_ACCION$ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+      </input>
+      <joinAttribute name="JOIN$ID_GRUPO_LINEA_ACCION$ID_GRUPO_LINEA_ACCION"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="COR_SERVICIO">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="INGRESO_G_S_O" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TMS_ANTERIOR"/>
+        <viewAttribute id="TMS_ACTUAL"/>
+        <viewAttribute id="CANTIDAD_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD"/>
+        <viewAttribute id="VENTA_PPTO"/>
+        <viewAttribute id="VENTA_ANTERIOR"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="OCUPACION_HABITACIONES"/>
+        <viewAttribute id="CANTIDAD_HABITACIONES"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="TIPO"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="BASE_PARTICIPACION"/>
+        <viewAttribute hidden="true" id="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#COR_SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <input node="#INGRESO_GR">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ANTERIOR" source="TMS_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ACTUAL" source="TMS_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_ANTERIOR" source="CANTIDAD_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_PPTO" source="VENTA_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_ANTERIOR" source="VENTA_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OCUPACION_HABITACIONES" source="OCUPACION_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_HABITACIONES" source="CANTIDAD_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO" source="TIPO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BASE_PARTICIPACION" source="BASE_PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID_SERVICIO$ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <joinAttribute name="JOIN$ID_SERVICIO$ID_SERVICIO"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="INGRESO_PART">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="PARTICIPACION"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_INGRESO_PARTICIPACION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="TMS_ANTERIOR"/>
+        <viewAttribute id="TMS_ACTUAL"/>
+        <viewAttribute id="CANTIDAD_ANTERIOR"/>
+        <viewAttribute id="CANTIDAD"/>
+        <viewAttribute id="VENTA_PPTO"/>
+        <viewAttribute id="VENTA_ANTERIOR"/>
+        <viewAttribute id="VENTA"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="OCUPACION_HABITACIONES"/>
+        <viewAttribute id="CANTIDAD_HABITACIONES"/>
+        <viewAttribute id="PARTICIPACION"/>
+        <viewAttribute id="TERCERO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="TIPO"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="ID_CAJA"/>
+        <viewAttribute id="INGRESO_REAL_AN"/>
+        <viewAttribute id="INGRESO_REAL"/>
+        <viewAttribute id="INGRESO_PPTO"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+        <viewAttribute id="GRUPO_LINEA_ACCION"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="PERIODO_PART_PROM"/>
+        <viewAttribute id="PARTICIPACION_PROMEDIO"/>
+        <viewAttribute id="BASE_PARTICIPACION"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="CC_TEST_PART_PROMEDIO" length="17" scale="8" expressionLanguage="COLUMN_ENGINE">
+          <formula>float(if(&quot;PARTICIPACION_PROMEDIO&quot;=0,0,(&quot;INGRESO_REAL&quot;/&quot;PARTICIPACION_PROMEDIO&quot;)))</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#INGRESO_G_S_O">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ANTERIOR" source="TMS_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TMS_ACTUAL" source="TMS_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_ANTERIOR" source="CANTIDAD_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_PPTO" source="VENTA_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA_ANTERIOR" source="VENTA_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VENTA" source="VENTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OCUPACION_HABITACIONES" source="OCUPACION_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD_HABITACIONES" source="CANTIDAD_HABITACIONES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TERCERO" source="TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO" source="TIPO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_CAJA" source="ID_CAJA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL_AN" source="INGRESO_REAL_AN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_PPTO" source="INGRESO_PPTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GRUPO_LINEA_ACCION" source="GRUPO_LINEA_ACCION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BASE_PARTICIPACION" source="BASE_PARTICIPACION"/>
+      </input>
+      <input node="#INGRESO_PART">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO_PART_PROM" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTICIPACION_PROMEDIO" source="PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+      </input>
+      <joinAttribute name="ID_SERVICIO"/>
+      <joinAttribute name="PERIODO"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="TERCERO" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TERCERO"/>
+        <keyMapping columnObjectName="Join_1" columnName="TERCERO"/>
+      </attribute>
+      <attribute id="SEGMENTO" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEGMENTO"/>
+        <keyMapping columnObjectName="Join_1" columnName="SEGMENTO"/>
+      </attribute>
+      <attribute id="TIPO_TERCERO" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_TERCERO"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO_TERCERO"/>
+      </attribute>
+      <attribute id="TIPO" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO"/>
+      </attribute>
+      <attribute id="NIVEL_2" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_2"/>
+        <keyMapping columnObjectName="Join_1" columnName="NIVEL_2"/>
+      </attribute>
+      <attribute id="NIVEL_1" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_1"/>
+        <keyMapping columnObjectName="Join_1" columnName="NIVEL_1"/>
+      </attribute>
+      <attribute id="ID_SERVICIO" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="ID_GRUPO_LINEA_ACCION" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_GRUPO_LINEA_ACCION"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_GRUPO_LINEA_ACCION"/>
+      </attribute>
+      <attribute id="ID_CAJA" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_CAJA"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_CAJA"/>
+      </attribute>
+      <attribute id="ORDEN_1" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_1"/>
+        <keyMapping columnObjectName="Join_1" columnName="ORDEN_1"/>
+      </attribute>
+      <attribute id="ORDEN_2" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_2"/>
+        <keyMapping columnObjectName="Join_1" columnName="ORDEN_2"/>
+      </attribute>
+      <attribute id="GRUPO_LINEA_ACCION" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GRUPO_LINEA_ACCION"/>
+        <keyMapping columnObjectName="Join_1" columnName="GRUPO_LINEA_ACCION"/>
+      </attribute>
+      <attribute id="SERVICIO" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="SERVICIO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="TMS_ANTERIOR" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TMS_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="TMS_ANTERIOR"/>
+      </measure>
+      <measure id="TMS_ACTUAL" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TMS_ACTUAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="TMS_ACTUAL"/>
+      </measure>
+      <measure id="CANTIDAD_ANTERIOR" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="CANTIDAD_ANTERIOR"/>
+      </measure>
+      <measure id="CANTIDAD" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD"/>
+        <measureMapping columnObjectName="Join_1" columnName="CANTIDAD"/>
+      </measure>
+      <measure id="VENTA_PPTO" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VENTA_PPTO"/>
+        <measureMapping columnObjectName="Join_1" columnName="VENTA_PPTO"/>
+      </measure>
+      <measure id="VENTA_ANTERIOR" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VENTA_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="VENTA_ANTERIOR"/>
+      </measure>
+      <measure id="VENTA" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VENTA"/>
+        <measureMapping columnObjectName="Join_1" columnName="VENTA"/>
+      </measure>
+      <measure id="OCUPACION_HABITACIONES" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="OCUPACION_HABITACIONES"/>
+        <measureMapping columnObjectName="Join_1" columnName="OCUPACION_HABITACIONES"/>
+      </measure>
+      <measure id="CANTIDAD_HABITACIONES" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CANTIDAD_HABITACIONES"/>
+        <measureMapping columnObjectName="Join_1" columnName="CANTIDAD_HABITACIONES"/>
+      </measure>
+      <measure id="PARTICIPACION" order="15" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PARTICIPACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="PARTICIPACION"/>
+      </measure>
+      <measure id="INGRESO_REAL_AN" order="25" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESO_REAL_AN"/>
+        <measureMapping columnObjectName="Join_1" columnName="INGRESO_REAL_AN"/>
+      </measure>
+      <measure id="INGRESO_REAL" order="26" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESO_REAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="INGRESO_REAL"/>
+      </measure>
+      <measure id="INGRESO_PPTO" order="27" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="INGRESO_PPTO"/>
+        <measureMapping columnObjectName="Join_1" columnName="INGRESO_PPTO"/>
+      </measure>
+      <measure id="PERIODO_PART_PROM" order="32" aggregationType="min" measureType="simple">
+        <descriptions defaultDescription="PERIODO_PART_PROM"/>
+        <measureMapping columnObjectName="Join_1" columnName="PERIODO_PART_PROM"/>
+      </measure>
+      <measure id="PARTICIPACION_PROMEDIO" order="33" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PARTICIPACION_PROMEDIO"/>
+        <measureMapping columnObjectName="Join_1" columnName="PARTICIPACION_PROMEDIO"/>
+      </measure>
+      <measure id="CC_TEST_PART_PROMEDIO" order="34" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CC_TEST_PART_PROMEDIO"/>
+        <measureMapping columnObjectName="Join_1" columnName="CC_TEST_PART_PROMEDIO"/>
+      </measure>
+      <measure id="BASE_PARTICIPACION" order="35" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="BASE_PARTICIPACION"/>
+        <measureMapping columnObjectName="Join_1" columnName="BASE_PARTICIPACION"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="PART_PROMEDIO" hidden="false" order="1" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="17" scale="8">
+        <descriptions defaultDescription="PART_PROMEDIO"/>
+        <formula>float(if(&quot;PARTICIPACION_PROMEDIO&quot;=0,0,(&quot;INGRESO_REAL&quot;/&quot;PARTICIPACION_PROMEDIO&quot;)))</formula>
+      </measure>
+      <measure id="CC_INGRESO_REAL" hidden="false" order="2" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="17" scale="2">
+        <descriptions defaultDescription="CC_INGRESO_REAL"/>
+        <formula>&quot;INGRESO_REAL&quot;</formula>
+      </measure>
+      <measure id="CC_PARTICIPACION_PROMEDIO" hidden="false" order="3" aggregationType="sum" measureType="simple" datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="17" scale="2">
+        <descriptions defaultDescription="CC_PARTICIPACION_PROMEDIO"/>
+        <formula>&quot;PARTICIPACION_PROMEDIO&quot;</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="99" y="87"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="251" y="549"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_ORDEN_VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="405" y="549"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ORDEN_VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="328" y="453"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_INGRESO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="174" y="453"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESO_ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="252" y="357"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_GRUPO_LINEA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="98" y="357"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESO_GR" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="176" y="261"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="COR_SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="261"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESO_G_S_O" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="99" y="165"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESO_PART" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="501" y="257"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="236" y="163"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.MEDICAMENTOS::DBMED_COSTFIN" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="COSTO FINANCIERO"/>
+  <metadata changedAt="2020-05-29 17:59:59.718"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="42"/>
+  <dataSources>
+    <DataSource id="logical.data::T_MED_DIST_COSTO_FINANCIERO">
+      <resourceUri>logical.data::T_MED_DIST_COSTO_FINANCIERO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_MED_COSTO_FINANCIERO">
+      <resourceUri>logical.data::T_MED_COSTO_FINANCIERO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_MED_PAR_TLCVE_CV">
+      <resourceUri>logical.data::T_MED_PAR_TLCVE_CV</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="DistCostoFinan">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="VALORDIST"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="FISCPER" length="7" expressionLanguage="COLUMN_ENGINE">
+          <formula>leftstr(string(&quot;PERIODO&quot;),4)+string('0')+rightstr(leftstr(string(&quot;PERIODO&quot;),7), 2)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="logical.data::T_MED_DIST_COSTO_FINANCIERO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="CostoFin">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="FISCPER"/>
+        <viewAttribute id="DEBITOR"/>
+        <viewAttribute id="PORCARVEN"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="logical.data::T_MED_COSTO_FINANCIERO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="FISCPER"/>
+        <viewAttribute id="DEBITOR"/>
+        <viewAttribute id="PORCARVEN"/>
+        <viewAttribute id="VALORDIST"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DOUBLE" id="Valor" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;PORCARVEN&quot;*&quot;VALORDIST&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="CALMONTH" length="6" expressionLanguage="COLUMN_ENGINE">
+          <formula>leftstr(&quot;FISCPER&quot;,4)+rightstr(&quot;FISCPER&quot;,2)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="DEBITORAG" length="9" expressionLanguage="COLUMN_ENGINE">
+          <formula>midstr(&quot;DEBITOR&quot;,2,9)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="CostoFin">
+        <mapping xsi:type="Calculation:AttributeMapping" target="FISCPER" source="FISCPER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBITOR" source="DEBITOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORCARVEN" source="PORCARVEN"/>
+      </input>
+      <input node="DistCostoFinan">
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALORDIST" source="VALORDIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FISCPER" source="FISCPER"/>
+      </input>
+    <joinAttribute name="FISCPER"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="COLUMN_ENGINE">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="DESC_AGCON"/>
+        <viewAttribute id="BIC_ZCH_AGCON"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="DEBITORAG" length="9" expressionLanguage="COLUMN_ENGINE">
+          <formula>midstr(&quot;BIC_ZCH_AGCON&quot;,2,9)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="logical.data::T_MED_PAR_TLCVE_CV"/>
+    <filter>&quot;CANAL&quot;='2'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="rightOuter">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="Valor"/>
+        <viewAttribute id="VALORDIST"/>
+        <viewAttribute id="DEBITOR"/>
+        <viewAttribute id="PORCARVEN"/>
+        <viewAttribute id="CALMONTH"/>
+        <viewAttribute id="CANAL"/>
+        <viewAttribute id="ENTIDAD"/>
+        <viewAttribute id="DESC_AGCON"/>
+        <viewAttribute id="BIC_ZCH_AGCON"/>
+      <viewAttribute hidden="true" id="JOIN$CALMONTH$CALMONTH"/>
+      <viewAttribute hidden="true" id="JOIN$DEBITORAG$DEBITORAG"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="Projection_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANAL" source="CANAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTIDAD" source="ENTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESC_AGCON" source="DESC_AGCON"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BIC_ZCH_AGCON" source="BIC_ZCH_AGCON"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CALMONTH$CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DEBITORAG$DEBITORAG" source="DEBITORAG"/>
+      </input>
+      <input node="Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="Valor" source="Valor"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALORDIST" source="VALORDIST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBITOR" source="DEBITOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PORCARVEN" source="PORCARVEN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CALMONTH$CALMONTH" source="CALMONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DEBITORAG$DEBITORAG" source="DEBITORAG"/>
+      </input>
+    <joinAttribute name="JOIN$CALMONTH$CALMONTH"/>
+    <joinAttribute name="JOIN$DEBITORAG$DEBITORAG"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="Join_2">
+    <descriptions/>
+    <attributes>
+      <attribute id="DEBITOR" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DEBITOR"/>
+        <keyMapping columnObjectName="Join_2" columnName="DEBITOR"/>
+      </attribute>
+      <attribute id="CALMONTH" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CALMONTH"/>
+        <keyMapping columnObjectName="Join_2" columnName="CALMONTH"/>
+      </attribute>
+      <attribute id="CANAL" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CANAL"/>
+        <keyMapping columnObjectName="Join_2" columnName="CANAL"/>
+      </attribute>
+      <attribute id="ENTIDAD" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ENTIDAD"/>
+        <keyMapping columnObjectName="Join_2" columnName="ENTIDAD"/>
+      </attribute>
+      <attribute id="DESC_AGCON" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DESC_AGCON"/>
+        <keyMapping columnObjectName="Join_2" columnName="DESC_AGCON"/>
+      </attribute>
+      <attribute id="BIC_ZCH_AGCON" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BIC_ZCH_AGCON"/>
+        <keyMapping columnObjectName="Join_2" columnName="BIC_ZCH_AGCON"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="Valor" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Valor"/>
+        <measureMapping columnObjectName="Join_2" columnName="Valor"/>
+      </measure>
+      <measure id="VALORDIST" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALORDIST"/>
+        <measureMapping columnObjectName="Join_2" columnName="VALORDIST"/>
+      </measure>
+      <measure id="PORCARVEN" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="PORCARVEN"/>
+        <measureMapping columnObjectName="Join_2" columnName="PORCARVEN"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="328.6900820831794" y="112"/>
+        <rectangleSize height="0" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="DistCostoFinan" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="92" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CostoFin" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="302" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="118.66666666666666" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="CostoFin" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="DistCostoFinan" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="395.83468516943316" y="376.9999988079071"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="328.6900820831794" y="217"/>
+        <rectangleSize height="-1" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

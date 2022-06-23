@@ -1,0 +1,9 @@
+---
+applications:
+  - name: DBSL_CAP-srv
+    path: .
+    memory: 256M
+    buildpacks:
+      - nodejs_buildpack
+    services:
+      - DBSL_CAP-db

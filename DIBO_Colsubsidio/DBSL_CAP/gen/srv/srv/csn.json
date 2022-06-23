@@ -1,0 +1,65 @@
+{
+  "namespace": "logical.data",
+  "definitions": {
+    "logical.data.sample_tbl": {
+      "kind": "entity",
+      "elements": {
+        "id": {
+          "key": true,
+          "type": "cds.Integer",
+          "notNull": true
+        },
+        "txt": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "logical.data.T_COR_PROYECTO": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "ID_PROYECTO": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10,
+          "notNull": true
+        },
+        "PROYECTO": {
+          "type": "cds.String",
+          "length": 40
+        }
+      }
+    },
+    "myservice": {
+      "@source": "srv/cat-service.cds",
+      "kind": "service"
+    },
+    "myservice.T_COR_PROYECTO": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "logical.data.T_COR_PROYECTO"
+          ]
+        }
+      },
+      "elements": {
+        "ID_PROYECTO": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10,
+          "notNull": true
+        },
+        "PROYECTO": {
+          "type": "cds.String",
+          "length": 40
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v2.11.4",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

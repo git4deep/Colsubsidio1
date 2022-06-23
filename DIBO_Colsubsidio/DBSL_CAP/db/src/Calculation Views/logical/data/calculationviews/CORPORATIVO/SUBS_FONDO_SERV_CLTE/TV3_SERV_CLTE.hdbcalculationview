@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.SUBS_FONDO_SERV_CLTE::TV3_SERV_CLTE" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="CUBE" enforceSqlExecution="false" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV3_SERV_CLTE"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_SERVICIO_CLIENTE">
+      <resourceUri>logical.data::T_COR_SERVICIO_CLIENTE</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="SERV_CLTE">
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO_CLIENTE"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="ATRIBUTO"/>
+        <viewAttribute id="ANO_ANTERIOR"/>
+        <viewAttribute id="ANO_ACTUAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_SERVICIO_CLIENTE">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO_CLIENTE" source="ID_SERVICIO_CLIENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ATRIBUTO" source="ATRIBUTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO_ANTERIOR" source="ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO_ACTUAL" source="ANO_ACTUAL"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="SERVICIO">
+      <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+      <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO_CLIENTE"/>
+        <viewAttribute id="NIVEL_2"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="ATRIBUTO"/>
+        <viewAttribute id="ANO_ANTERIOR"/>
+        <viewAttribute id="ANO_ACTUAL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+      </input>
+      <input node="#SERV_CLTE">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO_CLIENTE" source="ID_SERVICIO_CLIENTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_2" source="NIVEL_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ATRIBUTO" source="ATRIBUTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO_ANTERIOR" source="ANO_ANTERIOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANO_ACTUAL" source="ANO_ACTUAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+      <joinAttribute name="ID_SERVICIO"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_1">
+    <attributes>
+      <attribute id="ID_SERVICIO" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="SERVICIO" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="Join_1" columnName="SERVICIO"/>
+      </attribute>
+      <attribute id="PERIODO" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Join_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="NIVEL_2" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_2"/>
+        <keyMapping columnObjectName="Join_1" columnName="NIVEL_2"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="Join_1" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="SEGMENTO" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEGMENTO"/>
+        <keyMapping columnObjectName="Join_1" columnName="SEGMENTO"/>
+      </attribute>
+      <attribute id="ATRIBUTO" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ATRIBUTO"/>
+        <keyMapping columnObjectName="Join_1" columnName="ATRIBUTO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures>
+      <measure id="ID_SERVICIO_CLIENTE" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_SERVICIO_CLIENTE"/>
+        <measureMapping columnObjectName="Join_1" columnName="ID_SERVICIO_CLIENTE"/>
+      </measure>
+      <measure id="ANO_ANTERIOR" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANO_ANTERIOR"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANO_ANTERIOR"/>
+      </measure>
+      <measure id="ANO_ACTUAL" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ANO_ACTUAL"/>
+        <measureMapping columnObjectName="Join_1" columnName="ANO_ACTUAL"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERV_CLTE" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="28" y="573"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="247" y="586"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="247" y="472"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

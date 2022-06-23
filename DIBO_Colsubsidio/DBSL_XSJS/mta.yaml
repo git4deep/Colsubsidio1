@@ -1,0 +1,55 @@
+_schema-version: "3.2"
+ID: DBSL_XSJS
+version: 0.0.1
+description: "DBSL nodejs project."
+modules:
+ - name: xsjs_dbsl
+   type: nodejs
+   path: xsjs
+   provides:
+    - name: xsjs_api
+      properties:
+        url: '${default-url}'  
+   requires:
+    - name: DBSL_CAP-db
+    - name: hanabmp
+    - name: myjobxsjs-uaa
+    - name: dbsl_conn
+    - name: dbsl_dest
+    - name: jobScheduler
+   properties:
+    SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]' 
+
+resources:
+
+ # services extracted from CAP configuration
+ # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+# ------------------------------------------------------------
+ - name: DBSL_CAP-db
+   type: com.sap.xs.hdi-container
+   parameters:
+     service-name: HDI_DBSL
+   properties:
+     hdi-container-name: ${service-name}
+ - name: hanabmp
+   type: org.cloudfoundry.existing-service
+   parameters:
+    service-name: hanabmp
+   properties:
+      xshttpdest-hanabmp-service-name: '${service-name}'
+ - name: myjobxsjs-uaa
+   type: com.sap.xs.uaa-space
+ - name: dbsl_conn
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service-plan: lite
+     service: connectivity
+ - name: dbsl_dest
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service-plan: lite
+     service: destination
+ - name: jobScheduler
+   type: com.sap.xs.job-scheduler
+   parameters:
+    service-plan: standard      

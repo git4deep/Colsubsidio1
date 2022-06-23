@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="logical.data.calculationviews.CORPORATIVO.ILAE::T_COR_PART_INDIVIDUAL" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="T_COR_PART_INDIVIDUAL"/>
+  <metadata changedAt="2021-08-12 18:53:22.868"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="48"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_INGRESO">
+      <resourceUri>logical.data::T_COR_INGRESO</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_AFILIADOS">
+      <resourceUri>logical.data::T_COR_AFILIADOS</resourceUri>
+    </DataSource>
+    <DataSource id="Aggregation_1$$$$logical.data::T_COR_AFILIADOS$$">
+      <resourceUri>logical.data::T_COR_AFILIADOS</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="INGRESOS">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute aggregationType="sum" id="INGRESO_REAL"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TIPO_TERCERO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD"/>
+        <viewAttribute id="ID_SERVICIO_PRE"/>
+        <viewAttribute id="ID_GRUPO_LINEA_ACCION"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="ID_SERVICIO" length="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF(&quot;ID_SERVICIO_PRE&quot; = 'COCS', '3',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COEC', '4',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COIP', '5',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COMD', '6',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'CORT', '8',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COMS', '9',
+IF(&quot;ID_SERVICIO_PRE&quot; = 'COVD', '10', 'ERROR'
+
+)))))))</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="VALOR" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;INGRESO_REAL&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="COBERTURA" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;CANTIDAD&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#logical.data::T_COR_INGRESO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INGRESO_REAL" source="INGRESO_REAL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_TERCERO" source="TIPO_TERCERO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO_PRE" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_GRUPO_LINEA_ACCION" source="ID_GRUPO_LINEA_ACCION"/>
+      </input>
+      <filter>&quot;TIPO_ANALISIS&quot; = 'INGRESOS POR LÍNEA DE ACCIÓN ESTRATÉGICA' AND
+IN(&quot;ID_SERVICIO_PRE&quot;, 'COCS', 'COMD', 'CORT', 'COIP', 'COEC', 'COVD', 'COMD','COMS','COIP') AND
+IN(&quot;TIPO_TERCERO&quot;, 'TRABAJADORES') AND
+IN(&quot;ID_GRUPO_LINEA_ACCION&quot;, 8)</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="AFILIADOS">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="CANTIDAD"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#logical.data::T_COR_AFILIADOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinOrder="OUTSIDE_IN" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="CANTIDAD"/>
+        <viewAttribute id="COBERTURA"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="TOTAL_AFILIADO_SEGMENTO" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;CANTIDAD&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#INGRESOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COBERTURA" source="COBERTURA"/>
+      </input>
+      <input node="#AFILIADOS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+      </input>
+      <joinAttribute name="PERIODO"/>
+      <joinAttribute name="SEGMENTO"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute aggregationType="sum" id="CANTIDAD"/>
+        <viewAttribute id="NIVEL_3"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute aggregationType="sum" id="BASE_PARTICIPACION"/>
+        <viewAttribute aggregationType="sum" id="VALOR"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="NIVEL_1" length="50" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;NIVEL_3&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="TOTAL_AFILIADO_SEGMENTO" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;BASE_PARTICIPACION&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="DECIMAL" id="COBERTURA" length="17" scale="2" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;CANTIDAD&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="ID_SERVICIO" length="4" expressionLanguage="COLUMN_ENGINE">
+          <formula>IF( IN(&quot;NIVEL_3&quot;,'CLUBES','HOTELES','NUEVOS NEGOCIOS RYT','PISCILAGO','RECREACIÓN, DEPORTES Y EVENTOS'), 'CORT',  &#xD;
+IF( IN(&quot;NIVEL_3&quot;,'BAC','COLEGIOS PROPIOS','TEATRO Y CULTURA'), 'COEC',  &#xD;
+IF( LEFTSTR(&quot;NIVEL_3&quot;,8) = 'GERENCIA', 'COEC',&#xD;
+IF( IN(&quot;NIVEL_3&quot;,'CREDITO','SEGUROS'), 'COCS',  &#xD;
+IF( &quot;NIVEL_3&quot; = 'SALUD IPS', 'COIP',  &#xD;
+IF( &quot;NIVEL_3&quot; = 'SUPERMERCADOS', 'COMS',  &#xD;
+IF( &quot;NIVEL_3&quot; = 'MEDICAMENTOS', 'COMD',  &#xD;
+IF( &quot;NIVEL_3&quot; = 'VIVIENDA', 'COVD', '0') )))&#xD;
+))))</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#Aggregation_1$$$$logical.data::T_COR_AFILIADOS$$">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CANTIDAD" source="CANTIDAD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_3" source="NIVEL_3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BASE_PARTICIPACION" source="BASE_PARTICIPACION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+      <filter>NOT IN (&quot;NIVEL_3&quot;, '1. AFILIADOS A LA CAJA',  '2. AFILIADOS COMPRADORES', 'CANT. TRABAJADORES', 'REMANENTE $', 'TOTAL', '% PEN.', 'NO DEPENDIENTES',  'CANT. EMPRESAS')</filter>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Aggregation_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODO" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="Aggregation_1" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="ID_SERVICIO" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="Aggregation_1" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="NIVEL_1" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_1"/>
+        <keyMapping columnObjectName="Aggregation_1" columnName="NIVEL_1"/>
+      </attribute>
+      <attribute id="SEGMENTO" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEGMENTO"/>
+        <keyMapping columnObjectName="Aggregation_1" columnName="SEGMENTO"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="Aggregation_1" columnName="TIPO_ANALISIS"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="ID_PART" hidden="false" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_PART"/>
+        <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+          <formula>1</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="VALOR" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VALOR"/>
+        <measureMapping columnObjectName="Aggregation_1" columnName="VALOR"/>
+      </measure>
+      <measure id="TOTAL_AFILIADO_SEGMENTO" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_AFILIADO_SEGMENTO"/>
+        <measureMapping columnObjectName="Aggregation_1" columnName="TOTAL_AFILIADO_SEGMENTO"/>
+      </measure>
+      <measure id="COBERTURA" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="COBERTURA"/>
+        <measureMapping columnObjectName="Aggregation_1" columnName="COBERTURA"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="330" y="138"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="INGRESOS" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="138"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="AFILIADOS" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="176" y="138"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="99" y="42"/>
+        <rectangleSize height="30" width="140"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="330" y="216"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

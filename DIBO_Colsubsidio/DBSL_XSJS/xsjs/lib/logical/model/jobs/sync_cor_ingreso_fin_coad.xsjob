@@ -1,0 +1,10 @@
+{
+    "description": "Jobs to bw",
+    "action": "logical.xs_service.data.corporativo.cor_ingreso_fin:cor_ingreso_fin_coad.xsjs::getMetadata",
+    "schedules": [
+       {
+          "description": "Sync cor_ingreso_fin_coad",
+          "xscron": "* * 10:11 * 00 01 0"
+       }
+    ]
+}

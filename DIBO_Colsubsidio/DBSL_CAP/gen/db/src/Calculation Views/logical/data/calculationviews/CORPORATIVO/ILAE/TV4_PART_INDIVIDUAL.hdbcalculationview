@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="logical.data.calculationviews.CORPORATIVO.ILAE::TV4_PART_INDIVIDUAL" applyPrivilegeType="NONE" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation" xscCompatibilityMode="true">
+  <descriptions defaultDescription="TV4_PART_INDIVIDUAL"/>
+  <metadata changedAt="2020-11-26 10:23:07.116"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="45"/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_PART_INDIVIDUAL">
+      <resourceUri>logical.data::T_COR_PART_INDIVIDUAL</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_SERVICIO">
+      <resourceUri>logical.data::T_COR_SERVICIO</resourceUri>
+    </DataSource>
+    <DataSource id="T_COR_PART_INDIVIDUAL">
+      <resourceUri>logical.data.calculationviews.CORPORATIVO.ILAE::T_COR_PART_INDIVIDUAL</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_VISTA">
+      <resourceUri>logical.data::T_COR_VISTA</resourceUri>
+    </DataSource>
+    <DataSource id="logical.data::T_COR_ORDEN_VISTA">
+      <resourceUri>logical.data::T_COR_ORDEN_VISTA</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="PART_INVIDIAL">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="COBERTURA"/>
+        <viewAttribute id="ID_PART"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TOTAL_AFILIADO_SEGMENTO"/>
+        <viewAttribute id="VALOR"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_PART_INDIVIDUAL"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="SERVICIO">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_SERVICIO"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="PART_SER" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="COBERTURA"/>
+        <viewAttribute id="ID_PART"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TOTAL_AFILIADO_SEGMENTO"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="SERVICIO"/>
+      </viewAttributes>
+    <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="FILTRO_1" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;ID_SERVICIO&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="T_COR_PART_INDIVIDUAL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="COBERTURA" source="COBERTURA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PART" source="ID_PART"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_AFILIADO_SEGMENTO" source="TOTAL_AFILIADO_SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+      </input>
+      <input node="SERVICIO">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+      </input>
+    <joinAttribute name="ID_SERVICIO"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="VISTA_">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="DESCRIPCION"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_VISTA"/>
+    <filter>(&quot;ID_VISTA&quot;='4')</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="ORDEN">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+      <input node="logical.data::T_COR_ORDEN_VISTA"/>
+    </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="ORDEN_VISTA" joinType="inner">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="ID_VISTA"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="ORDEN">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+      </input>
+      <input node="VISTA_">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_VISTA" source="ID_VISTA"/>
+      </input>
+    <joinAttribute name="ID_VISTA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="PART_SER_ORD" joinType="leftOuter">
+    <descriptions/>
+    <viewAttributes>
+        <viewAttribute id="COBERTURA"/>
+        <viewAttribute id="ID_PART"/>
+        <viewAttribute id="ID_SERVICIO"/>
+        <viewAttribute id="NIVEL_1"/>
+        <viewAttribute id="PERIODO"/>
+        <viewAttribute id="SEGMENTO"/>
+        <viewAttribute id="TIPO_ANALISIS"/>
+        <viewAttribute id="TOTAL_AFILIADO_SEGMENTO"/>
+        <viewAttribute id="VALOR"/>
+        <viewAttribute id="SERVICIO"/>
+        <viewAttribute id="FILTRO_1"/>
+        <viewAttribute id="ORDEN_1"/>
+        <viewAttribute id="ORDEN_2"/>
+      </viewAttributes>
+    <calculatedViewAttributes/>
+      <input node="PART_SER">
+        <mapping xsi:type="Calculation:AttributeMapping" target="COBERTURA" source="COBERTURA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_PART" source="ID_PART"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_SERVICIO" source="ID_SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NIVEL_1" source="NIVEL_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODO" source="PERIODO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEGMENTO" source="SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TIPO_ANALISIS" source="TIPO_ANALISIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_AFILIADO_SEGMENTO" source="TOTAL_AFILIADO_SEGMENTO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALOR" source="VALOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICIO" source="SERVICIO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+      </input>
+      <input node="ORDEN_VISTA">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_1" source="ORDEN_1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORDEN_2" source="ORDEN_2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FILTRO_1" source="FILTRO_1"/>
+      </input>
+    <joinAttribute name="FILTRO_1"/>
+  </calculationView>
+</calculationViews>
+  <logicalModel id="PART_SER_ORD">
+    <descriptions/>
+    <attributes>
+      <attribute id="ID_SERVICIO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SERVICIO"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="ID_SERVICIO"/>
+      </attribute>
+      <attribute id="NIVEL_1" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NIVEL_1"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="NIVEL_1"/>
+      </attribute>
+      <attribute id="PERIODO" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERIODO"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="PERIODO"/>
+      </attribute>
+      <attribute id="SEGMENTO" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEGMENTO"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="SEGMENTO"/>
+      </attribute>
+      <attribute id="TIPO_ANALISIS" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TIPO_ANALISIS"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="TIPO_ANALISIS"/>
+      </attribute>
+      <attribute id="SERVICIO" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SERVICIO"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="SERVICIO"/>
+      </attribute>
+      <attribute id="FILTRO_1" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FILTRO_1"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="FILTRO_1"/>
+      </attribute>
+      <attribute id="ORDEN_1" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_1"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="ORDEN_1"/>
+      </attribute>
+      <attribute id="ORDEN_2" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORDEN_2"/>
+        <keyMapping columnObjectName="PART_SER_ORD" columnName="ORDEN_2"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="COBERTURA" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="COBERTURA"/>
+        <measureMapping columnObjectName="PART_SER_ORD" columnName="COBERTURA"/>
+      </measure>
+      <measure id="ID_PART" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="ID_PART"/>
+        <measureMapping columnObjectName="PART_SER_ORD" columnName="ID_PART"/>
+      </measure>
+      <measure id="TOTAL_AFILIADO_SEGMENTO" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TOTAL_AFILIADO_SEGMENTO"/>
+        <measureMapping columnObjectName="PART_SER_ORD" columnName="TOTAL_AFILIADO_SEGMENTO"/>
+      </measure>
+      <measure id="VALOR" order="10" semanticType="amount" aggregationType="sum" measureType="amount">
+        <descriptions defaultDescription="VALOR"/>
+        <fixedCurrency>$</fixedCurrency>
+        <measureMapping columnObjectName="PART_SER_ORD" columnName="VALOR"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="PARTICIPACION" hidden="false" order="1" aggregationType="sum" measureType="simple" datatype="FLOAT" expressionLanguage="COLUMN_ENGINE" length="1">
+        <descriptions defaultDescription="PARTICIPACION"/>
+        <formula>&quot;COBERTURA&quot;/&quot;TOTAL_AFILIADO_SEGMENTO&quot;</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="660.3803161028517" y="112"/>
+        <rectangleSize width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PART_INVIDIAL" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="92.00000000000004" y="546.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SERVICIO" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="414.5400023760756" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="PART_SER" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="414.5400023760756" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="logical.data.calculationviews.CORPORATIVO.ILAE::T_COR_PART_INDIVIDUAL" modelObjectNameSpace="PART_SER" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SERVICIO" modelObjectNameSpace="PART_SER" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="VISTA_" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="624.5400023760757" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ORDEN" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="834.5400023760756" y="536.9999976158142"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ORDEN_VISTA" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="702.9071307778008" y="376.9999988079071"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    <shape modelObjectName="ORDEN" modelObjectNameSpace="ORDEN_VISTA" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="VISTA_" modelObjectNameSpace="ORDEN_VISTA" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+      <shape expanded="true" modelObjectName="PART_SER_ORD" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="660.3803161028517" y="217"/>
+        <rectangleSize height="30" width="160"/>
+      </shape>
+    
+    <shape modelObjectName="PART_SER" modelObjectNameSpace="PART_SER_ORD" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="ORDEN_VISTA" modelObjectNameSpace="PART_SER_ORD" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

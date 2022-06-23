@@ -1,0 +1,77 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = DBSL_CAP
+## language=nodejs; multitenant=false
+## approuter=
+_schema-version: '3.1'
+ID: DBSL_CAP
+version: 1.0.0
+description: "DBSL CAP project."
+parameters:
+  enable-parallel-deployments: true
+   
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install --production
+      - npx -p @sap/cds-dk cds build --production
+
+modules:
+ # --------------------- SERVER MODULE ------------------------
+ - name: DBSL_CAP-srv
+ # ------------------------------------------------------------
+   type: nodejs
+   path: gen/srv
+   parameters:
+     buildpack: nodejs_buildpack
+   requires:
+    # Resources extracted from CAP configuration
+    - name: DBSL_CAP-db
+    - name: DBSL_CAP-uaa
+   provides:
+    - name: srv-api      # required by consumers of CAP services (e.g. approuter)
+      properties:
+        srv-url: ${default-url}
+
+ # -------------------- SIDECAR MODULE ------------------------
+ - name: DBSL_CAP-db-deployer
+ # ------------------------------------------------------------
+   type: hdb
+   path: gen/db  
+   parameters:
+     buildpack: nodejs_buildpack
+   requires:
+    # 'hana' and 'xsuaa' resources extracted from CAP configuration
+    - name: DBSL_CAP-db
+      properties:
+          TARGET_CONTAINER: ~{hdi-container-name}
+    - name: remote-grant-service
+resources:
+ # services extracted from CAP configuration
+ # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+# ------------------------------------------------------------
+ - name: DBSL_CAP-db
+# ------------------------------------------------------------
+   type: com.sap.xs.hdi-container
+   parameters:
+     config:
+        schema: DBSL
+        makeUniqueName: false
+     service: hana  # or 'hanatrial' on trial landscapes
+     service-plan: hdi-shared
+     service-name: HDI_DBSL
+   properties:
+     hdi-container-name: ${service-name}
+ - name: DBSL_CAP-uaa
+   type: org.cloudfoundry.managed-service
+   parameters:
+      service-plan: application
+      service: xsuaa
+      config:
+        xsappname: DBSL_CAP-${space}
+        tenant-mode: dedicated     
+ - name: remote-grant-service
+   type: org.cloudfoundry.existing-service
+   parameters:
+    service-name: remote-grant-service 
+

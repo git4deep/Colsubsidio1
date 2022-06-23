@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" 
+	xmlns:m="sap.m" >
+	<Dialog title="{i18n>deleteData}" contentWidth="35%" class="sapUiSizeCompact" afterClose="onCancelDeleteData" >
+		<content>
+				
+			<VBox class="sapUiMediumMargin" >
+				<Label text="{i18n>ms1}" />
+				<HBox height="40px" />
+				<Input id="inpDeleteData" width="100%" />
+			</VBox>
+				
+			<VBox height="20px" />
+		</content>
+		<buttons>
+			<Button type="Reject" text="{i18n>delete}" press="onConfirmDeleteData" />
+			<Button type="Default" text="{i18n>close}" press="onCancelDeleteData" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="3.0" id="SAP_BOC_SPATIAL::GEO_SUBCANAL_LOCATIONVIEW" applyPrivilegeType="NONE" defaultClient="$$client$$" dataCategory="DIMENSION" dimensionType="STANDARD" enforceSqlExecution="false" outputViewType="Projection">
+  <descriptions defaultDescription="GEO_SUBCANAL_LOCATIONVIEW"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources>
+    <DataSource id="logical.data::T_COR_GEO_SUBCANAL">
+      <resourceUri>logical.data::T_COR_GEO_SUBCANAL</resourceUri>
+    </DataSource>
+  </dataSources>
+<calculationViews/>
+  <logicalModel id="logical.data::T_COR_GEO_SUBCANAL">
+    <attributes>
+      <attribute id="ID_SUBCANAL_LD" key="true" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ID_SUBCANAL_LD"/>
+        <keyMapping columnObjectName="T_COR_GEO_SUBCANAL" columnName="ID_SUBCANAL_LD"/>
+      </attribute>
+      <attribute id="PUNTO" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PUNTO"/>
+        <keyMapping columnObjectName="T_COR_GEO_SUBCANAL" columnName="PUNTO"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+  </logicalModel>
+<layout>
+  <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+</layout>
+</Calculation:scenario>
